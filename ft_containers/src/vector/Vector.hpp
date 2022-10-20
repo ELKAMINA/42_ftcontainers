@@ -4,33 +4,34 @@
 template<typename T>
 class Vector
 {
-// arr is the integer pointer
-// which stores the address of our vector
-	T* arr;
+	private :
+		// arr is the integer pointer
+		// which stores the address of our vector
+		T* arr;
 
-	// capacity is the total storage
-	// capacity of the vector
-	int capacity;
+		// capacity is the total storage
+		// capacity of the vector
+		int capacity;
 
-	// current is the number of elements
-	// currently present in the vector
-	int current;
+		// current is the number of elements
+		// currently present in the vector
+		int current;
 	
 	public:
 		// Default constructor to initialise
 		// an initial capacity of 1 element and
 		// allocating storage using dynamic allocation
-	vectorClass()
-	{
-		arr = new T[1];
-		capacity = 1;
-		// current is the number of elements
-    	// currently present in the vector
-		current = 0;
-	}
+		Vector<T>();
+	// {
+	// 	arr = new T[1];
+	// 	capacity = 1;
+	// 	// current is the number of elements
+    // 	// currently present in the vector
+	// 	current = 0;
+	// }
 	//destructor to deallocate storage allocated by dynamic allocation
 	//to prevent memory leak
-	~ vectorClass()
+	~ Vector()
 	{
 		delete [] arr;
 	}
