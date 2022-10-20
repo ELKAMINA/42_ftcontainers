@@ -7,7 +7,7 @@ int main()
 	Vector<int> kikou;
 
 	kikou.push(5);
-	// kikou.push(10);
+	kikou.push(10);
 	std::cout << "Capacity : " << kikou.getcapacity() << std::endl;
 	std::cout << "Size : " << kikou.size() << std::endl;
 	// kikou.push(120);

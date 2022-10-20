@@ -22,15 +22,16 @@ class Vector
 		{
 			T* block = new T[newCapacity];
 
-			block[0] = arr[0];
-			std::cout << "Kikou" << std::endl;
-			// for (size_t i = 0; i < newCapacity; i++)
-			// {
-			// 	block[i] = arr[i];
-			// }
-			// delete[] arr;
-			// arr = block;
-			// current = newCapacity;
+			std::cout << "NEW CAPACITY : " << newCapacity << std::endl;
+			for (size_t i = 0; i < newCapacity; i++)
+			{
+				block[i] = arr[i];
+				std::cout << "block  : "<< block[i] << std::endl;
+
+			}
+			delete[] arr;
+			arr = block;
+			current = newCapacity;
 		}
 		void Realloc_and_assign(size_t newCapacity, T val)
 		{
@@ -69,6 +70,7 @@ class Vector
 			// capacity
 			std::cout << "current " << current << std::endl;
 			std::cout << "capacity " << capacity << std::endl;
+			std::cout << "DATA : " << data << std::endl;
 			if (current == capacity)
 				this->Realloc(2 * capacity);
 				// deleting previous array
