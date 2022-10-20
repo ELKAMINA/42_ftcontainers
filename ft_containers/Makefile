@@ -1,6 +1,6 @@
 NAME = container
 	
-SRC = 
+SRC = main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -8,7 +8,7 @@ DEPS = $(OBJ:.o=.d)
 
 CXX = c++
 
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -g3 -Wall -Werror -Wextra -std=c++98
 CPPFLAGS = -MMD -I .
 
 all : $(NAME)
