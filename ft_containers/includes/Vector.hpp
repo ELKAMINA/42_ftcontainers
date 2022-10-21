@@ -144,10 +144,40 @@ class Vector
 			// capacity, that means we don't have space to
 			// accommodate more elements. We need to double the
 			// capacity
-			if (current == capacity) {
-				
-			}
+		}
 
+		void resize(size_t n, T value)
+		{
+			// Resizes the container so that it contains n elements.
+
+			// If n is smaller than the current container size, the content is reduced to its first n elements, removing those beyond (and destroying them).
+			if (n < current)
+			{
+				std::cout << "Here " << std::endl;
+				current = n;
+				this->Realloc(n);
+			}
+			else if (n > current)
+			{
+				if	(n > capacity)
+					capacity = n;
+				this->Realloc(n);
+				for (size_t i = current; i < n; i++)
+					push(value);
+			}
+			// If n is greater than the current container size, the content is expanded by inserting at the end as many elements as needed to reach a size of n. If val is specified, the new elements are initialized as copies of val, otherwise, they are value-initialized.
+
+			// If n is also greater than the current container capacity, an automatic reallocation of the allocated storage space takes place.
+
+			// Notice that this function changes the actual content of the container by inserting or erasing elements from it.
+
+
+
+
+			// if the number of elements is equal to the
+			// capacity, that means we don't have space to
+			// accommodate more elements. We need to double the
+			// capacity
 		}
 
 		size_t getcapacity()

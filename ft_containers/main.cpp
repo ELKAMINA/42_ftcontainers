@@ -20,7 +20,11 @@ int main()
 	kikou.print();
 
 	/* *** Resize without reassigning *** */
-	kikou.resize(7);
+	// kikou.resize(7);
+	// kikou.print();
+
+	/* *** Resize without reassigning *** */
+	kikou.resize(8, 50);
 	kikou.print();
 	// kikou.push(120);
 	// kikou.push(-951);
