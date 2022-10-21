@@ -9,30 +9,31 @@ template<typename T>
 class Vector
 {
 	private :
-		// arr is the integer pointer which stores the address of our vector
+		// arr is the size_teger posize_ter which stores the address of our vector
 		T* arr;
 
 		// capacity is the total storage capacity of the vector
-		int capacity;
+		size_t capacity;
 
 		// current is the number of element currently present in the vector
-		int current;
+		size_t current;
 
 		void Realloc(size_t newCapacity)
 		{
 			T* block = new T[newCapacity];
 
-			std::cout << "NEW CAPACITY : " << newCapacity << std::endl;
-			for (size_t i = 0; i < newCapacity; i++)
+			// std::cout << "NEW CAPACITY : " << newCapacity << std::endl;
+			for (size_t i = 0; i < (size_t)current; i++)
 			{
 				block[i] = arr[i];
-				std::cout << "block  : "<< block[i] << std::endl;
+				// std::cout << "block  : "<< block[i] << std::endl;
 
 			}
 			delete[] arr;
 			arr = block;
-			current = newCapacity;
+			capacity = newCapacity;
 		}
+
 		void Realloc_and_assign(size_t newCapacity, T val)
 		{
 			T* block = new T[newCapacity];
@@ -63,27 +64,25 @@ class Vector
 		// Function to add an element at the last
 		void push(T data)
 		{
-			std::cout << " je rentre ici " << std::endl;
+			// std::cout << " je rentre ici " << std::endl;
 			// if the number of elements is equal to the
 			// capacity, that means we don't have space to
 			// accommodate more elements. We need to double the
-			// capacity
-			std::cout << "current " << current << std::endl;
-			std::cout << "capacity " << capacity << std::endl;
-			std::cout << "DATA : " << data << std::endl;
+			// // capacity
+			// std::cout << "current " << current << std::endl;
+			// std::cout << "capacity " << capacity << std::endl;
+			// std::cout << "DATA : " << data << std::endl;
 			if (current == capacity)
 				this->Realloc(2 * capacity);
 				// deleting previous array
-
 			// Inserting data
 			arr[current] = data;
 			current++;
 		}
 
 		// function to add element at any index
-		void push(T data, int index)
+		void push(T data, size_t index)
 		{
-
 			// if index is equal to capacity then this
 			// function is same as push defined above
 			if (index == capacity)
@@ -93,7 +92,7 @@ class Vector
 		}
 
 		// function to extract element at any index
-		T get(int index)
+		T get(size_t index)
 		{
 
 			// if index is within the range
@@ -108,7 +107,7 @@ class Vector
 		}
 
 		// function to get size of the vector
-		int size() 
+		size_t size() 
 		{ 
 			return current;
 		}
@@ -119,17 +118,19 @@ class Vector
 
 			// If n is smaller than the current container size, the content is reduced to its first n elements, removing those beyond (and destroying them).
 			if (n < current)
+			{
+				std::cout << "Here " << std::endl;
+				current = n;
 				this->Realloc(n);
+			}
 			else if (n > current)
 			{
+				if	(n > capacity)
+					capacity = n;
 				this->Realloc(n);
 				for (size_t i = current; i < n; i++)
 					push(0);
-				if	(n > capacity)
-					capacity = n;
 			}
-
-			
 			// If n is greater than the current container size, the content is expanded by inserting at the end as many elements as needed to reach a size of n. If val is specified, the new elements are initialized as copies of val, otherwise, they are value-initialized.
 
 			// If n is also greater than the current container capacity, an automatic reallocation of the allocated storage space takes place.
@@ -149,14 +150,14 @@ class Vector
 
 		}
 
-		int getcapacity()
+		size_t getcapacity()
 		{
 			return capacity;
 		}
 
 		void print()
 		{
-			for (int i = 0; i < current; i++) {
+			for (size_t i = 0; i < current; i++) {
 				std::cout << arr[i] << " ";
 				std::cout << std::endl;
 			}
