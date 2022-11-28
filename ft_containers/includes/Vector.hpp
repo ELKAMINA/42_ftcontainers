@@ -6,7 +6,7 @@
 #include <iomanip>
 
 template<typename T>
-class Vector
+class ft_vector
 {
 	private :
 		// arr is the size_teger posize_ter which stores the address of our vector
@@ -49,18 +49,23 @@ class Vector
 		}
 	
 	public:
-		Vector()
+		MyVector()
 		{
 			arr = new T[1];
 			capacity = 1;
 			current = 0;
 		}
 
-		~ Vector()
+		~ MyVector()
 		{
 			delete [] arr;
 		}
 
+		T &MyVector<T>::operator[](size_t pos) {
+			if (pos >= 0 &&  pos <= current)
+				return *(this->arr + pos);
+			throw std::out_of_range("Out of bounds element access");
+		}
 		// Function to add an element at the last
 		void push(T data)
 		{
