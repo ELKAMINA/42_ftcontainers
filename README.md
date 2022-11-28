@@ -17,6 +17,12 @@
   7. pair
   8. make_pair
 
+**Requirements**
+  
+  Iterators system
+  std::allocator
+  keyword friend if needed
+
 # To start :
 
 1. What is a container ?
