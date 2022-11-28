@@ -56,6 +56,7 @@ Links that helped
 | Subject | Link |
 |:--------------|:----------------|
 | Conteneurs STL | http://tvaira.free.fr/dev/cours/cours-conteneurs-stl.pdf |
+| Allocator | https://medium.com/@vgasparyan1995/what-is-an-allocator-c8df15a93ed |
 
 
 Glossary for vector
