@@ -73,5 +73,13 @@ Global glossary
 -------------
 
 1. *Namespaces* : In C++, a namespace is a collection of related names or identifiers (functions, class, variables) which helps to separate these identifiers from similar identifiers in other namespaces or the global namespace. The identifiers of the C++ standard library are defined in a namespace called std .
-2. 
+
+2. Example : 
+typedef typename _MyBase::value_type value_type;
+value_type v;
+********************
+  => typedef is defining a new type for use in your code, like a shorthand
+
+  => typename here is letting the compiler know that value_type is a type and not a static member of _MyBase.
+        the :: is the scope of the type. It is kind of like "is in" so value_type "is in" _MyBase. or can also be thought of as contains.
 
