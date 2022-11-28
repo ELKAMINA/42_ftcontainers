@@ -64,3 +64,14 @@ Glossary for vector
 | Title | Definition |
 |:--------------|:----------------|
 | Modifiers | functions that modifies the structure of a vector container |
+| Allocator | to give the programmer control over memory allocation within containers. It's stateless|
+
+
+
+
+Global glossary
+-------------
+
+1. *Namespaces* : In C++, a namespace is a collection of related names or identifiers (functions, class, variables) which helps to separate these identifiers from similar identifiers in other namespaces or the global namespace. The identifiers of the C++ standard library are defined in a namespace called std .
+2. 
+
