@@ -37,6 +37,33 @@ We call **Complexity** : the idea of how efficient it is to access an element fr
   .
   .
   
+ 3. What are iterators ?
+ 
+ => Pointer-like objects
+ 
+ In C++ STL (Standard Template Library), 3 things are meaningful and important:
+
+**Containers**: These are used to manage collection of objects of a certain kind. Containers can be of two types: Sequence Containers (vector, deque, list) and Associative Containers (Set, Multiset, Map, Multimap).
+
+**Algorithms**: These are used to process the elements of a collection. That is algorithms feed from containers and process those elements in a predefined way and may also push the results into the same/different container.
+
+**Iterator**: These are used to step through the elements of collection of objects (aka containers).
+The designer of STL chose a wonderful yet simple common approach - "The separation of data and operation".
+
+*The data is held and managed by the Container classes.*
+*The operations over the containers are defined and managed by the configurable algorithms.*
+
+**Iterators are those Bridge/Tunnel/Glue** between containers classes and algorithms.
+
+Different categories of iterators :
+  - Bidirectionnal
+  - Random access
+  - 
+
+ 
+ 4. What are iterators_traits ?
+ 
+  
 # Vector container
 
 *Vector* is sequential container that encapsulates dynamic sized arrays. The data elements are stored in contiguous storage. Data elements are inserted at the end.
