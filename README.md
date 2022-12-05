@@ -65,7 +65,7 @@ Different categories of iterators :
   
 # Vector container
 
-*Vector* is sequential container that encapsulates dynamic sized arrays. The data elements are stored in contiguous storage. Data elements are inserted at the end.
+*Vector* is **sequential container** that encapsulates dynamic sized arrays. The data elements are stored in contiguous storage. Data elements are inserted at the end.
 Elements can be accessed with :
 - **iterators / reverse iterators** : objects that points to other objects
 - **classical pointers**
