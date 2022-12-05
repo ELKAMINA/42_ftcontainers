@@ -96,11 +96,16 @@ Glossary for vector
 | Modifiers | functions that modifies the structure of a vector container |
 | Allocator | to give the programmer control over memory allocation within containers. It's stateless|
 
+Perks and cons regarding other dynamic sequence containers
+-----------
 
-
+Perks : vectors are very efficient accessing its elements (just like arrays) and relatively efficient adding or removing elements from its end. 
+  
+Cons : For operations that involve inserting or removing elements at positions other than the end, they perform worse than the others, and have less consistent iterators and references than lists and forward_lists.
 
 Global glossary
--------------
+-----------
+  
 
 1. *Namespaces* : In C++, a namespace is a collection of related names or identifiers (functions, class, variables) which helps to separate these identifiers from similar identifiers in other namespaces or the global namespace. The identifiers of the C++ standard library are defined in a namespace called std .
 
@@ -117,3 +122,6 @@ value_type v;
  - type template parameters
  - non-type template parameters
  - template template parameters.
+  
+ 4. *Allocator-aware*
+  An object that dynamically handle the container storage needs.
