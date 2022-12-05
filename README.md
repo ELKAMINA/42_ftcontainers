@@ -3,8 +3,7 @@
 **Goal** : Reimplementing STL containers (c++98) 
 
   1. Vector
-  2. Stack
-  3. Map
+  2. Map
 
 **Tools to implement for each container**
 
