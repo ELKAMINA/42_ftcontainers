@@ -105,10 +105,8 @@ Perks : vectors are very efficient accessing its elements (just like arrays) and
   
 Cons : For operations that involve inserting or removing elements at positions other than the end, they perform worse than the others, and have less consistent iterators and references than lists and forward_lists.
 
-Global glossary
------------
+  # Global glossary
   
-
 1. *Namespaces* : In C++, a namespace is a collection of related names or identifiers (functions, class, variables) which helps to separate these identifiers from similar identifiers in other namespaces or the global namespace. The identifiers of the C++ standard library are defined in a namespace called std .
 
 2. *Typedef and Typename*
