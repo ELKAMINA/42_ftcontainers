@@ -62,10 +62,21 @@ Different categories of iterators :
  
  4. What are iterators_traits ?
  
+ 5. Creating our own container ?
+ 
+ 3 requirements :
+  
+  - **Container interface requirements**
+  
+  - **Allocator interface requirements :**
+  
+    The basic interface of an allocator class consists of a set of typedefs, a pair of allocation functions, allocate() and deallocate(), and a pair of       construction/destruction members, construct() and destroy(). The typedefs are used by a container to determine the look of pointers, references,           sizes, and differences, where a difference means a distance between two pointers  
+  
+  - **Iterator requirements**
   
 # Vector container
 
-*Vector* is **sequential container** that encapsulates dynamic sized arrays. The data elements are stored in contiguous storage. Data elements are inserted at the end.
+*Vector* is a **sequential container** that encapsulates dynamic sized arrays. The data elements are stored in contiguous storage. Data elements are inserted at the end.
 Elements can be accessed with :
 - **iterators / reverse iterators** : objects that points to other objects
 - **classical pointers**
@@ -78,8 +89,6 @@ Elements can be accessed with :
  
  *class template of vector* : template < class T, class Alloc = allocator<T> > class vector
   
-
-
 Links that helped
 -----------
 | Subject | Link |
