@@ -115,9 +115,12 @@ Cons : For operations that involve inserting or removing elements at positions o
 
   # Global glossary
   
-1. *Namespaces* : In C++, a namespace is a collection of related names or identifiers (functions, class, variables) which helps to separate these identifiers from similar identifiers in other namespaces or the global namespace. The identifiers of the C++ standard library are defined in a namespace called std .
+1. *Namespaces*
+
+In C++, a namespace is a collection of related names or identifiers (functions, class, variables) which helps to separate these identifiers from similar identifiers in other namespaces or the global namespace. The identifiers of the C++ standard library are defined in a namespace called std .
 
 2. *Typedef and Typename*
+
 typedef typename _MyBase::value_type value_type;
 value_type v;
   => **typedef** is defining a new type for use in your code, like a shorthand
@@ -125,6 +128,7 @@ value_type v;
         the :: is the scope of the type. It is kind of like "is in" so value_type "is in" _MyBase. or can also be thought of as contains.
         
  3. *Templates*
+ 
  allow generic coding bc we don't need to consider the datas type
  has parameters of three kinds :
  - type template parameters
@@ -132,4 +136,10 @@ value_type v;
  - template template parameters.
   
  4. *Allocator-aware*
+ 
   An object that dynamically handle the container storage needs.
+
+5. What are Range access ?
+
+At a high level, a range is something that you can iterate over. The containers, such as vector and list, in the C++ Standard Library are range.
+With ranges, you can call std::ranges::sort(myVector);, which is treated as if you called std::sort(myVector.begin(), myVector.end());. In range libraries, algorithms take ranges as parameters (although they can also take iterators, if you want). They can operate directly on collections.
