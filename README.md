@@ -18,11 +18,11 @@
 
 **Requirements**
   
-    > Iterators system.
+  > Iterators system.
   
-    > std::allocator.
+  > std::allocator.
   
-    > keyword friend if needed.
+  > keyword friend if needed.
 
 # To start :
 
