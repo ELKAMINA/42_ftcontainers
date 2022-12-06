@@ -98,7 +98,8 @@ Links that helped
 | Conteneurs STL | http://tvaira.free.fr/dev/cours/cours-conteneurs-stl.pdf |
 | Allocator | https://medium.com/@vgasparyan1995/what-is-an-allocator-c8df15a93ed |
 | Member types | https://stackoverflow.com/questions/37714566/what-do-member-types-mean-in-vectors |
-
+| Github inspo| https://github.com/yongjulejule/ft_containers/tree/fa4e0535dcdd04d911ac8c2ae5bf5c8e0cdd73d7#ft_containers |
+  
 
 
 Glossary for vector
