@@ -59,12 +59,11 @@ The designer of STL chose a wonderful yet simple common approach - "The separati
 Different categories of iterators :
   - Bidirectionnal
   - Random access
-  - 
-
+  - Input iterators
+  - Output iterators
+  - Forward iterators
  
- 4. What are iterators_traits ?
- 
- 5. Creating our own container ?
+ 4. Creating our own container ?
  
  3 requirements :
   
@@ -75,6 +74,10 @@ Different categories of iterators :
     The basic interface of an allocator class consists of a set of typedefs, a pair of allocation functions, allocate() and deallocate(), and a pair of       construction/destruction members, construct() and destroy(). The typedefs are used by a container to determine the look of pointers, references,           sizes, and differences, where a difference means a distance between two pointers  
   
   - **Iterator requirements**
+
+5. What are *.traits ?
+
+
   
 # Vector container
 
