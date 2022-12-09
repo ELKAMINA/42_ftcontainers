@@ -158,9 +158,11 @@ With ranges, you can call std::ranges::sort(myVector);, which is treated as if y
 Compile time : error detected at compiling time ( from .cpp to .o)
 Running time : error detected at running/execution time 
 
-7. Generic programing 
+7. Generic programing / SFINAE
 
 Generic programing is a a way to define identical algorithms on differents types of data. It's a kind of polymorphism (type polymorphism or type setting)
+It is based on SFINAE : Substitution Failure is not an Error.
+SFINAE is based on the idea that when a compiler encounters an invalid type or expression during template instantiation, it will simply ignore that invalid code and continue the compilation process, instead of generating a compilation error. This allows you to write code that uses template metaprogramming to perform type-based dispatching and conditional logic, without causing compilation errors.
   
 8. Metadata et Metaprograming
 
