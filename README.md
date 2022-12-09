@@ -105,7 +105,7 @@ Links that helped
 | Member types | https://stackoverflow.com/questions/37714566/what-do-member-types-mean-in-vectors |
 | Github inspo| https://github.com/yongjulejule/ft_containers/tree/fa4e0535dcdd04d911ac8c2ae5bf5c8e0cdd73d7#ft_containers |
 | Traits | https://h-deb.clg.qc.ca/Sujets/Divers--cplusplus/Traits.html| 
-
+| Vectors | https://www.scaler.com/topics/cpp/vector-in-cpp/| 
   
 
 
