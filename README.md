@@ -156,3 +156,13 @@ With ranges, you can call std::ranges::sort(myVector);, which is treated as if y
  
 Compile time : error detected at compiling time ( from .cpp to .o)
 Running time : error detected at running/execution time 
+
+7. Generic programing 
+
+Generic programing is a a way to define identical algorithms on differents types of data. It's a kind of polymorphism (type polymorphism or type setting)
+  
+8. Metadata et Metaprograming
+
+ ** A TRADUIRE **
+Où une donnée peut simplement être une information, une liste de mesures ou des observations, une histoire ou une description d’une certaine chose. Les métadonnées spécifient les informations pertinentes sur les données, ce qui aide à identifier la nature et la caractéristique des données.
+*Une information disponible au programme sur les types qui y sont utilisés*
