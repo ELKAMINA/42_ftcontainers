@@ -79,6 +79,7 @@ Different categories of iterators :
  Traits are a powerful tool for providing type information at compile time.
  A trait is a class or class template that characterizes a type, possibly a template parameter
  Traits are typically implemented using template metaprogramming, which allows them to provide type information without requiring any runtime overhead.
+ Traits are a C++ convention adopted by programmers, they're also always declared **as struct**.
   
 # Vector container
 
