@@ -171,5 +171,8 @@ Où une donnée peut simplement être une information, une liste de mesures ou d
 # To deepen
 
   > Overhead
+  
   > RUNTIME vs COMPILE TIME (how it really works)
+  
+  > Embedded system
 
