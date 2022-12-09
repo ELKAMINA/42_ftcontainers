@@ -76,8 +76,9 @@ Different categories of iterators :
 
 5. What are *.traits ?
 
+ Traits are a powerful tool for providing type information at compile time.
  A trait is a class or class template that characterizes a type, possibly a template parameter
-
+ Traits are typically implemented using template metaprogramming, which allows them to provide type information without requiring any runtime overhead.
   
 # Vector container
 
@@ -166,3 +167,9 @@ Generic programing is a a way to define identical algorithms on differents types
  ** A TRADUIRE **
 Où une donnée peut simplement être une information, une liste de mesures ou des observations, une histoire ou une description d’une certaine chose. Les métadonnées spécifient les informations pertinentes sur les données, ce qui aide à identifier la nature et la caractéristique des données.
 *Une information disponible au programme sur les types qui y sont utilisés*
+
+# To deepen
+
+  > Overhead
+  > RUNTIME vs COMPILE TIME (how it really works)
+
