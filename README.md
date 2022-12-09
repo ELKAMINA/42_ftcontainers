@@ -34,9 +34,6 @@ We call **Complexity** : the idea of how efficient it is to access an element fr
  - Linear Complexity O(n) : if calculation is proportional to n.
  - Instantaneous Complexity O(1) : if calculation is instantaneous.
  - Logarithmic COmplexity O(log(n))
-  .
-  .
-  .
   
  3. What are iterators ?
  
@@ -63,6 +60,8 @@ Different categories of iterators :
   - Output iterators
   - Forward iterators
  
+ Iterator algorithms are not dependent on the container type.
+ 
  4. Creating our own container ?
  
  3 requirements :
@@ -77,6 +76,7 @@ Different categories of iterators :
 
 5. What are *.traits ?
 
+ A trait is a class or class template that characterizes a type, possibly a template parameter
 
   
 # Vector container
@@ -149,3 +149,8 @@ value_type v;
 
 At a high level, a range is something that you can iterate over. The containers, such as vector and list, in the C++ Standard Library are range.
 With ranges, you can call std::ranges::sort(myVector);, which is treated as if you called std::sort(myVector.begin(), myVector.end());. In range libraries, algorithms take ranges as parameters (although they can also take iterators, if you want). They can operate directly on collections.
+  
+6. Compile time VS Running time 
+ 
+Compile time : error detected at compiling time ( from .cpp to .o)
+Running time : error detected at running/execution time 
