@@ -81,6 +81,12 @@ Different categories of iterators :
  A trait is a class or class template that characterizes a type, possibly a template parameter
  Traits are typically implemented using template metaprogramming, which allows them to provide type information without requiring any runtime overhead.
  Traits are a C++ convention adopted by programmers, they're also always declared **as struct**.
+ 
+ 6. What is ptrdiff_t ?
+ 
+ IT'S A TYPE.
+ ptrdiff_t is the signed integer type of the result of subtracting two pointers.
+ ptrdiff_t is used for pointer arithmetic and array indexing, if negative values are possible
   
 # Vector container
 
@@ -173,6 +179,12 @@ SFINAE is based on the idea that when a compiler encounters an invalid type or e
  ** A TRADUIRE **
 Où une donnée peut simplement être une information, une liste de mesures ou des observations, une histoire ou une description d’une certaine chose. Les métadonnées spécifient les informations pertinentes sur les données, ce qui aide à identifier la nature et la caractéristique des données.
 *Une information disponible au programme sur les types qui y sont utilisés*
+
+9. Template specialization/ Template instantiation :
+
+The act of creating a new definition of a function, class, or member of a class from a template declaration. **One or more template arguments is called template instantiation**. 
+The definition created from a template instantiation is called a **specialization**. 
+The primary template is the template that is being specialized.
 
 # To deepen
 
