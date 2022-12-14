@@ -114,9 +114,7 @@ Links that helped
 | Traits | https://h-deb.clg.qc.ca/Sujets/Divers--cplusplus/Traits.html| 
 | Vectors | https://www.scaler.com/topics/cpp/vector-in-cpp/| 
 | Iterators | https://www.internalpointers.com/post/writing-custom-iterators-modern cpp#:~:text=An%20iterator%20is%20an%20object,some%20methods%20to%20retrieve%20it.|
-
-  
-
+| Types of template specializations | https://www.ibm.com/docs/en/zos/2.4.0?topic=only-explicit-specialization-c |
 
 Glossary for vector
 -----------
@@ -181,10 +179,14 @@ Où une donnée peut simplement être une information, une liste de mesures ou d
 *Une information disponible au programme sur les types qui y sont utilisés*
 
 9. Template specialization/ Template instantiation :
-
+  
+purpose : sometimes, Templates works for 2/3 datas types out of 4. So we need, a template specialization to make our class really generic regardless of all data types.
+> Link : https://www.ibm.com/docs/en/zos/2.4.0?topic=only-explicit-specialization-c
 The act of creating a new definition of a function, class, or member of a class from a template declaration. **One or more template arguments is called template instantiation**. 
 The definition created from a template instantiation is called a **specialization**. 
 The primary template is the template that is being specialized.
+  
+10. What is partial template specialization ?
 
 # To deepen
 
