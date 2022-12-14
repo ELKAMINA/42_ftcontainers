@@ -61,6 +61,7 @@ Different categories of iterators :
   - Forward iterators
  
  Iterator algorithms are not dependent on the container type.
+ Adding iterators to your containers will make them compatible with the range-based for loops(c++11) and the C++ Algorithms library: a collection of functions for searching, sorting, counting and manipulating containers, based on iterators.
  
  4. Creating our own container ?
  
