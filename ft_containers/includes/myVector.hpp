@@ -1,24 +1,62 @@
+
+/* explicit keyword : to avoid implicit casts/conversions */
+#include <memory> // for allocator
+
 namespace ft {
 	template <class T, class Allocator = allocator<T> >
 	class vector {
 		public:
-		// types:
-		typedef typename Allocator::reference reference;
-		typedef typename Allocator::const_reference const_reference;
-		typedef implementation defined iterator; // See 23.1
-		typedef implementation defined const_iterator; // See 23.1
-		typedef implementation defined size_type; // See 23.1
-		typedef implementation defined difference_type;// See 23.1
-		typedef T value_type;
-		typedef Allocator allocator_type;
-		typedef typename Allocator::pointer pointer;
-		typedef typename Allocator::const_pointer const_pointer
+		
+
+		/*************************************************************************/
+		/*                Member types and their definition :                   */
+		/* *********************************************************************/
+
+		typedef T 														value_type;
+		typedef Allocator 												allocator_type;
+		typedef typename allocator_type::reference 						reference;
+		typedef typename allocator_type::const_reference 				const_reference;
+		typedef typename allocator_type::pointer 						pointer;
+		typedef typename allocator_type::const_pointer 					const_pointer;
+		typedef random_access_iterator<value_type>;
+		typedef random_access_iterator<const value_type>;
 		typedef std::reverse_iterator<iterator> reverse_iterator;
 		typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
-		// 23.2.4.1 construct/copy/destroy:
-		explicit vector(const Allocator& = Allocator());
-		explicit vector(size_type n, const T& value = T(),
-		const Allocator& = Allocator());
+		typedef ptrdiff_t												difference_type;
+		typedef size_t													size_type;
+
+		private:
+			allocator_type	_allocation
+			// arr is the size_teger posize_ter which stores the address of our vector
+			pointer 		_arrey;
+
+			// capacity is the total storage capacity of the vector
+			size_type 		_capacity;
+
+			// current is the number of element currently present in the vector
+			size_type 		_current;
+
+
+
+		/*************************************************************************/
+		/*                			Constructors 						        */
+		/* *********************************************************************/
+
+		/* default constructor for an empty container */
+		explicit vector (const allocator_type& alloc = allocator_type()); 
+		
+		/* Constructor container with n elements */
+		explicit vector (size_type n, const value_type& val = value_type(),
+                 const allocator_type& alloc = allocator_type());
+		
+		/* Constructs a container with as many elements as the range [first,last)  */
+		template <class InputIterator>
+        vector (InputIterator first, InputIterator last,
+                 const allocator_type& alloc = allocator_type());
+
+		/* Constructs a container with a copy of each of the elements in x, in the same order.  */
+		vector (const vector& x);
+
 		template <class InputIterator>
 		vector(InputIterator first, InputIterator last,
 		const Allocator& = Allocator());
