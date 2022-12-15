@@ -3,7 +3,7 @@
 #include <memory> // for allocator
 
 namespace ft {
-	template <class T, class Allocator = allocator<T> >
+	template <class T, class Allocator = std::allocator<T> >
 	class vector {
 		public:
 		
@@ -42,12 +42,22 @@ namespace ft {
 		/*                			Constructors 						        */
 		/* *********************************************************************/
 
-		/* default constructor for an empty container */
-		explicit vector (const allocator_type& alloc = allocator_type()); 
+		/* default constructor : creates an empty container */
+		explicit vector (const allocator_type& alloc = allocator_type()) : _allocation(alloc), _current(0), _capacity(0)
+		{
+			_arrey = NULL
+		}
 		
 		/* Constructor container with n elements */
 		explicit vector (size_type n, const value_type& val = value_type(),
-                 const allocator_type& alloc = allocator_type());
+                 const allocator_type& alloc = allocator_type()) : _allocation(alloc), _current(n), _capacity(n)
+		{
+			_arrey = _allocation.allocate(_capacity); /* allocate() func allocate memory for a container. It returns a pointer to the start of the allocated memory */
+			for	(size_type i = 0; i < _size; i++)
+			{
+				_allocation.construct(&_arrey[i], val); /* construct () is used to construct an object in allocated memory */
+			}
+		}
 		
 		/* Constructs a container with as many elements as the range [first,last)  */
 		template <class InputIterator>
