@@ -4,6 +4,9 @@ C'est pour cette raison qu'une classe de traits a été définie pour les itéra
 
 /* La declaration des structures en plusieurs fois permet de pouvoir repondre au besoin des algorithmes qui ne connaissent pas les iterateurs en tan qu'objet mais uniquemet les pointeurs. */
 
+
+/* Les traits permettent de faire la jointure entre les pointeurs et les iterators. Unification entre iterateurs/pointeurs/const_pointeurs*/
+
 template<class Iterator> 
 struct iterator_traits
 {
