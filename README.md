@@ -102,6 +102,13 @@ Elements can be accessed with :
  *Container Adapter* : vector limited to some functionalities (stack, queue, priority queue)
  
  *class template of vector* : template < class T, class Alloc = allocator<T> > class vector
+ 
+ ** How to reimplement a vector container **
+ 
+ 1. A vector container needs some required typedefs (member types from cplusplus) 
+  * TO understand the use of typename/typedef used in containers - **cf item 42** of the book `Effective c++ - 3rd Edition` *
+ 
+ 
   
 Links that helped
 -----------
@@ -185,7 +192,9 @@ purpose : sometimes, Templates works for 2/3 datas types out of 4. So we need, a
 The act of creating a new definition of a function, class, or member of a class from a template declaration. **One or more template arguments is called template instantiation**. 
 The definition created from a template instantiation is called a **specialization**. 
 The primary template is the template that is being specialized.
-  
+ 
+ 
+ 
 10. What is partial template specialization ?
 
 # To deepen
