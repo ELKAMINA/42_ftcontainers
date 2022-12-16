@@ -122,6 +122,8 @@ Links that helped
 | Vectors | https://www.scaler.com/topics/cpp/vector-in-cpp/| 
 | Iterators | https://www.internalpointers.com/post/writing-custom-iterators-modern cpp#:~:text=An%20iterator%20is%20an%20object,some%20methods%20to%20retrieve%20it.|
 | Types of template specializations | https://www.ibm.com/docs/en/zos/2.4.0?topic=only-explicit-specialization-c |
+| Excellent cours et notions cpp | [https://www.ibm.com/docs/en/zos/2.4.0?topic=only-explicit-specialization-c](http://casteyde.christian.free.fr/cpp/cours/online/x5089.html) |
+  
 
 Glossary for vector
 -----------
