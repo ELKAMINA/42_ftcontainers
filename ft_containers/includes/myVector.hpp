@@ -1,6 +1,8 @@
 
 /* explicit keyword : to avoid implicit casts/conversions */
 #include <memory> // for allocator
+#include "./enable_if.hpp"
+
 
 namespace ft {
 	template <class T, class Allocator = std::allocator<T> >
@@ -18,16 +20,17 @@ namespace ft {
 		typedef typename allocator_type::const_reference 				const_reference;
 		typedef typename allocator_type::pointer 						pointer;
 		typedef typename allocator_type::const_pointer 					const_pointer;
-		typedef random_access_iterator<value_type>;
-		typedef random_access_iterator<const value_type>;
-		typedef std::reverse_iterator<iterator> reverse_iterator;
-		typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
+		typedef RandomAccessIterator<value_type>						iterator;
+		typedef RandomAccessIterator<const value_type>					const_iterator;
+		typedef std::reverse_iterator<iterator> 						reverse_iterator;
+		typedef std::reverse_iterator<const_iterator> 					const_reverse_iterator;
 		typedef ptrdiff_t												difference_type;
 		typedef size_t													size_type;
 
 		private:
 			allocator_type	_allocation
-			// arr is the size_teger posize_ter which stores the address of our vector
+			
+			// arrey is  the pointer which stores the address of our vector
 			pointer 		_arrey;
 
 			// capacity is the total storage capacity of the vector
@@ -60,9 +63,15 @@ namespace ft {
 		}
 		
 		/* Constructs a container with as many elements as the range [first,last)  */
-		template <class InputIterator>
+		template <class InputIterator, typename ft::enable_if<ft::is_integral<T>::value,
+                                 T>::type* = nullptr>
         vector (InputIterator first, InputIterator last,
-                 const allocator_type& alloc = allocator_type());
+                 const allocator_type& alloc = allocator_type())
+		{
+			/* Start with iterators and functions */
+			// _arrey = NULL;
+			// insert(begin(), first, last);
+		}
 
 		/* Constructs a container with a copy of each of the elements in x, in the same order.  */
 		vector (const vector& x);
