@@ -82,6 +82,10 @@ Different categories of iterators :
  Traits are typically implemented using template metaprogramming, which allows them to provide type information without requiring any runtime overhead.
  Traits are a C++ convention adopted by programmers, they're also always declared **as struct**.
  
+ What is their goal ?
+ 
+ The goal of defining the 5th type of traits is to make the iterator compatible with STL algorithms.
+ 
  6. What is ptrdiff_t ?
  
  IT'S A TYPE.
