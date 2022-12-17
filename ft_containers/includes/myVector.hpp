@@ -1,8 +1,8 @@
-
+#pragma once
 /* explicit keyword : to avoid implicit casts/conversions */
 #include <memory> // for allocator
 #include "./enable_if.hpp"
-
+#include "./RandomAccessIterator.hpp"
 
 namespace ft {
 	template <class T, class Allocator = std::allocator<T> >

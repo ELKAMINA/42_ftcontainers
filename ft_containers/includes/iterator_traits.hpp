@@ -1,3 +1,4 @@
+#pragma once
 /* Ces types (tel que difference_type/value_type/pointer....) sont utilisés par les itérateurs nativement, cependant, ils ne le sont généralement pas par les algorithmes. En effet, ceux-ci sont susceptibles d'être appelées avec des pointeurs normaux, et les pointeurs ne définissent pas tous ces types. Or, les algorithmes sont definis generiquement pour tous les containers.
 C'est pour cette raison qu'une classe de traits a été définie pour les itérateurs par la bibliothèque standard. Cette classe est déclarée comme suit dans l'en-tête iterator : */
 
@@ -28,7 +29,8 @@ struct iterator_traits<T *>
 };
 
 template <class T>
-struct iterators_traits <const T*> {
+struct iterator_traits<const T*> 
+{
 	
 	typedef T										value_type;
 	typedef ptrdiff_t								difference_type;

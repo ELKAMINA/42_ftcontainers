@@ -1,3 +1,4 @@
+#pragma once
 /* recoding is_integral use a combination of template metaprogramming and type traits 
 
 is_integral is a c++11 version and use type_traits et std::false_type and true_type

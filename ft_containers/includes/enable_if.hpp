@@ -1,3 +1,5 @@
+#pragma once
+
 /* recoding enable_if use a combination of template metaprogramming and type traits */
 
 namespace ft
