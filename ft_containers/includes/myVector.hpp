@@ -157,7 +157,7 @@ namespace ft {
 			}
 
 		};
-			/* Reserve : Requests that the vector capacity be at least enough to contain n elements.*/
+			/* Reserve : Requests that the vector capacity be at least enough to contain n elements. Only change capacity*/
 			void reserve (size_type n)
 			{
 				/* Cas 1 : If the size requested is greater than the maximum size (vector::max_size), a length_error exception is thrown.*/ 
@@ -172,16 +172,26 @@ namespace ft {
 						_alloc.construct(&realloc[i], _arrey[i]);	
 						_alloc.destroy(&_arrey[i]);
 					}
-					_alloc.deallocate(_arrey, _capacity);
+					_alloc.deallocate(_arrey, _current);
 					_capacity = n;
 					_arrey = realloc;
 				}
-
+				/* Cas 3  : If n is smaller than the current vector capacity, nothing is done*/
+				else if(n < capacity)
+					return ;
 			};
+			/* Reserve : Requests that the vector capacity be at least enough to contain n elements. Only change capacity*/
 
 
+/* ************************************************************************** */
+/*                                 Modifiers:                                 */
+/* ************************************************************************** */
 
-
+			/* Insert : Requests that the vector capacity be at least enough to contain n elements. Only change capacity*/
+			iterator insert (iterator position, const value_type& val);
+			void insert (iterator position, size_type n, const value_type& val);
+			template <class InputIterator>
+				void insert (iterator position, InputIterator first, InputIterator last);
 
 
 
