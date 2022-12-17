@@ -249,26 +249,38 @@ The primary template is the template that is being specialized.
   
 ** Member functions ** 
 (constructor)	Construct vector (public member function) : 4 
+  
     > (1) empty container constructor (default constructor) : *OK*
 Constructs an empty container, with no elements.
+  
     > (2) fill constructor : *OK*
 Constructs a container with n elements. Each element is a copy of val.
+  
     > (3) range constructor : *En cours* 
 Constructs a container with as many elements as the range [first,last), with each element constructed from its corresponding element in that range, in the same order.
+  
     > (4) copy constructor : *NY*
 Constructs a container with a copy of each of the elements in x, in the same order.
   
 (destructor)	Vector destructor (public member function) : 1
 operator=	Assign content (public member function) : 1
 
-** Iterators: ** 
-**begin**	Return iterator to beginning (public member function) : OK 
+** Iterators: **
+  
+**begin**	Return iterator to beginning (public member function) : *OK* 
+  
 **end**	Return iterator to end (public member function)
+  
 rbegin	Return reverse iterator to reverse beginning (public member function)
+  
 rend	Return reverse iterator to reverse end (public member function)
+  
 cbegin	Return const_iterator to beginning (public member function)
+  
 cend	Return const_iterator to end (public member function)
+  
 crbegin	Return const_reverse_iterator to reverse beginning (public member function)
+  
 crend	Return const_reverse_iterator to reverse end (public member function)
 
 Capacity:
