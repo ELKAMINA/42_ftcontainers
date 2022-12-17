@@ -1,6 +1,7 @@
 #pragma once
 /* explicit keyword : to avoid implicit casts/conversions */
 #include <memory> // for allocator
+#include <stdexcept>
 #include "./enable_if.hpp"
 #include "./RandomAccessIterator.hpp"
 
@@ -162,9 +163,7 @@ namespace ft {
 			{
 				/* Cas 1 : If the size requested is greater than the maximum size (vector::max_size), a length_error exception is thrown.*/ 
 				if (n > max_size())
-				{
-					
-				}
+					std::length_error()
 				/* Cas 2  : If n is greater than the current vector capacity, the function causes the container to reallocate its storage increasing its capacity to n (or greater).*/
 				if (n > _capacity)
 				{
