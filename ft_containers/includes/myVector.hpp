@@ -85,7 +85,6 @@ namespace ft {
 
 		vector(const vector<T,Allocator>& x);
 		vector<T,Allocator>& operator=(const vector<T,Allocator>& x);
-		/* Member functions */
 			
 		template <class InputIterator>
 		void assign(InputIterator first, InputIterator last);
@@ -163,12 +162,19 @@ namespace ft {
 			{
 				/* Cas 1 : If the size requested is greater than the maximum size (vector::max_size), a length_error exception is thrown.*/ 
 				if (n > max_size())
-					std::length_error()
+					std::length_error("Max size of the container can't be over extended!");
 				/* Cas 2  : If n is greater than the current vector capacity, the function causes the container to reallocate its storage increasing its capacity to n (or greater).*/
-				if (n > _capacity)
+				else if (n > _capacity)
 				{
-
-
+					pointer realloc = _alloc.allocate(n);
+					for (size_type i = 0; i < _current; i++)
+					{
+						_alloc.construct(&realloc[i], _arrey[i]);	
+						_alloc.destroy(&_arrey[i]);
+					}
+					_alloc.deallocate(_arrey, _capacity);
+					_capacity = n;
+					_arrey = realloc;
 				}
 
 			};
