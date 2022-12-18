@@ -36,20 +36,20 @@ namespace ft {
 		explicit vector (const allocator_type& alloc = allocator_type()) : _allocation(alloc), _capacity(0), _current(0) 
 		{
 			_arrey = NULL;
-		}
+		};
 		
 		/* Constructor container with n elements */
 		explicit vector (size_type n, const value_type& val = value_type(),
-                 const allocator_type& alloc = allocator_type()) : _allocation(alloc), _current(n), _capacity(n)
+                 const allocator_type& alloc = allocator_type()) : _allocation(alloc), _capacity(n), _current(n)
 		{
 			_arrey = _allocation.allocate(_current); /* allocate() func allocate memory for a container. It returns a pointer to the start of the allocated memory */
 			for	(size_type i = 0; i < _current; i++)
 			{
 				_allocation.construct(&_arrey[i], val); /* construct () is used to construct an object in allocated memory */
 			}
-		}
+		};
 		
-		/* Constructs a container with as many elements as the range [first,last)  */
+		/* Range constructor : Constructs a container with as many elements as the range [first,last)  */
 		// template <class InputIterator>
         // vector (InputIterator first, InputIterator last,
         //          const allocator_type& alloc = allocator_type(), typename ft::enable_if<ft::is_integral<InputIterator>::value,
@@ -61,14 +61,21 @@ namespace ft {
 		// }
 
 		/* Constructs a container with a copy of each of the elements in x, in the same order.  */
+		//vector (const vector& x)
+		// {
+			// _vector = NULL;
+			// assign(x.begin(), x.end());
+		// };
+
+/*************************************************************************/
+/*                			Destructors 						        */
+/* *********************************************************************/
+
 		// ~vector()
 		// {
 		// 	clear();
 		// 	_allocation.deallocate(_arrey, _current);
 		// };
-
-
-
 
 /* ************************************************************************** */
 /*                                 Iterator :                                 */
@@ -90,7 +97,7 @@ namespace ft {
 			Warning : If the container is empty, the returned iterator value shall not be dereferenced.*/
 		iterator end()
 		{
-			return (iterator(_current));
+			return (iterator(begin() + _current));
 		};
 		const_iterator end() const
 		{
