@@ -123,9 +123,9 @@ namespace ft {
 		bool empty() const
 		{
 			if(size() == 0)
-				return true;
+				return true; // value 1
 			else
-				return false;
+				return false; // value 0
 		};
 
 			/* 4- Resizes the container so that it contains n elements.*/
@@ -138,7 +138,7 @@ namespace ft {
 				_current--;
 			}
 			/* Cas 2 : If n is greater than the current container size, the content is expanded by inserting at the end as many elements as needed to reach a size of n. If val is specified, the new elements are initialized as copies of val, otherwise, they are value-initialized.*/
-			if	(n > _current) // use insert so we need to code it 
+			if	(n > _current)
 				insert(end(), (n - _current), val);
 		};
 
@@ -147,7 +147,9 @@ namespace ft {
 		{
 			/* Cas 1 : If the size requested is greater than the maximum size (vector::max_size), a length_error exception is thrown.*/ 
 			if (n > max_size())
-				std::length_error("Max size of the container can't be over extended!");
+			{
+				throw std::length_error("MY VECTOR : _M_fill_insert");
+			}
 			/* Cas 2  : If n is greater than the current vector capacity, the function causes the container to reallocate its storage increasing its capacity to n (or greater).*/
 			else if (n > _capacity)
 			{
@@ -187,6 +189,8 @@ namespace ft {
 			void insert (iterator position, size_type n, const value_type& val)
 			{
 				difference_type index = position - begin();
+				// std::cout << "index " << index << std::endl;
+
 				if	(_capacity == 0)
 					reserve(n);
 				else
@@ -195,7 +199,7 @@ namespace ft {
 					if (_current * 2 >= _current + n)
         		    	reserve(_current * 2);
         		  	else
-        		    	reserve(_current + n);
+        		    	 reserve(_current + n);
 				}
 				for (size_type i = n + _current - 1; i > index + n - 1; i--)
 				{

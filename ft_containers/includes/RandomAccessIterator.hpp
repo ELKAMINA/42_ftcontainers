@@ -24,7 +24,7 @@ namespace ft
             virtual ~RandomAccessIterator() {} // virtual destructor : why?
 
             /* Retrieve the current pointer */
-            pointer base() { return this->current;};
+            pointer base() const { return this->_ptr;};
             
             /* Comparison Operators */
             RandomAccessIterator &operator=(const RandomAccessIterator &other)
@@ -41,7 +41,7 @@ namespace ft
             bool operator>=(const RandomAccessIterator &other) const { return _ptr >= other._ptr; }
 
             /* Operators */
-            reference operator*() const { return *_ptr; } // OK
+            reference operator*() const {return *_ptr; } // OK
             pointer operator->() const { return _ptr; } // OK
             RandomAccessIterator &operator++() { ++_ptr; return *this; } // OK
             RandomAccessIterator operator++(int) { RandomAccessIterator tmp(*this); ++_ptr; return tmp; } // OK
