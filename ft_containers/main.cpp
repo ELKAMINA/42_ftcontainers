@@ -314,60 +314,82 @@ int main()
 				ft::vector<size_t> myvec(5, 130);
 				std::vector<size_t> vec2(5, 130);
 				std::cout << "\e[0;34mINSERT() >>>> \e[0m" << std::endl;
-				try{
-					std::cout << std::endl;
-					std::cout << "\e[0;46mProtoype 2\e[0m"  << std::endl;
-					std::cout << std::endl;
-					std::cout << std::endl;
-					std::cout << "\e[0;33m$$$$$$ MY VECTOR $$$$$ \e[0m" << std::endl;
-					std::cout << "My Size: " << myvec.size() << std::endl;
-					std::cout << "My Capacity: " << myvec.capacity() << std::endl;
-					std::cout << "Inserting ... " << std::endl;
-					ft::vector<size_t>::iterator it = myvec.begin();
-					myvec.insert(it+2, 4, 15);
-					std::cout << "My Size: " << myvec.size() << std::endl;
-					std::cout << "My Capacity: " << myvec.capacity() << std::endl;
-					std::cout << "Traversing the tab ... " << std::endl;
-					ft::vector<size_t>::iterator start1 = myvec.begin();
-					for(; start1 != myvec.end(); start1++)
-						std::cout << *start1 << " ; ";
-					std::cout << std::endl;
-					ft::vector<size_t>::iterator start3 = myvec.begin();
-					myvec.insert(start3+5, 2, 12);
-					ft::vector<size_t>::iterator start4 = myvec.begin();
-					for(; start4 != myvec.end(); start4++)
-						std::cout << *start4 << " ; ";
-					std::cout << std::endl;
-					std::cout << std::endl;
-
-
-					std::cout << "\e[0;32m~~~~ REAL VECTOR ~~~~~ \e[0m" << std::endl;
-					std::cout << "Size: " << vec2.size() << std::endl;
-					std::cout << "Capacity: " << vec2.capacity() << std::endl;
-					std::cout << "Inserting ... " << std::endl;
-					std::vector<size_t>::iterator ittt = vec2.begin();
-					vec2.insert(ittt+2, 4, 15);
-					std::cout << "My Size: " << vec2.size() << std::endl;
-					std::cout << "My Capacity: " << vec2.capacity() << std::endl;
-					std::cout << "Traversing the tab ... " << std::endl;
-					std::vector<size_t>::iterator itt1 = vec2.begin();
-					for(; itt1 != vec2.end(); itt1++)
-						std::cout << *itt1 << " ; ";
-					std::cout << std::endl;
-					std::vector<size_t>::iterator itt2 = vec2.begin();
-					vec2.insert(itt2+5, 2, 12);
-					std::vector<size_t>::iterator itt3 = vec2.begin();
-					for(; itt3 != vec2.end(); itt3++)
-						std::cout << *itt3 << " ; ";
-					std::cout << std::endl;
-					std::cout << std::endl;
-				}
-				catch(const std::exception& e)
 				{
-					std::cout << e.what() << std::endl;
-				}
-			}
-		}
+					try
+					{
+						{
+							std::cout << std::endl;
+							std::cout << "\e[0;46mProtoype 2\e[0m"  << std::endl;
+							std::cout << std::endl;
+							std::cout << std::endl;
+							std::cout << "\e[0;33m$$$$$$ MY VECTOR $$$$$ \e[0m" << std::endl;
+							std::cout << "My Size: " << myvec.size() << std::endl;
+							std::cout << "My Capacity: " << myvec.capacity() << std::endl;
+							std::cout << "Inserting ... " << std::endl;
+							ft::vector<size_t>::iterator it = myvec.begin();
+							myvec.insert(it+2, 4, 15);
+							std::cout << "My Size: " << myvec.size() << std::endl;
+							std::cout << "My Capacity: " << myvec.capacity() << std::endl;
+							std::cout << "Traversing the tab ... " << std::endl;
+							ft::vector<size_t>::iterator start1 = myvec.begin();
+							for(; start1 != myvec.end(); start1++)
+								std::cout << *start1 << " ; ";
+							std::cout << std::endl;
+							ft::vector<size_t>::iterator start3 = myvec.begin();
+							myvec.insert(start3+5, 2, 12);
+							ft::vector<size_t>::iterator start4 = myvec.begin();
+							for(; start4 != myvec.end(); start4++)
+								std::cout << *start4 << " ; ";
+							std::cout << std::endl;
+							std::cout << std::endl;
 
+
+							std::cout << "\e[0;32m~~~~ REAL VECTOR ~~~~~ \e[0m" << std::endl;
+							std::cout << "Size: " << vec2.size() << std::endl;
+							std::cout << "Capacity: " << vec2.capacity() << std::endl;
+							std::cout << "Inserting ... " << std::endl;
+							std::vector<size_t>::iterator ittt = vec2.begin();
+							vec2.insert(ittt+2, 4, 15);
+							std::cout << "My Size: " << vec2.size() << std::endl;
+							std::cout << "My Capacity: " << vec2.capacity() << std::endl;
+							std::cout << "Traversing the tab ... " << std::endl;
+							std::vector<size_t>::iterator itt1 = vec2.begin();
+							for(; itt1 != vec2.end(); itt1++)
+								std::cout << *itt1 << " ; ";
+							std::cout << std::endl;
+							std::vector<size_t>::iterator itt2 = vec2.begin();
+							vec2.insert(itt2+5, 2, 12);
+							std::vector<size_t>::iterator itt3 = vec2.begin();
+							for(; itt3 != vec2.end(); itt3++)
+								std::cout << *itt3 << " ; ";
+							std::cout << std::endl;
+							std::cout << std::endl;
+					}
+					{
+						std::cout << std::endl;
+						std::cout << "\e[0;46mProtoype 3\e[0m"  << std::endl;
+						std::cout << std::endl;
+						std::cout << std::endl;
+						std::cout << "\e[0;33m$$$$$$ MY VECTOR $$$$$ \e[0m" << std::endl;
+						std::cout << "My Size: " << myvec.size() << std::endl;
+						std::cout << "My Capacity: " << myvec.capacity() << std::endl;
+						size_t myarray[] = {5, 6, 8};
+						ft::vector<size_t>::iterator it = myvec.begin();
+						ft::vector<size_t>::iterator first = myarray;
+						myvec.insert(it+2, first, first+3);
+						std::cout << "Inserting ... " << std::endl;
+						ft::vector<size_t>::iterator toto = myvec.begin();
+						for(; toto != myvec.end(); toto++)
+							std::cout << *toto << " ; ";
+						std::cout << std::endl;
+						std::cout << std::endl;
+					}
+			}
+			catch(const std::exception& e)
+			{
+				std::cout << e.what() << std::endl;
+			}
+			}
+//		}
 	}
 }

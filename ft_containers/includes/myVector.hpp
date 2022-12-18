@@ -212,8 +212,41 @@ namespace ft {
 					_current++;
 				}
 			};
-			// template <class InputIterator>
-			// 	void insert (iterator position, InputIterator first, InputIterator last);
+	
+			template <class InputIterator>
+				void insert (iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
+				{
+					difference_type index = position - begin();
+					InputIterator tmp = first;
+					size_type n = 0;
+					
+					while (tmp++ != last)
+						n++;
+					if (_current + n > _capacity)
+					{
+						if (_capacity == 0)
+							reserve(n);
+						else 
+						{
+							if (_current * 2 >= _current + n)
+								reserve(_current * 2);
+							else
+								reserve(_current + n);
+						}
+					}
+					
+					for (size_type i = n + _current - 1; i > index + n - 1; i--)
+					{
+						_allocation.construct(&_arrey[i], _arrey[i - n]);
+						_allocation.destroy(&_arrey[i - n]);
+					}
+					for (size_type i = index; i < index + n; i++)
+					{
+						_allocation.construct(&_arrey[i], *first);
+						_current++;
+						first++;
+					}
+				};
 
 				/* Push back : Adds a new element at the end of the vector, after its current last element. It increases the container size by one, which causes an automatic reallocation of the allocated storage space if -and only if- the new vector size surpasses the current vector capacity.*/
 			void push_back(const T& x)
