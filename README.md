@@ -309,7 +309,7 @@ data	Access data (public member function)
 
 assign	Assign vector content (public member function)
 
-push_back	Add element at the end (public member function)
+push_back	Add element at the end (public member function): *OK*
 
 pop_back	Delete last element (public member function)
 
