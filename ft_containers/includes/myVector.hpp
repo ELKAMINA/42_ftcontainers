@@ -224,8 +224,11 @@ namespace ft {
 					InputIterator tmp = first;
 					size_type n = 0;
 					
-					while (tmp++ != last)
+					while (tmp != last)
+					{
+						tmp++;
 						n++;
+					}
 					if (_current + n > _capacity)
 					{
 						if (_capacity == 0)
@@ -258,12 +261,49 @@ namespace ft {
 				insert(end(), 1, x);
 			};
 
-				/*Erase : Removes from the vector either a single element (position) or a range of elements ([first,last)). This effectively reduces the container size by the number of elements removed, which are destroyed. Return value : An iterator pointing to the new location of the element that followed the last element erased by the function call*/
-			// iterator erase (iterator position)
-			// {
+				/* Clear : Erases all elements from the container. After this call, size() returns zero.Invalidates any references, pointers, or iterators referring to contained elements. Any past-the-end iterators are also invalidated. Leaves the capacity() of the vector unchanged.*/
+				void clear()
+				{
+					for(size_type i = 0; i < _current; i++)
+					{
+						_allocation.destroy(&_arrey[i]);
+					}
+					_current = 0;
+				};
 
-			// };
-			// iterator erase (iterator first, iterator last);
+				/* Assign : Assigns new contents to the vector, replacing its current contents, and modifying its size accordingly.*/
+
+				/* Prototype 1 */
+			template <class InputIterator>
+				void assign (InputIterator first, InputIterator last)
+				{
+					InputIterator tmp = first;
+					size_type n = 0;
+					
+					while (tmp != last)
+					{
+						tmp++;
+						n++;
+					}
+					clear();
+					reserve(n);
+				 	insert(begin(), first, last);
+				};	
+				
+				/* Prototype 2 */
+			void assign (size_type n, const value_type& val)
+			{
+				clear();
+				reserve(n);
+				insert(begin(), n, val);
+			};
+
+				/*Erase : Removes from the vector either a single element (position) or a range of elements ([first,last)). This effectively reduces the container size by the number of elements removed, which are destroyed. Return value : An iterator pointing to the new location of the element that followed the last element erased by the function call*/
+			iterator erase (iterator position)
+			{
+
+			};
+			iterator erase (iterator first, iterator last);
 
 		/* *********************************************************************  */
 		// allocator_type get_allocator() const;
@@ -301,6 +341,15 @@ namespace ft {
 		// iterator erase(iterator first, iterator last);
 		// void swap(vector<T,Allocator>&);
 		// void clear();
+
+
+/* ************************************************************************** */
+/*                                 Element acces :                            */
+/* ************************************************************************** */
+	
+	reference 				operator[] (size_type n) { return _arrey[n]; };
+	const_reference 		operator[] (size_type n) const { return _arrey[n]; };
+
 /* ************************************************************************** */
 /*                                 Attributes :                                 */
 /* ************************************************************************** */
