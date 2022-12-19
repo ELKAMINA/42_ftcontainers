@@ -29,7 +29,7 @@ namespace ft {
 		typedef size_t													size_type;
 
 /*************************************************************************/
-/*                			Constructors 						        */
+/*                			Constructors/Member functions		        */
 /* *********************************************************************/
 
 		/* default constructor : creates an empty container */
@@ -56,26 +56,36 @@ namespace ft {
         //                          <InputIterator>::type* = nullptr)
 		// {
 		// 	/* Start with iterators and functions */
-		// 	// _arrey = NULL;
-		// 	// insert(begin(), first, last);
+		// 	_arrey = NULL;
+		// 	insert(begin(), first, last);
 		// }
 
 		/* Constructs a container with a copy of each of the elements in x, in the same order.  */
-		//vector (const vector& x)
-		// {
-			// _vector = NULL;
-			// assign(x.begin(), x.end());
-		// };
+		vector (const vector& x)
+		{
+			_arrey = NULL;
+			assign(x.begin(), x.end());
+		};
+
+		/* Operator =  : Assigns new contents to the container, replacing its current contents, and modifying its size accordingly.*/
+
+		vector& operator= (const vector& x)
+		{
+			if (&x == this)
+				return ;
+			assign(x.begin(), x.end());
+			return *this;
+		};
 
 /*************************************************************************/
 /*                			Destructors 						        */
 /* *********************************************************************/
 
-		// ~vector()
-		// {
-		// 	clear();
-		// 	_allocation.deallocate(_arrey, _current);
-		// };
+		~vector()
+		{
+			clear();
+			_allocation.deallocate(_arrey, _current);
+		};
 
 /* ************************************************************************** */
 /*                                 Iterator :                                 */
@@ -261,6 +271,12 @@ namespace ft {
 				insert(end(), 1, x);
 			};
 
+				/* Pop back : Removes the last element in the vector, effectively reducing the container size by one.	This destroys the removed element.*/
+			void pop_back()
+			{
+				erase(end() - 1);
+			};
+
 				/* Clear : Erases all elements from the container. After this call, size() returns zero.Invalidates any references, pointers, or iterators referring to contained elements. Any past-the-end iterators are also invalidated. Leaves the capacity() of the vector unchanged.*/
 				void clear()
 				{
@@ -380,6 +396,55 @@ namespace ft {
 	
 	reference 				operator[] (size_type n) { return _arrey[n]; };
 	const_reference 		operator[] (size_type n) const { return _arrey[n]; };
+
+		/* at : Access element. Returns a reference to the element at position n in the vector. The function automatically checks whether n is within the bounds of valid elements in the vector, throwing an out_of_range exception if it is not (i.e., if n is greater than, or equal to, its size). This is in contrast with member operator[], that does not check against bounds.*/
+		
+		/* Prototype 1 */
+	reference at (size_type n)
+	{
+		if (n >= _current)
+			throw(std::out_of_range());
+		return (_arrey[n]);
+	};
+
+		/* Prototype 2 */
+	const_reference at (size_type n) const
+	{
+		if (n >= _current)
+			throw(std::out_of_range());
+		return (_arrey[n]);
+	};
+
+		/* front : Access first element. Returns a reference to the first element in the vector. Unlike member vector::begin, which returns an iterator to this same element, this function returns a direct reference.Calling this function on an empty container causes undefined behavior..*/
+
+	reference front ()
+	{
+		if (n >= _current)
+			throw(std::out_of_range());
+		if	(_current[0])
+			return (*_arrey);
+	};
+	
+		/* Prototype 2 */
+	const_reference front () const
+	{
+		if (n >= _current)
+			throw(std::out_of_range());
+		return (*_arrey);
+	};
+
+
+
+/* ************************************************************************** */
+/*                                 Allocator :                                */
+/* ************************************************************************** */
+
+
+	allocator_type get_allocator() const
+	{
+		return (_allocation);
+	};
+
 
 /* ************************************************************************** */
 /*                                 Attributes :                                 */

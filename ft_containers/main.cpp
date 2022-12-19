@@ -642,6 +642,78 @@ int main()
 					std::cout << '\n';
 
 				}
+				std::cout << std::endl;
+				std::cout << std::endl;
+				std::cout << "\e[0;34mPop back() >>>> \e[0m" << std::endl;
+				{
+					std::cout << "\e[0;33m$$$$$$ Real VECTOR $$$$$ \e[0m" << std::endl;
+					std::vector<int> myvector;
+					// int sum (0);
+					myvector.push_back (100);
+					myvector.push_back (200);
+					myvector.push_back (300);
+					std::vector<int>::iterator start = myvector.begin();
+					for(; start != myvector.end(); start++) 
+						std::cout << *start << std::endl;
+					while (!myvector.empty())
+					{
+						// sum+=myvector.back();
+						myvector.pop_back();
+					}
+				}
+				{
+					std::cout << "\e[0;33m$$$$$$ My VECTOR $$$$$ \e[0m" << std::endl;
+					ft::vector<int> myvector;
+					// int sum (0);
+					myvector.push_back (100);
+					myvector.push_back (200);
+					myvector.push_back (300);
+					ft::vector<int>::iterator start = myvector.begin();
+					for(; start != myvector.end(); start++) 
+						std::cout << *start << std::endl;
+					while (!myvector.empty())
+					{
+						// sum+=myvector.back();
+						myvector.pop_back();
+					}
+				}
+				std::cout << std::endl;
+				std::cout << std::endl;
+				std::cout << "\e[0;34mat() >>>> \e[0m" << std::endl;
+				{
+					try
+					{
+						std::cout << "\e[0;33m$$$$$$ Real VECTOR $$$$$ \e[0m" << std::endl;
+						std::vector<int> myvector;
+						// int sum (0);
+						myvector.push_back (100);
+						myvector.push_back (200);
+						myvector.push_back (300);
+						myvector.at(2);
+						myvector.at(6);
+					}
+					catch(const std::exception& e)
+					{
+						std::cout << e.what() << std::endl;
+					}
+				}
+				{
+					try
+					{
+						std::cout << "\e[0;33m$$$$$$ My VECTOR $$$$$ \e[0m" << std::endl;
+						ft::vector<int> myvector;
+						// int sum (0);
+						myvector.push_back (100);
+						myvector.push_back (200);
+						myvector.push_back (300);
+						myvector.at(2);
+						myvector.at(6);
+					}
+					catch(const std::exception& e)
+					{
+						std::cout << e.what() << std::endl;
+					}
+				}
 			}
 
 		}
