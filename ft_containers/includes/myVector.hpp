@@ -299,11 +299,24 @@ namespace ft {
 			};
 
 				/*Erase : Removes from the vector either a single element (position) or a range of elements ([first,last)). This effectively reduces the container size by the number of elements removed, which are destroyed. Return value : An iterator pointing to the new location of the element that followed the last element erased by the function call*/
+			
+				/* Prototype 1 */
 			iterator erase (iterator position)
+			{
+				size_type index = position - begin();
+				_current--;
+				for (size_type i = index; i < _current; i++)
+				{
+					_allocation.destroy(&_arrey[i]);
+					_allocation.construct(&_arrey[i], _arrey[i + 1]);
+				}
+				return (iterator(&_arrey[index]));
+			};
+				/* Prototype 2 */
+			iterator erase (iterator first, iterator last)
 			{
 
 			};
-			iterator erase (iterator first, iterator last);
 
 		/* *********************************************************************  */
 		// allocator_type get_allocator() const;
