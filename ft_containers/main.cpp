@@ -613,10 +613,10 @@ int main()
 					for (int i=1; i<=10; i++) myvector.push_back(i);
 
 					// erase the 6th element
-					myvector.erase (myvector.begin()+5);
+					// myvector.erase (myvector.begin()+5);
 
 					// erase the first 3 elements:
-					myvector.erase (myvector.begin(),myvector.begin()+3);
+					myvector.erase (myvector.begin() + 3,myvector.begin()+5);
 
 					std::cout << "myvector contains:";
 					for (unsigned i=0; i<myvector.size(); ++i)
@@ -631,10 +631,10 @@ int main()
 					for (int i=1; i<=10; i++) myvector.push_back(i);
 
 					// erase the 6th element
-					myvector.erase (myvector.begin()+5);
+					// myvector.erase (myvector.begin()+5);
 
 					// // erase the first 3 elements:
-					myvector.erase (myvector.begin(),myvector.begin()+3);
+					myvector.erase (myvector.begin() + 3,myvector.begin()+5);
 
 					std::cout << "myvector contains:";
 					for (unsigned i=0; i<myvector.size(); ++i)
@@ -643,6 +643,7 @@ int main()
 
 				}
 			}
+
 		}
 	}
 }

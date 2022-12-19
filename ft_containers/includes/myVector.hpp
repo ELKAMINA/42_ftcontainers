@@ -316,16 +316,24 @@ namespace ft {
 			iterator erase (iterator first, iterator last)
 			{
 				size_type index = first - begin();
+				std::cout << index << std::endl;
 				size_type diff = last - first;
-				_current -= diff;
-				// std::cout << diff << std::endl;
-				// _current--;
-				for (size_type i = index; i < _current; i++)
+				std::cout << diff << std::endl;
+				while(first != last)
 				{
-					_allocation.destroy(&_arrey[i]);
-					_allocation.construct(&_arrey[i], _arrey[i + 1]);
+					_allocation.destroy(&(*first));
+					first++;
 				}
-				return (iterator(first));
+				_current -= diff;
+				if	(diff < _current)
+				{
+					for (size_type i = index; i < _current; i++)
+					{
+						_allocation.destroy(&_arrey[i + diff]);
+						_allocation.construct(&_arrey[i], _arrey[i + diff]);
+					}
+				}
+				return (iterator(&_arrey[index]));
 			};
 
 		/* *********************************************************************  */
