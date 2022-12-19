@@ -689,7 +689,7 @@ int main()
 						myvector.push_back (100);
 						myvector.push_back (200);
 						myvector.push_back (300);
-						myvector.at(2);
+						std::cout << myvector.at(2) << std::endl;
 						myvector.at(6);
 					}
 					catch(const std::exception& e)
@@ -706,7 +706,7 @@ int main()
 						myvector.push_back (100);
 						myvector.push_back (200);
 						myvector.push_back (300);
-						myvector.at(2);
+						std::cout << myvector.at(2) << std::endl;
 						myvector.at(6);
 					}
 					catch(const std::exception& e)
@@ -715,7 +715,76 @@ int main()
 					}
 				}
 			}
-
-		}
+				std::cout << std::endl;
+				std::cout << std::endl;
+				std::cout << "\e[0;34mfront() >>>> \e[0m" << std::endl;
+				{
+					try
+					{
+						std::cout << "\e[0;33m$$$$$$ Real VECTOR $$$$$ \e[0m" << std::endl;
+						std::vector<int> myvector;
+						// int sum (0);
+						myvector.push_back (100);
+						myvector.push_back (200);
+						myvector.push_back (300);
+						std::cout << myvector.front() << std::endl;
+					}
+					catch(const std::exception& e)
+					{
+						std::cout << e.what() << std::endl;
+					}
+				}
+				{
+					try
+					{
+						std::cout << "\e[0;33m$$$$$$ My VECTOR $$$$$ \e[0m" << std::endl;
+						ft::vector<int> myvector;
+						// int sum (0);
+						myvector.push_back (100);
+						myvector.push_back (200);
+						myvector.push_back (300);
+						std::cout << myvector.front() << std::endl;
+					}
+					catch(const std::exception& e)
+					{
+						std::cout << e.what() << std::endl;
+					}
+				}
+			}
+				std::cout << std::endl;
+				std::cout << std::endl;
+				std::cout << "\e[0;34mback() >>>> \e[0m" << std::endl;
+				{
+					try
+					{
+						std::cout << "\e[0;33m$$$$$$ Real VECTOR $$$$$ \e[0m" << std::endl;
+						std::vector<int> myvector;
+						// int sum (0);
+						myvector.push_back (100);
+						myvector.push_back (200);
+						myvector.push_back (300);
+						std::cout << myvector.back() << std::endl;
+					}
+					catch(const std::exception& e)
+					{
+						std::cout << e.what() << std::endl;
+					}
+				}
+				{
+					try
+					{
+						std::cout << "\e[0;33m$$$$$$ My VECTOR $$$$$ \e[0m" << std::endl;
+						ft::vector<int> myvector;
+						// int sum (0);
+						myvector.push_back (100);
+						myvector.push_back (200);
+						myvector.push_back (300);
+						std::cout << myvector.back() << std::endl;
+					}
+					catch(const std::exception& e)
+					{
+						std::cout << e.what() << std::endl;
+					}
+				}
 	}
 }

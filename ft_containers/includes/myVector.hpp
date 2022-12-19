@@ -352,44 +352,6 @@ namespace ft {
 				return (iterator(&_arrey[index]));
 			};
 
-		/* *********************************************************************  */
-		// allocator_type get_allocator() const;
-		// // iterators:
-		// iterator end();
-		// const_iterator end() const;
-		// reverse_iterator rbegin();
-		// const_reverse_iterator rbegin() const;
-		// reverse_iterator rend();
-		// const_reverse_iterator rend() const;
-		// // 23.2.4.2 capacity:
-		// size_type size() const;
-		// size_type max_size() const;
-		// void resize(size_type sz, T c = T());
-		// size_type capacity() const;
-		// bool empty() const;
-		// void reserve(size_type n);
-		// // element access:
-		// reference operator[](size_type n);
-		// const_reference operator[](size_type n) const;
-		// const_reference at(size_type n) const;
-		// reference at(size_type n);
-		// reference front();
-		// const_reference front() const;
-		// reference back();
-		// const_reference back() const;
-		// // 23.2.4.3 modifiers:
-		// void pop_back();
-		// iterator insert(iterator position, const T& x);
-		// void insert(iterator position, size_type n, const T& x);
-		// template <class InputIterator>
-		// void insert(iterator position,
-		// InputIterator first, InputIterator last);
-		// iterator erase(iterator position);
-		// iterator erase(iterator first, iterator last);
-		// void swap(vector<T,Allocator>&);
-		// void clear();
-
-
 /* ************************************************************************** */
 /*                                 Element acces :                            */
 /* ************************************************************************** */
@@ -403,7 +365,7 @@ namespace ft {
 	reference at (size_type n)
 	{
 		if (n >= _current)
-			throw(std::out_of_range());
+			throw std::out_of_range("vector::_M_range_check: __n ");
 		return (_arrey[n]);
 	};
 
@@ -411,29 +373,37 @@ namespace ft {
 	const_reference at (size_type n) const
 	{
 		if (n >= _current)
-			throw(std::out_of_range());
+			throw std::out_of_range("vector::_M_range_check: __n (which is ");
 		return (_arrey[n]);
 	};
 
 		/* front : Access first element. Returns a reference to the first element in the vector. Unlike member vector::begin, which returns an iterator to this same element, this function returns a direct reference.Calling this function on an empty container causes undefined behavior..*/
-
-	reference front ()
+		
+		/* Prototype 1 */
+	reference front()
 	{
-		if (n >= _current)
-			throw(std::out_of_range());
-		if	(_current[0])
 			return (*_arrey);
 	};
 	
 		/* Prototype 2 */
-	const_reference front () const
+	const_reference front() const
 	{
-		if (n >= _current)
-			throw(std::out_of_range());
 		return (*_arrey);
 	};
 
+			/* back :Access last element. Returns a reference to the last element in the vector. Unlike member vector::end, which returns an iterator just past this element, this function returns a direct reference..*/
 
+		/* Prototype 1 */
+		reference back()
+	{
+			return (*(end() - 1));
+	};
+	
+		/* Prototype 2 */
+	const_reference back() const
+	{
+		return (*(end() - 1));
+	};
 
 /* ************************************************************************** */
 /*                                 Allocator :                                */
@@ -462,4 +432,86 @@ namespace ft {
 			// current is the number of element currently present in the vector
 			size_type 		_current;
 	};
+
+
+/* ************************************************************************** */
+/*                                 Non member functions :                     */
+/* ************************************************************************** */
+	void swap (vector& x)
+	{
+		pointer	tmp_arrey = other._arrey;
+		other._arrey = _arrey;
+		_arrey = tmp_arrey;
+
+		size_type	tmp_current = other._current;
+		other._current = _current;
+		_current = tmp_current;
+
+		size_type	tmp_capacity = other._capacity;
+		other._capacity = _capacity;
+		_capacity = tmp_capacity;
+
+		allocator_type	tmp_allocation = other._allocation;
+		other._allocation = _allocation;
+		_allocation = tmp_allocation;
+	};
+
+	template <class T, class Allocator>
+	inline bool operator==(const vector<T, Allocator> &lhs, const vector<T, Allocator> &rhs)
+	{
+		if (lhs.size() != rhs.size())
+			return false;
+		return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()) ? true : false);
+	}
+
+	template <class T, class Allocator>
+	inline bool operator<(const vector<T, Allocator> &lhs, const vector<T, Allocator> &rhs)
+	{ 
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end())); 
+	}
+
+	template <class T, class Allocator>
+	inline bool operator!=(const vector<T, Allocator> &lhs, const vector<T, Allocator> &rhs)
+	{ return not (lhs == rhs); }
+
+	template <class T, class Allocator>
+	inline bool operator>(const vector<T, Allocator> &lhs, const vector<T, Allocator> &rhs)
+	{ return rhs < lhs; }
+
+	template <class T, class Allocator>
+	inline bool operator>=(const vector<T, Allocator> &lhs, const vector<T, Allocator> &rhs)
+	{ return not (lhs < rhs); }
+
+	template <class T, class Allocator>
+	inline bool operator<=(const vector<T, Allocator> &lhs, const vector<T, Allocator> &rhs)
+	{ return not (rhs < lhs); }
+
+	template <class T, class Allocator>
+		void swap(vector<T, Allocator> &x, vector<T, Allocator> &y)
+		{ x.swap(y); }
+
+
+
+
+
+
+
 }
+
+
+
+	template <class T, class Alloc>
+	bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+
+	template <class T, class Alloc>
+	bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+
+	template <class T, class Alloc>
+	bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+
+	template <class T, class Alloc>
+	bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+
+	template <class T, class Alloc>
+	bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+
