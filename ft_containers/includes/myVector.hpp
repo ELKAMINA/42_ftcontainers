@@ -3,6 +3,8 @@
 #include <memory> // for allocator
 #include <stdexcept>
 #include "./enable_if.hpp"
+#include "./equal.hpp"
+#include "./lexicographical_compare.hpp"
 #include "./RandomAccessIterator.hpp"
 
 namespace ft {
@@ -111,7 +113,7 @@ namespace ft {
 		};
 		const_iterator end() const
 		{
-			return (const_iterator(_current));
+			return (const_iterator(begin() + _current));
 		};
 
 /* ************************************************************************** */
@@ -352,6 +354,24 @@ namespace ft {
 				return (iterator(&_arrey[index]));
 			};
 
+			void swap (vector& other)
+			{
+				pointer	tmp_arrey = other._arrey;
+				other._arrey = _arrey;
+				_arrey = tmp_arrey;
+
+				size_type	tmp_current = other._current;
+				other._current = _current;
+				_current = tmp_current;
+
+				size_type	tmp_capacity = other._capacity;
+				other._capacity = _capacity;
+				_capacity = tmp_capacity;
+
+				allocator_type	tmp_allocation = other._allocation;
+				other._allocation = _allocation;
+				_allocation = tmp_allocation;
+			};
 /* ************************************************************************** */
 /*                                 Element acces :                            */
 /* ************************************************************************** */
@@ -437,24 +457,6 @@ namespace ft {
 /* ************************************************************************** */
 /*                                 Non member functions :                     */
 /* ************************************************************************** */
-	void swap (vector& x)
-	{
-		pointer	tmp_arrey = other._arrey;
-		other._arrey = _arrey;
-		_arrey = tmp_arrey;
-
-		size_type	tmp_current = other._current;
-		other._current = _current;
-		_current = tmp_current;
-
-		size_type	tmp_capacity = other._capacity;
-		other._capacity = _capacity;
-		_capacity = tmp_capacity;
-
-		allocator_type	tmp_allocation = other._allocation;
-		other._allocation = _allocation;
-		_allocation = tmp_allocation;
-	};
 
 	template <class T, class Allocator>
 	inline bool operator==(const vector<T, Allocator> &lhs, const vector<T, Allocator> &rhs)
@@ -500,18 +502,18 @@ namespace ft {
 
 
 
-	template <class T, class Alloc>
-	bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+	// template <class T, class Alloc>
+	// bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
 
-	template <class T, class Alloc>
-	bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+	// template <class T, class Alloc>
+	// bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
 
-	template <class T, class Alloc>
-	bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+	// template <class T, class Alloc>
+	// bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
 
-	template <class T, class Alloc>
-	bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+	// template <class T, class Alloc>
+	// bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
 
-	template <class T, class Alloc>
-	bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
+	// template <class T, class Alloc>
+	// bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
 

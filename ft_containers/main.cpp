@@ -786,5 +786,146 @@ int main()
 						std::cout << e.what() << std::endl;
 					}
 				}
+				std::cout << std::endl;
+				std::cout << std::endl;
+				std::cout << "\e[0;34m Relational Operators >>>> \e[0m" << std::endl;
+				{
+					try
+					{
+						std::cout << "\e[0;33m$$$$$$ Real VECTOR $$$$$ \e[0m" << std::endl;
+						std::vector<int> myvector;
+						std::vector<int> myvector2;
+						// int sum (0);
+						myvector.push_back (100);
+						myvector.push_back (200);
+						myvector.push_back (300);
+						myvector2.push_back (100);
+						myvector2.push_back (200);
+						myvector2.push_back (50);
+						if (myvector <= myvector2)
+							std::cout << " Kikou " << std::endl;
+						else
+							std::cout << " Not Kikou " << std::endl;
+						std::vector<int> vec1;
+						std::vector<int> vec2;
+						vec1.push_back (1);
+						vec1.push_back (2);
+						vec1.push_back (3);
+						vec1.push_back (6);
+						vec1.push_back (9);
+						vec2.push_back (1);
+						vec2.push_back (2);
+						vec2.push_back (3);
+						if (vec1 != vec2)
+							std::cout << " Kikou " << std::endl;
+						else
+							std::cout << " Not Kikou " << std::endl;
+
+					}
+					catch(const std::exception& e)
+					{
+						std::cout << e.what() << std::endl;
+					}
+				}
+				std::cout << std::endl;
+				{
+					try
+					{
+						std::cout << "\e[0;33m$$$$$$ My VECTOR $$$$$ \e[0m" << std::endl;
+						ft::vector<int> myvector;
+						ft::vector<int> myvector2;
+						// int sum (0);
+						myvector.push_back (100);
+						myvector.push_back (200);
+						myvector.push_back (300);
+						myvector2.push_back (100);
+						myvector2.push_back (200);
+						myvector2.push_back (50);
+						if (myvector <= myvector2)
+							std::cout << " Kikou " << std::endl;
+						else
+							std::cout << " Not Kikou " << std::endl;
+						std::vector<int> vec1;
+						std::vector<int> vec2;
+						vec1.push_back (1);
+						vec1.push_back (2);
+						vec1.push_back (3);
+						vec1.push_back (6);
+						vec1.push_back (9);
+						vec2.push_back (1);
+						vec2.push_back (2);
+						vec2.push_back (3);
+						if (vec1 != vec2)
+							std::cout << " Kikou " << std::endl;
+						else
+							std::cout << " Not Kikou " << std::endl;
+					}
+					catch(const std::exception& e)
+					{
+						std::cout << e.what() << std::endl;
+					}
+				}
+				std::cout << std::endl;
+				{
+					std::cout << "\e[0;33m$$$$$$ SWAP $$$$$ \e[0m" << std::endl;
+					{
+						try
+						{
+							std::cout << "\e[0;33m$$$$$$ REAL VECTOR $$$$$ \e[0m" << std::endl;
+							std::vector<int> myvector;
+							std::vector<int> myvector2;
+							// int sum (0);
+							myvector.push_back (1);
+							myvector.push_back (2);
+							myvector.push_back (3);
+							myvector2.push_back (100);
+							myvector2.push_back (200);
+							myvector2.push_back (50);
+							myvector2.push_back (550);
+							myvector2.push_back (5500);
+							myvector.swap(myvector2);
+							std::vector<int>::iterator start = myvector.begin();
+							for(; start != myvector.end(); start++)
+								std::cout << *start << std::endl;
+							std::vector<int>::iterator start2 = myvector2.begin();
+							for(; start2 != myvector2.end(); start2++)
+								std::cout << *start2 << std::endl;
+				
+						}
+						catch(const std::exception& e)
+						{
+							std::cout << e.what() << std::endl;
+						}
+					}
+					{
+						try
+						{
+							std::cout << "\e[0;33m$$$$$$ My VECTOR $$$$$ \e[0m" << std::endl;
+							ft::vector<int> myvector;
+							ft::vector<int> myvector2;
+							// int sum (0);
+							myvector.push_back (1);
+							myvector.push_back (2);
+							myvector.push_back (3);
+							myvector2.push_back (100);
+							myvector2.push_back (200);
+							myvector2.push_back (50);
+							myvector2.push_back (550);
+							myvector2.push_back (5500);
+							myvector.swap(myvector2);
+							ft::vector<int>::iterator start = myvector.begin();
+							for(; start != myvector.end(); start++)
+								std::cout << *start << std::endl;
+							ft::vector<int>::iterator start2 = myvector2.begin();
+							for(; start2 != myvector2.end(); start2++)
+								std::cout << *start2 << std::endl;
+				
+						}
+						catch(const std::exception& e)
+						{
+							std::cout << e.what() << std::endl;
+						}
+					}
+				}
 	}
 }
