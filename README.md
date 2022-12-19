@@ -259,17 +259,17 @@ Constructs a container with n elements. Each element is a copy of val.
     > (3) range constructor : *En cours* 
 Constructs a container with as many elements as the range [first,last), with each element constructed from its corresponding element in that range, in the same order.
   
-    > (4) copy constructor : *NY*
+    > (4) copy constructor : : *OK*
 Constructs a container with a copy of each of the elements in x, in the same order.
   
-(destructor)	Vector destructor (public member function) : 1
-operator=	Assign content (public member function) : 1
+(destructor)	Vector destructor (public member function) :  : *OK*
+operator=	Assign content (public member function) : : *OK*
 
 ** Iterators: **
   
 **begin**	Return iterator to beginning (public member function) : *OK* 
   
-**end**	Return iterator to end (public member function)
+**end**	Return iterator to end (public member function) : *OK*
   
 rbegin	Return reverse iterator to reverse beginning (public member function)
   
@@ -299,9 +299,9 @@ reserve	Request a change in capacity (public member function) : *OK*
 
 
 **Element access:**
-operator[]	Access element (public member function)
-at	Access element (public member function)
-front	Access first element (public member function)
+operator[]	Access element (public member function) : *OK* 
+at	Access element (public member function) : *OK* 
+front	Access first element (public member function) : *OK* 
 back	Access last element (public member function)
 data	Access data (public member function)
 
@@ -315,7 +315,7 @@ pop_back	Delete last element (public member function)
 
 insert	Insert elements (public member function) : *OK*
 
-erase	Erase elements (public member function)
+erase	Erase elements (public member function): *OK*
 
 swap	Swap content (public member function)
 
@@ -327,7 +327,7 @@ emplace_back	Construct and insert element at the end (public member function)
 
 **Allocator:**
 
-get_allocator	Get allocator (public member function)
+get_allocator	Get allocator (public member function) : *OK* 
 
 **Non-member function overloads**
 
