@@ -313,8 +313,8 @@ int main()
 			{
 				ft::vector<size_t> myvec(5, 130);
 				std::vector<size_t> vec2(5, 130);
-				std::cout << "\e[0;34mINSERT() >>>> \e[0m" << std::endl;
 				{
+				std::cout << "\e[0;34mINSERT() >>>> \e[0m" << std::endl;
 					try
 					{
 						{
@@ -364,32 +364,82 @@ int main()
 								std::cout << *itt3 << " ; ";
 							std::cout << std::endl;
 							std::cout << std::endl;
+						}
+						{
+							std::cout << std::endl;
+							std::cout << "\e[0;46mProtoype 3\e[0m"  << std::endl;
+							std::cout << std::endl;
+							std::cout << std::endl;
+							std::cout << "\e[0;33m$$$$$$ MY VECTOR $$$$$ \e[0m" << std::endl;
+							std::cout << "My Size: " << myvec.size() << std::endl;
+							std::cout << "My Capacity: " << myvec.capacity() << std::endl;
+							size_t myarray[] = {5, 6, 8};
+							ft::vector<size_t>::iterator it = myvec.begin();
+							ft::vector<size_t>::iterator first = myarray;
+							myvec.insert(it+2, first, first+3);
+							std::cout << "Inserting ... " << std::endl;
+							ft::vector<size_t>::iterator toto = myvec.begin();
+							for(; toto != myvec.end(); toto++)
+								std::cout << *toto << " ; ";
+							std::cout << std::endl;
+							std::cout << std::endl;
+							{
+								std::cout << "\e[0;33m$$$$$$ Exemple cpp : Vrai vector $$$$$ \e[0m" << std::endl;
+								std::vector<int> myvector (3,100);
+								std::vector<int>::iterator it;
+
+								it = myvector.begin();
+								it = myvector.insert ( it , 200 );
+
+								myvector.insert (it,2,300);
+
+								// "it" no longer valid, get a new one:
+								it = myvector.begin();
+
+								std::vector<int> anothervector (2,400);
+								myvector.insert (it+2,anothervector.begin(),anothervector.end());
+
+								int myarray [] = { 501,502,503 };
+								myvector.insert (myvector.begin(), myarray, myarray+3);
+
+								std::cout << "REal vector contains:";
+								for (it=myvector.begin(); it<myvector.end(); it++)
+									std::cout << ' ' << *it;
+								std::cout << '\n';
+							}
+							std::cout << std::endl;
+							{
+								std::cout << "\e[0;33m$$$$$$ Exemple cpp : Mon vector $$$$$ \e[0m" << std::endl;
+								ft::vector<int> myvector (3,100);
+								ft::vector<int>::iterator it;
+
+								it = myvector.begin();
+								it = myvector.insert ( it , 200 );
+
+								myvector.insert (it,2,300);
+
+								// "it" no longer valid, get a new one:
+								it = myvector.begin();
+
+								ft::vector<int> anothervector (2,400);
+								myvector.insert (it+2,anothervector.begin(),anothervector.end());
+
+								int myarray [] = { 501,502,503 };
+								myvector.insert (myvector.begin(), myarray, myarray+3);
+
+								std::cout << "myvector contains:";
+								for (it=myvector.begin(); it<myvector.end(); it++)
+									std::cout << ' ' << *it;
+								std::cout << '\n';
+							}
+						}
 					}
+					catch(const std::exception& e)
 					{
-						std::cout << std::endl;
-						std::cout << "\e[0;46mProtoype 3\e[0m"  << std::endl;
-						std::cout << std::endl;
-						std::cout << std::endl;
-						std::cout << "\e[0;33m$$$$$$ MY VECTOR $$$$$ \e[0m" << std::endl;
-						std::cout << "My Size: " << myvec.size() << std::endl;
-						std::cout << "My Capacity: " << myvec.capacity() << std::endl;
-						size_t myarray[] = {5, 6, 8};
-						ft::vector<size_t>::iterator it = myvec.begin();
-						ft::vector<size_t>::iterator first = myarray;
-						myvec.insert(it+2, first, first+3);
-						std::cout << "Inserting ... " << std::endl;
-						ft::vector<size_t>::iterator toto = myvec.begin();
-						for(; toto != myvec.end(); toto++)
-							std::cout << *toto << " ; ";
-						std::cout << std::endl;
-						std::cout << std::endl;
+						std::cout << e.what() << std::endl;
 					}
+				}
 			}
-			catch(const std::exception& e)
-			{
-				std::cout << e.what() << std::endl;
-			}
-			}
-//		}
+		}
 	}
 }

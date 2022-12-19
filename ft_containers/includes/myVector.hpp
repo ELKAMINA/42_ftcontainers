@@ -180,12 +180,15 @@ namespace ft {
 /* ************************************************************************** */
 
 			/* Insert : Requests that the vector capacity be at least enough to contain n elements. Only change capacity*/
+
 				/* Prototype 1 */
 			iterator insert (iterator position, const value_type& val)
 			{
 				insert(position, 1, val);
+				return (_arrey);
 			};
-
+			
+				/* Prototype 2 */
 			void insert (iterator position, size_type n, const value_type& val)
 			{
 				difference_type index = position - begin();
@@ -212,7 +215,8 @@ namespace ft {
 					_current++;
 				}
 			};
-	
+
+				/* Prototype 3 */
 			template <class InputIterator>
 				void insert (iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
 				{
