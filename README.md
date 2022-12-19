@@ -284,35 +284,52 @@ crbegin	Return const_reverse_iterator to reverse beginning (public member functi
 crend	Return const_reverse_iterator to reverse end (public member function)
 
 Capacity:
-size	Return size (public member function) : *OK*
-max_size	Return maximum size (public member function) : *OK*
-resize	Change size (public member function)
-capacity	Return size of allocated storage capacity (public member function)
-empty	Test whether vector is empty (public member function): *OK*
-reserve	Request a change in capacity (public member function) : *OK*
-shrink_to_fit	Shrink to fit (public member function)
 
-Element access:
+size	Return size (public member function) : *OK*
+
+max_size	Return maximum size (public member function) : *OK*
+
+resize	Change size (public member function): *OK*
+
+capacity	Return size of allocated storage capacity (public member function): *OK*
+
+empty	Test whether vector is empty (public member function): *OK*
+
+reserve	Request a change in capacity (public member function) : *OK*
+
+
+**Element access:**
 operator[]	Access element (public member function)
 at	Access element (public member function)
 front	Access first element (public member function)
 back	Access last element (public member function)
 data	Access data (public member function)
 
-Modifiers:
+**Modifiers:**
+
 assign	Assign vector content (public member function)
+
 push_back	Add element at the end (public member function)
+
 pop_back	Delete last element (public member function)
-insert	Insert elements (public member function)
+
+insert	Insert elements (public member function) : *OK*
+
 erase	Erase elements (public member function)
+
 swap	Swap content (public member function)
+
 clear	Clear content (public member function)
+
 emplace	Construct and insert element (public member function)
+
 emplace_back	Construct and insert element at the end (public member function)
 
-Allocator:
+**Allocator:**
+
 get_allocator	Get allocator (public member function)
 
-Non-member function overloads
+**Non-member function overloads**
+
 relational operators	Relational operators for vector (function template)
 swap	Exchange contents of vectors (function template)
