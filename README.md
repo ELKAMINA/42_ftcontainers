@@ -307,7 +307,7 @@ data	Access data (public member function)
 
 **Modifiers:**
 
-assign	Assign vector content (public member function)
+assign	Assign vector content (public member function): *OK*
 
 push_back	Add element at the end (public member function): *OK*
 
@@ -319,7 +319,7 @@ erase	Erase elements (public member function)
 
 swap	Swap content (public member function)
 
-clear	Clear content (public member function)
+clear	Clear content (public member function) : *OK*
 
 emplace	Construct and insert element (public member function)
 
