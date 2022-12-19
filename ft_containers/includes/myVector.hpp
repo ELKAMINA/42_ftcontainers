@@ -315,7 +315,17 @@ namespace ft {
 				/* Prototype 2 */
 			iterator erase (iterator first, iterator last)
 			{
-
+				size_type index = first - begin();
+				size_type diff = last - first;
+				_current -= diff;
+				// std::cout << diff << std::endl;
+				// _current--;
+				for (size_type i = index; i < _current; i++)
+				{
+					_allocation.destroy(&_arrey[i]);
+					_allocation.construct(&_arrey[i], _arrey[i + 1]);
+				}
+				return (iterator(first));
 			};
 
 		/* *********************************************************************  */
