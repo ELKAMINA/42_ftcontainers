@@ -257,7 +257,6 @@ namespace ft {
 					}
 					if (_current + n > _capacity)
 					{
-						std::cout << "heros " << std::endl;
 						if (_capacity == 0)
 							reserve(n);
 						else 
@@ -314,7 +313,6 @@ namespace ft {
 				void assign (InputIterator first, InputIterator last)
 				{
 					InputIterator tmp = first;
-					std::cout << "je rentre ici " << std::endl;
 					size_type n = 0;
 					
 					while (tmp != last)
@@ -412,7 +410,7 @@ namespace ft {
 	const_reference at (size_type n) const
 	{
 		if (n >= _current)
-			throw std::out_of_range("vector::_M_range_check: __n (which is ");
+			throw std::out_of_range("vector::_M_range_check");
 		return (_arrey[n]);
 	};
 
@@ -510,29 +508,5 @@ namespace ft {
 	template <class T, class Allocator>
 		void swap(vector<T, Allocator> &x, vector<T, Allocator> &y)
 		{ x.swap(y); }
-
-
-
-
-
-
-
 }
-
-
-
-	// template <class T, class Alloc>
-	// bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
-
-	// template <class T, class Alloc>
-	// bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
-
-	// template <class T, class Alloc>
-	// bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
-
-	// template <class T, class Alloc>
-	// bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
-
-	// template <class T, class Alloc>
-	// bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs);
 

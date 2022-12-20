@@ -2,6 +2,7 @@
 #include "./iterator_traits.hpp"
 #include "./iterator_baseClass.hpp"
 #include "./is_integral.hpp"
+#include "./remove_cv.hpp"
 
 namespace ft
 {
@@ -20,14 +21,14 @@ namespace ft
             /* Constructors and Destructors */
             RandomAccessIterator() : _ptr(NULL) {}
             RandomAccessIterator(pointer ptr) : _ptr(ptr) {}
-            RandomAccessIterator(const RandomAccessIterator<T> &other) : _ptr(other._ptr) {}
+            RandomAccessIterator(const RandomAccessIterator<typename remove_cv<value_type>::type> &other) : _ptr(other._ptr) {}
             virtual ~RandomAccessIterator() {} // virtual destructor : why?
 
             /* Retrieve the current pointer */
             pointer base() const { return this->_ptr;};
             
             /* Comparison Operators */
-            RandomAccessIterator &operator=(const RandomAccessIterator &other)
+            RandomAccessIterator &operator=(const RandomAccessIterator<typename remove_cv<value_type>::type> &other)
             {
                 if (this != &other)
                     _ptr = other._ptr;
