@@ -1,4 +1,5 @@
 #pragma once
+
 #include <cstddef> // for ptrdiff_t
 #include <vector>
 #include <iterator>

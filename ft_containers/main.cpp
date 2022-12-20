@@ -1,10 +1,12 @@
 #include <iostream>
 #include <iomanip>
 #include "./includes/Stack.hpp"
-#include "./includes/myVector.hpp"
+#include "./includes/vector.hpp"
 #include "./includes/ReverseIterator.hpp"
 
 /* For colours in terminal/outputs : https://stackoverflow.com/questions/2616906/how-do-i-output-coloured-text-to-a-linux-terminal*/
+
+using namespace std;
 
 int main()
 {
@@ -1103,4 +1105,110 @@ int main()
 
 	// 			}
 	// }
+	std::cout << "\e[1;41m MAZOISE TESTS\033[0m\n" << std::endl;
+	{
+		/* Tests Mazoise avec mon vecteur */
+		std::cout << "\e[0;34m ERASE -> >>>> \e[0m" << std::endl;
+		std::vector<int> myvector;
+
+		// set some values (from 1 to 10)
+		for (int i=1; i<=10; i++) myvector.push_back(i);
+
+		// erase the 6th element
+		myvector.erase (myvector.begin()+5);
+
+		// erase the first 3 elements:
+		myvector.erase (myvector.begin(),myvector.begin()+3);
+
+		cout << "REAL vector contains:";
+		for (unsigned i=0; i<myvector.size(); ++i)
+			cout << ' ' << myvector[i];
+		cout << '\n';
+	}
+	{
+		std::cout << "\e[0;34m ERASE -> >>>> \e[0m" << std::endl;
+		/* Tests Mazoise avec mon vecteur */
+
+		std::vector<int> myvector;
+
+		// set some values (from 1 to 10)
+		for (int i=1; i<=10; i++) myvector.push_back(i);
+
+		// erase the 6th element
+		myvector.erase (myvector.begin()+5);
+
+		// erase the first 3 elements:
+		myvector.erase (myvector.begin(),myvector.begin()+3);
+
+		cout << "myvector contains:";
+		for (unsigned i=0; i<myvector.size(); ++i)
+			cout << ' ' << myvector[i];
+		cout << '\n';
+	}
+	{
+		std::cout << "\e[0;34m REAL Reserve -> >>>> \e[0m" << std::endl;
+		vector<int>::size_type sz;
+
+		vector<int> foo;
+		sz = foo.capacity();
+		cout << "making foo grow:\n";
+		for (int i=0; i<100; ++i) {
+			foo.push_back(i);
+			if (sz!=foo.capacity()) {
+			sz = foo.capacity();
+			cout << "capacity changed: " << sz << '\n';
+			}
+		}
+
+		vector<int> bar;
+		sz = bar.capacity();
+		bar.reserve(100);   // this is the only difference with foo above
+		cout << "making bar grow:\n";
+		for (int i=0; i<100; ++i) {
+			bar.push_back(i);
+			if (sz!=bar.capacity()) {
+			sz = bar.capacity();
+			cout << "capacity changed: " << sz << '\n';
+			}
+		}
+		try
+		{
+			bar.reserve(bar.max_size() * 2);
+		}
+		catch(std::exception& e) { cout << e.what(); }
+	}
+	cout << endl;
+	cout << endl;
+	cout << endl;
+	{
+		std::cout << "\e[0;34m MON Reserve  >>>> \e[0m" << std::endl;
+		ft::vector<int>::size_type sz;
+
+		ft::vector<int> foo;
+		sz = foo.capacity();
+		cout << "making foo grow:\n";
+		for (int i=0; i<100; ++i) {
+			foo.push_back(i);
+			if (sz!=foo.capacity()) {
+			sz = foo.capacity();
+			cout << "capacity changed: " << sz << '\n';
+			}
+		}
+		ft::vector<int> bar;
+		sz = bar.capacity();
+		bar.reserve(100);   // this is the only difference with foo above
+		cout << "making bar grow:\n";
+		for (int i=0; i<100; ++i) {
+			bar.push_back(i);
+			if (sz!=bar.capacity()) {
+			sz = bar.capacity();
+			cout << "capacity changed: " << sz << '\n';
+			}
+		}
+		try
+		{
+			bar.reserve(bar.max_size() * 2);
+		}
+		catch(std::exception& e) { cout << e.what(); }
+	}
 }

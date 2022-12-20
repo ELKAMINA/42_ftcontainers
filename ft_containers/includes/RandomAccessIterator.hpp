@@ -1,4 +1,5 @@
 #pragma once
+
 #include "./iterator_traits.hpp"
 #include "./iterator_baseClass.hpp"
 #include "./is_integral.hpp"
@@ -21,7 +22,7 @@ namespace ft
             /* Constructors and Destructors */
             RandomAccessIterator() : _ptr(NULL) {}
             RandomAccessIterator(pointer ptr) : _ptr(ptr) {}
-            RandomAccessIterator(const RandomAccessIterator<typename remove_cv<value_type>::type> &other) : _ptr(other._ptr) {}
+            RandomAccessIterator(const RandomAccessIterator<typename remove_cv<value_type>::type> &other) : _ptr(other.base()) {}
             virtual ~RandomAccessIterator() {} // virtual destructor : why?
 
             /* Retrieve the current pointer */
@@ -31,15 +32,15 @@ namespace ft
             RandomAccessIterator &operator=(const RandomAccessIterator<typename remove_cv<value_type>::type> &other)
             {
                 if (this != &other)
-                    _ptr = other._ptr;
+                    _ptr = other.base();
                 return *this;
             }
-            bool operator==(const RandomAccessIterator &other) const { return _ptr == other._ptr; } // OK
-            bool operator!=(const RandomAccessIterator &other) const { return _ptr != other._ptr; } // OK
-            bool operator<(const RandomAccessIterator &other) const { return _ptr < other._ptr; }
-            bool operator<=(const RandomAccessIterator &other) const { return _ptr <= other._ptr; }
-            bool operator>(const RandomAccessIterator &other) const { return _ptr > other._ptr; }
-            bool operator>=(const RandomAccessIterator &other) const { return _ptr >= other._ptr; }
+            bool operator==(const RandomAccessIterator &other) const { return _ptr == other.base(); } // OK
+            bool operator!=(const RandomAccessIterator &other) const { return _ptr != other.base(); } // OK
+            bool operator<(const RandomAccessIterator &other) const { return _ptr < other.base(); }
+            bool operator<=(const RandomAccessIterator &other) const { return _ptr <= other.base(); }
+            bool operator>(const RandomAccessIterator &other) const { return _ptr > other.base(); }
+            bool operator>=(const RandomAccessIterator &other) const { return _ptr >= other.base(); }
 
             /* Operators */
             reference operator*() const {return *_ptr; } // OK
@@ -51,7 +52,7 @@ namespace ft
             RandomAccessIterator operator+(difference_type n) const { return RandomAccessIterator(_ptr + n); } // OK
             RandomAccessIterator operator-(difference_type n) const { return RandomAccessIterator(_ptr - n); } // OK
             RandomAccessIterator &operator+=(difference_type n) { _ptr += n; return *this; } //OK arithmetic op between iterator and int value/another it
-            RandomAccessIterator &operator-=(difference_type n) { _ptr -= n; return;}// OK arithmetic op between iterator and int value/another it
+            RandomAccessIterator &operator-=(difference_type n) { _ptr -= n; return *this;}// OK arithmetic op between iterator and int value/another it
             reference operator[](difference_type n) const { return _ptr[n]; } //OK
 
         	private:
@@ -82,7 +83,7 @@ namespace ft
 
         template<typename T1, typename T2>
         inline bool operator<(const ft::RandomAccessIterator<T1> &lhs, const ft::RandomAccessIterator<T2> &rhs)
-        { return lhs.base() < rhs.base(); }
+        { return (lhs.base() < rhs.base()); }
 
         template <typename T>
         inline bool operator>(const ft::RandomAccessIterator<T> &lhs, const ft::RandomAccessIterator<T> &rhs)

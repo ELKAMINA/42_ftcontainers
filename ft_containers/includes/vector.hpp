@@ -2,6 +2,9 @@
 /* explicit keyword : to avoid implicit casts/conversions */
 #include <memory> // for allocator
 #include <stdexcept>
+#include <iostream>
+#include <sstream>
+#include <iomanip>
 #include "./enable_if.hpp"
 #include "./equal.hpp"
 #include "./lexicographical_compare.hpp"
@@ -58,7 +61,6 @@ namespace ft {
         vector (InputIterator first, InputIterator last,
                  const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
 		{
-			std::cout << "Maybe here " << std::endl;
 			(void)alloc;
 			/* Start with iterators and functions */
 			_arrey = NULL;
@@ -81,7 +83,7 @@ namespace ft {
 		vector& operator= (const vector& x)
 		{
 			if (&x == this)
-				return ;
+				return *this;
 			assign(x.begin(), x.end());
 			return *this;
 		};
@@ -174,7 +176,7 @@ namespace ft {
 			/* Cas 1 : If the size requested is greater than the maximum size (vector::max_size), a length_error exception is thrown.*/ 
 			if (n > max_size())
 			{
-				throw std::length_error("MY VECTOR : _M_fill_insert");
+				throw std::length_error("vector::reserve");
 			}
 			/* Cas 2  : If n is greater than the current vector capacity, the function causes the container to reallocate its storage increasing its capacity to n (or greater).*/
 			else if (n > _capacity)
@@ -351,9 +353,7 @@ namespace ft {
 			iterator erase (iterator first, iterator last)
 			{
 				size_type index = first - begin();
-				std::cout << index << std::endl;
 				size_type diff = last - first;
-				std::cout << diff << std::endl;
 				while(first != last)
 				{
 					_allocation.destroy(&(*first));
@@ -402,7 +402,11 @@ namespace ft {
 	reference at (size_type n)
 	{
 		if (n >= _current)
-			throw std::out_of_range("vector::_M_range_check: __n ");
+		{
+			std::stringstream str;
+			str << "vector::_M_range_check: __n (which is " << n << ") >= this->size() (which is " << _current << ")";
+			throw std::out_of_range(str.str().c_str());
+		}
 		return (_arrey[n]);
 	};
 
@@ -410,7 +414,11 @@ namespace ft {
 	const_reference at (size_type n) const
 	{
 		if (n >= _current)
-			throw std::out_of_range("vector::_M_range_check");
+		{
+			std::stringstream str;
+			str << "vector::_M_range_check: __n (which is " << n << ") >= this->size() (which is " << _current << ")";
+			throw std::out_of_range(str.str().c_str());
+		}
 		return (_arrey[n]);
 	};
 
