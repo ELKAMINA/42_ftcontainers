@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "./includes/Stack.hpp"
 #include "./includes/myVector.hpp"
+#include "./includes/ReverseIterator.hpp"
 
 /* For colours in terminal/outputs : https://stackoverflow.com/questions/2616906/how-do-i-output-coloured-text-to-a-linux-terminal*/
 
@@ -925,6 +926,63 @@ int main()
 						{
 							std::cout << e.what() << std::endl;
 						}
+					}
+				}
+				std::cout << std::endl;
+				std::cout << std::endl;
+				std::cout << "\e[1;41m Reverse iterators \033[0m\n" << std::endl;
+				{
+					{
+						std::cout << "\e[0;34m Real Reverse_iterator >>>> \e[0m" << std::endl;
+						std::vector<int> myvector;
+						for (int i=0; i<10; i++) myvector.push_back(i);
+
+						typedef std::vector<int>::iterator iter_type;
+																				// ? 9 8 7 6 5 4 3 2 1 0 ?
+						iter_type from (myvector.begin());                     //   ^
+																				//         ------>
+						iter_type until (myvector.end());                      //                       ^
+																				//
+						std::reverse_iterator<iter_type> rev_until (from);     // ^
+						std::cout << "rev_util :" << *rev_until<< std::endl;
+							//         <------
+						std::reverse_iterator<iter_type> rev_from (until);     //                     ^
+						std::cout << "rev_from :" << *rev_from << std::endl;
+
+						std::cout << "myvector:";
+						while (rev_from != rev_until)
+							std::cout << ' ' << *rev_from++;
+						std::cout << '\n';
+					}
+					{
+						std::cout << "\e[0;34m My Reverse_iterator >>>> \e[0m" << std::endl;
+						ft::vector<int> myvector;
+						for (int i=0; i<10; i++)
+						{
+							myvector.push_back(i);
+							std::cout << myvector[i] << std::endl;
+						}
+						typedef ft::vector<int>::iterator iter_type;
+																				// ? 9 8 7 6 5 4 3 2 1 0 ?
+						iter_type from (myvector.begin());                     //   ^
+						std::cout << "from :" << *from << std::endl;
+						// 														//         ------>
+						iter_type until (myvector.end());                     //                       ^
+						std::cout << "until :" << *until << std::endl;					//
+						ft::reverse_iterator<iter_type> rev_until (from);     // ^
+						std::cout << "rev_util :" << *rev_until<< std::endl;
+																	//         <------
+						ft::reverse_iterator<iter_type> rev_from (until);     //                     ^
+						std::cout << "rev_from :" << *rev_from << std::endl;
+
+						// std::cout << "myvector:";
+						// int i = 0;
+						// while (rev_from != rev_until)
+						// {
+						// 	std::cout << ' ' << (*rev_from)++ << " >>>>> i :" << i << std::endl;
+						// 	i++;	
+						// }
+						// std::cout << '\n';
 					}
 				}
 	}
