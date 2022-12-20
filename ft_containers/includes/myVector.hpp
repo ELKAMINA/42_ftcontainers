@@ -6,6 +6,7 @@
 #include "./equal.hpp"
 #include "./lexicographical_compare.hpp"
 #include "./RandomAccessIterator.hpp"
+#include "./ReverseIterator.hpp"
 
 namespace ft {
 	template <class T, class Allocator = std::allocator<T> >
@@ -25,8 +26,8 @@ namespace ft {
 		typedef typename allocator_type::const_pointer 					const_pointer;
 		typedef ft::RandomAccessIterator<value_type>					iterator;
 		typedef ft::RandomAccessIterator<const value_type>				const_iterator;
-		//typedef std::reverse_iterator<iterator> 						reverse_iterator;
-		//typedef std::reverse_iterator<const_iterator> 					const_reverse_iterator;
+		typedef ft::reverse_iterator<iterator> 							reverse_iterator;
+		typedef ft::reverse_iterator<const_iterator> 					const_reverse_iterator;
 		typedef ptrdiff_t												difference_type;
 		typedef size_t													size_type;
 
@@ -44,6 +45,7 @@ namespace ft {
 		explicit vector (size_type n, const value_type& val = value_type(),
                  const allocator_type& alloc = allocator_type()) : _allocation(alloc), _capacity(n), _current(n)
 		{
+			// std::cout << "here " << std::endl;
 			_arrey = _allocation.allocate(_current); /* allocate() func allocate memory for a container. It returns a pointer to the start of the allocated memory */
 			for	(size_type i = 0; i < _current; i++)
 			{
@@ -52,20 +54,25 @@ namespace ft {
 		};
 		
 		/* Range constructor : Constructs a container with as many elements as the range [first,last)  */
-		// template <class InputIterator>
-        // vector (InputIterator first, InputIterator last,
-        //          const allocator_type& alloc = allocator_type(), typename ft::enable_if<ft::is_integral<InputIterator>::value,
-        //                          <InputIterator>::type* = nullptr)
-		// {
-		// 	/* Start with iterators and functions */
-		// 	_arrey = NULL;
-		// 	insert(begin(), first, last);
-		// }
+		template <class InputIterator>
+        vector (InputIterator first, InputIterator last,
+                 const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
+		{
+			std::cout << "Maybe here " << std::endl;
+			(void)alloc;
+			/* Start with iterators and functions */
+			_arrey = NULL;
+			_capacity = 0;
+			_current = 0;
+			insert(begin(), first, last);
+		}
 
 		/* Constructs a container with a copy of each of the elements in x, in the same order.  */
-		vector (const vector& x)
+		vector(const vector& x)
 		{
 			_arrey = NULL;
+			_capacity = 0;
+			_current = 0;
 			assign(x.begin(), x.end());
 		};
 
@@ -100,11 +107,11 @@ namespace ft {
 		{
 			return (iterator(_arrey));
 		};
+
 		const_iterator begin() const
 		{
 			return (const_iterator(_arrey));
 		};
-
 			/* 2 - end : An iterator to the element past the end of the sequence.
 			Warning : If the container is empty, the returned iterator value shall not be dereferenced.*/
 		iterator end()
@@ -115,6 +122,13 @@ namespace ft {
 		{
 			return (const_iterator(begin() + _current));
 		};
+
+		reverse_iterator 		rbegin()		{ return reverse_iterator(end()); };
+
+		const_reverse_iterator	rbegin() const	{ return reverse_iterator(end()); };
+
+		reverse_iterator		rend() 			{ return reverse_iterator(begin()); };
+		const_reverse_iterator 	rend() const	{ return const_reverse_iterator(begin()); };
 
 /* ************************************************************************** */
 /*                                 Capacity :                                 */
@@ -243,6 +257,7 @@ namespace ft {
 					}
 					if (_current + n > _capacity)
 					{
+						std::cout << "heros " << std::endl;
 						if (_capacity == 0)
 							reserve(n);
 						else 
@@ -280,14 +295,17 @@ namespace ft {
 			};
 
 				/* Clear : Erases all elements from the container. After this call, size() returns zero.Invalidates any references, pointers, or iterators referring to contained elements. Any past-the-end iterators are also invalidated. Leaves the capacity() of the vector unchanged.*/
-				void clear()
+			void clear()
+			{
+				if	(_arrey)
 				{
 					for(size_type i = 0; i < _current; i++)
 					{
 						_allocation.destroy(&_arrey[i]);
 					}
-					_current = 0;
-				};
+				}
+				_current = 0;
+			};
 
 				/* Assign : Assigns new contents to the vector, replacing its current contents, and modifying its size accordingly.*/
 
@@ -296,6 +314,7 @@ namespace ft {
 				void assign (InputIterator first, InputIterator last)
 				{
 					InputIterator tmp = first;
+					std::cout << "je rentre ici " << std::endl;
 					size_type n = 0;
 					
 					while (tmp != last)
