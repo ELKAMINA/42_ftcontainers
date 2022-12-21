@@ -190,7 +190,6 @@ namespace ft {
 					_allocation.destroy(&_arrey[i]);
 				}
 				_allocation.deallocate(_arrey, _current);
-				// std::cout << "je rentre ici? " << std::endl;
 				_capacity = n;
 				_arrey = reallocation;
 			}
@@ -216,6 +215,7 @@ namespace ft {
 			iterator insert (iterator position, const value_type& val)
 			{
 				insert(position, 1, val);
+				// difference_type diff = position - begin();
 				return (_arrey);
 			};
 			
@@ -224,27 +224,33 @@ namespace ft {
 			{
 				difference_type index = position - begin();
 				// std::cout << "index " << index << std::endl;
-
+				if (n == 0)
+					return ;
 				if	(_capacity == 0)
 					reserve(n);
 				else
 				{
 					/* Why *2 : https://stackoverflow.com/questions/33571130/how-does-stdvector-reallocates-every-time-an-item-is-inserted-using-a-loop*/
-					if (_current + n > _capacity)
-        		    	reserve(_capacity * 2);
+					if ((_current + n > _capacity) && (_current + n < _capacity * 2))
+					{
+        		    	reserve(_current * 2);
+					}
         		  	else
-        		    	 reserve(_current + n);
+					{
+        		    	reserve(_current + n);
+					}
 				}
 				for (size_type i = n + _current - 1; i > index + n - 1; i--)
 				{
 					_allocation.construct(&_arrey[i], _arrey[i - n]);
 					_allocation.destroy(&_arrey[i - n]);
 				}
-				for (size_type i = index; i < index + n; i++)
+				for (size_type i = index; i < index + n ; i++)
 				{
 					_allocation.construct(&_arrey[i], val);
 					_current++;
 				}
+				
 			};
 
 				/* Prototype 3 */
