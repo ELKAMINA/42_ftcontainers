@@ -95,7 +95,7 @@ namespace ft {
 		~vector()
 		{
 			clear();
-			_allocation.deallocate(_arrey, _current);
+			_allocation.deallocate(_arrey, _capacity);
 		};
 
 /* ************************************************************************** */
@@ -190,6 +190,7 @@ namespace ft {
 					_allocation.destroy(&_arrey[i]);
 				}
 				_allocation.deallocate(_arrey, _current);
+				// std::cout << "je rentre ici? " << std::endl;
 				_capacity = n;
 				_arrey = reallocation;
 			}
@@ -229,8 +230,8 @@ namespace ft {
 				else
 				{
 					/* Why *2 : https://stackoverflow.com/questions/33571130/how-does-stdvector-reallocates-every-time-an-item-is-inserted-using-a-loop*/
-					if (_current * 2 >= _current + n)
-        		    	reserve(_current * 2);
+					if (_current + n > _capacity)
+        		    	reserve(_capacity * 2);
         		  	else
         		    	 reserve(_current + n);
 				}
@@ -258,7 +259,7 @@ namespace ft {
 					{
 						tmp++;
 						n++;
-					}
+					}	
 					if (_current + n > _capacity)
 					{
 						if (_capacity == 0)
@@ -298,27 +299,21 @@ namespace ft {
 			};
 
 				/* Clear : Erases all elements from the container. After this call, size() returns zero.Invalidates any references, pointers, or iterators referring to contained elements. Any past-the-end iterators are also invalidated. Leaves the capacity() of the vector unchanged.*/
-			void clear()
+			void	clear(void)
 			{
-				if	(_arrey)
-				{
-					for(size_type i = 0; i < _current; i++)
-					{
-						_allocation.destroy(&_arrey[i]);
-					}
-				}
-				_current = 0;
-			};
+				if (this->_current > 0)
+					this->erase(this->begin(), this->end());
+			}
 
 				/* Assign : Assigns new contents to the vector, replacing its current contents, and modifying its size accordingly.*/
 
-				/* Prototype 1 */
+				/* Prototype 1  : enter in this prototype only if Input Iterator is not an integral type */
 			template <class InputIterator>
-				void assign (InputIterator first, InputIterator last)
+				void assign (InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
 				{
 					InputIterator tmp = first;
 					size_type n = 0;
-					
+					// std::cout << *first << std::endl;
 					while (tmp != last)
 					{
 						tmp++;
@@ -332,6 +327,7 @@ namespace ft {
 				/* Prototype 2 */
 			void assign (size_type n, const value_type& val)
 			{
+				// sstd::cout << " ici 2?? " << std::endl;
 				clear();
 				reserve(n);
 				insert(begin(), n, val);
@@ -342,32 +338,35 @@ namespace ft {
 				/* Prototype 1 */
 			iterator erase (iterator position)
 			{
-				size_type index = position - begin();
-				_current--;
-				for (size_type i = index; i < _current; i++)
+				if (position != this->end() - 1)
+					return (erase(position, position + 1));
+				else
 				{
-					_allocation.destroy(&_arrey[i]);
-					_allocation.construct(&_arrey[i], _arrey[i + 1]);
+					_allocation.destroy(_arrey + (_current - 1));
+					_current -= 1;
+					return (this->end());
 				}
-				return (iterator(&_arrey[index]));
 			};
 				/* Prototype 2 */
 			iterator erase (iterator first, iterator last)
 			{
 				size_type index = first - begin();
 				size_type diff = last - first;
+				if (first == last)
+        			return iterator(first);
 				while(first != last)
 				{
 					_allocation.destroy(&(*first));
 					first++;
 				}
 				_current -= diff;
-				if	(diff < _current)
+				// std::cout << _current << std::endl;
+				if	(index < _current)
 				{
 					for (size_type i = index; i < _current; i++)
 					{
-						_allocation.destroy(&_arrey[i + diff]);
 						_allocation.construct(&_arrey[i], _arrey[i + diff]);
+						_allocation.destroy(&_arrey[i + diff]);
 					}
 				}
 				return (iterator(&_arrey[index]));
