@@ -162,12 +162,14 @@ namespace ft {
 			// Cas 1  : If n is smaller than the current container size, the content is reduced to its first n elements, removing those beyond (and destroying them).
 			while(_current > n)
 			{
-				_allocation.destroy(&_arrey[_current]);
+				_allocation.destroy(&_arrey[_current - 1]);
 				_current--;
 			}
 			/* Cas 2 : If n is greater than the current container size, the content is expanded by inserting at the end as many elements as needed to reach a size of n. If val is specified, the new elements are initialized as copies of val, otherwise, they are value-initialized.*/
 			if	(n > _current)
+			{
 				insert(end(), (n - _current), val);
+			}
 		};
 
 			/* Reserve : Requests that the vector capacity be at least enough to contain n elements. Only change capacity*/
