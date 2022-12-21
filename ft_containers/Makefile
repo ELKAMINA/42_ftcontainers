@@ -1,6 +1,7 @@
 NAME = container
 	
-SRC = main.cpp
+SRC = main.cpp \
+		vector.cpp \
 
 OBJ = $(SRC:.cpp=.o)
 
