@@ -233,7 +233,7 @@ namespace ft {
 				{
 					/* Why *2 : https://stackoverflow.com/questions/33571130/how-does-stdvector-reallocates-every-time-an-item-is-inserted-using-a-loop*/
 					// std::cout << " capacity : " << _capacity << std::endl;
-					if ((_current + n > _current) && (_current + n < _current * 2))
+					if ((_current + n > _capacity) && (_current + n < _current * 2))
 					{
         		    	reserve(_current * 2);
 					}
