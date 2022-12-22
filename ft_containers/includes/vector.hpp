@@ -209,14 +209,14 @@ namespace ft {
 /*                                 Modifiers:                                 */
 /* ************************************************************************** */
 
-			/* Insert : Requests that the vector capacity be at least enough to contain n elements. Only change capacity*/
+			/* Insert : The vector is extended by inserting new elements before the element at the specified position, effectively increasing the container size by the number of elements inserted.*/
 
 				/* Prototype 1 */
 			iterator insert (iterator position, const value_type& val)
 			{
+				difference_type diff = position - begin();
 				insert(position, 1, val);
-				// difference_type diff = position - begin();
-				return (_arrey);
+				return (iterator(&_arrey[diff]));
 			};
 			
 				/* Prototype 2 */
@@ -257,6 +257,7 @@ namespace ft {
 			template <class InputIterator>
 				void insert (iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
 				{
+					// std::cout << "je rentre ici for sure " << std::endl;
 					difference_type index = position - begin();
 					InputIterator tmp = first;
 					size_type n = 0;

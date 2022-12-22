@@ -59,25 +59,25 @@ int		main(void)
 {
 	{
 		std::cout << "\e[0;34m Real Vector -> >>>> \e[0m" << std::endl;
-		vector<int> vct(5);
+		vector<int> vct(5); 
 		vector<int> vct2;
-		// const int cut = 3;
+		const int cut = 3;
 
 		for (unsigned long int i = 0; i < vct.size(); ++i)
 			vct[i] = (vct.size() - i) * 7;
-		printSize(vct);
+		// printSize(vct);
 
-		// vct2.insert(vct2.begin(), vct.begin(), vct.begin() + cut);
+		vct2.insert(vct2.begin(), vct.begin(), vct.begin() + cut);
 		// printSize(vct2);
-		// vct2.insert(vct2.begin(), vct.begin() + cut, vct.end());
+		vct2.insert(vct2.begin(), vct.begin() + cut, vct.end());
 		// printSize(vct2);
-		// vct2.insert(vct2.end(), vct.begin(), vct.begin() + cut);
+		vct2.insert(vct2.end(), vct.begin(), vct.begin() + cut);
 		// printSize(vct2);
 
 		// std::cout << "insert return:" << std::endl;
 
-		// std::cout << *vct2.insert(vct2.end(), 42) << std::endl;
-		// std::cout << *vct2.insert(vct2.begin() + 5, 84) << std::endl;
+		std::cout << *vct2.insert(vct2.end(), 42) << std::endl;
+		std::cout << *vct2.insert(vct2.begin() + 5, 84) << std::endl;
 		// std::cout << "----------------------------------------" << std::endl;
 
 		// printSize(vct2);
@@ -87,23 +87,23 @@ int		main(void)
 		std::cout << "\e[0;34m My Vector -> >>>> \e[0m" << std::endl;
 		ft::vector<int> vct(5);
 		ft::vector<int> vct2;
-		// const int cut = 3;
+		const int cut = 3;
 
 		for (unsigned long int i = 0; i < vct.size(); ++i)
 			vct[i] = (vct.size() - i) * 7;
-		printSize(vct);
+		// printSize(vct);
 
-		// vct2.insert(vct2.begin(), vct.begin(), vct.begin() + cut);
+		vct2.insert(vct2.begin(), vct.begin(), vct.begin() + cut);
 		// printSize(vct2);
-		// vct2.insert(vct2.begin(), vct.begin() + cut, vct.end());
+		vct2.insert(vct2.begin(), vct.begin() + cut, vct.end());
 		// printSize(vct2);
-		// vct2.insert(vct2.end(), vct.begin(), vct.begin() + cut);
+		vct2.insert(vct2.end(), vct.begin(), vct.begin() + cut);
 		// printSize(vct2);
 
-		// std::cout << "insert return:" << std::endl;
+		std::cout << "insert return:" << std::endl;
 
-		// std::cout << *vct2.insert(vct2.end(), 42) << std::endl;
-		// std::cout << *vct2.insert(vct2.begin() + 5, 84) << std::endl;
+		std::cout << *vct2.insert(vct2.end(), 42) << std::endl;
+		std::cout << *vct2.insert(vct2.begin() + 5, 84) << std::endl;
 		// std::cout << "----------------------------------------" << std::endl;
 
 		// printSize(vct2);
