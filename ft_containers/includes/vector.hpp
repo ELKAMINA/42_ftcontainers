@@ -165,6 +165,7 @@ namespace ft {
 				_allocation.destroy(&_arrey[_current - 1]);
 				_current--;
 			}
+			// std::cout << " curreeeeent " << _current << std::endl;
 			/* Cas 2 : If n is greater than the current container size, the content is expanded by inserting at the end as many elements as needed to reach a size of n. If val is specified, the new elements are initialized as copies of val, otherwise, they are value-initialized.*/
 			if	(n > _current)
 			{
@@ -231,7 +232,8 @@ namespace ft {
 				else
 				{
 					/* Why *2 : https://stackoverflow.com/questions/33571130/how-does-stdvector-reallocates-every-time-an-item-is-inserted-using-a-loop*/
-					if ((_current + n > _capacity) && (_current + n < _capacity * 2))
+					// std::cout << " capacity : " << _capacity << std::endl;
+					if ((_current + n > _current) && (_current + n < _current * 2))
 					{
         		    	reserve(_current * 2);
 					}

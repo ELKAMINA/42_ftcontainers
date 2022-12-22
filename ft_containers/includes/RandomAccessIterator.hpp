@@ -31,8 +31,8 @@ namespace ft
             /* Comparison Operators */
             RandomAccessIterator &operator=(const RandomAccessIterator<typename remove_cv<value_type>::type> &other)
             {
-                if (this != &other)
-                    _ptr = other.base();
+            //     if (this != &other)
+                _ptr = other.base();
                 return *this;
             }
             bool operator==(const RandomAccessIterator &other) const { return _ptr == other.base(); } // OK
