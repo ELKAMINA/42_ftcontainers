@@ -1,11 +1,23 @@
 #pragma once
 
-#include <vector>
+#include "./vector.hpp"
 #include <iostream>
+#include <memory> // for allocator
+#include <stdexcept>
+#include <iostream>
+#include <sstream>
+#include <iomanip>
+#include "./enable_if.hpp"
+#include "./equal.hpp"
+#include "./lexicographical_compare.hpp"
+#include "./RandomAccessIterator.hpp"
+#include "./ReverseIterator.hpp"
+
+class vector;
 
 namespace ft
 {
-	template <class T, class Container = std::vector<T> >
+	template <class T, class Container = ft::vector<T> >
 		class stack
 		{
 			public:
@@ -23,8 +35,7 @@ namespace ft
 
 				stack&	operator=(const stack& other)
 				{
-					if (this != &other)
-						c = other.c;
+					c = other.c;
 					return (*this);
 				}
 
