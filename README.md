@@ -4,6 +4,7 @@
 
   1. Vector
   2. Map
+  3. Stack
 
 **Tools to implement for each container**
 
@@ -142,6 +143,26 @@ Perks and cons regarding other dynamic sequence containers
 Perks : vectors are very efficient accessing its elements (just like arrays) and relatively efficient adding or removing elements from its end. 
   
 Cons : For operations that involve inserting or removing elements at positions other than the end, they perform worse than the others, and have less consistent iterators and references than lists and forward_lists.
+
+
+# Map container
+
+   *Why using Red Black Tree as Data Structure ?*
+  
+**A binary search tree (BST)**, also called an ordered or sorted binary tree, is a rooted binary tree data structure with the key of each internal node being greater than all the keys in the respective node's left subtree and less than the ones in its right subtree. The time complexity of operations on the binary search tree is directly proportional to the height of the tree. Many types of BST : 
+> Red Black Trees  assures that the complexity is O(log2n) although it is roughly balanced compared to the AVL Tree.
+> Searching in AVL Tree is more efficient because it is balanced but insertion/deletion are more efficient bc less rotations are required.
+
+
+Glossary for MAP
+-----------
+| Title | Definition |
+|:--------------|:----------------|
+| Modifiers | functions that modifies the structure of a vector container |
+| Allocator | to give the programmer control over memory allocation within containers. It's stateless|
+
+
+
 
   # Global glossary
   
