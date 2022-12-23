@@ -150,7 +150,7 @@ Cons : For operations that involve inserting or removing elements at positions o
    *Why using Red Black Tree as Data Structure ?*
     
   Red Black Trees assures that the complexity is O(log2n) although it is roughly balanced compared to the AVL Tree.
-  
+  Searching in AVL Tree is more efficient because it is balanced but insertion/deletion are more efficient bc less rotations are required.
 
 
 Glossary for MAP
