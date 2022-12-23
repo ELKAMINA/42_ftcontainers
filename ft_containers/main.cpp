@@ -1,147 +1,79 @@
 #include <iostream>
 #include <iomanip>
-#include <vector>
-#include "./includes/Stack.hpp"
+#include <map>
+#include "./includes/stack.hpp"
 #include "./includes/vector.hpp"
 #include "./includes/ReverseIterator.hpp"
-#include "./base.hpp"
+#include <iostream>
+#include <utility>
+#include <functional>
 
 /* For colours in terminal/outputs : https://stackoverflow.com/questions/2616906/how-do-i-output-coloured-text-to-a-linux-terminal*/
 
 using namespace std;
-#define T_SIZE_TYPE typename TESTED_NAMESPACE::vector<T>::size_type
-#define TESTED_TYPE int
 
-template <typename T>
-void	printSize(vector<T> const &vct, bool print_content = true)
-{
-	const typename vector<T>::size_type size = vct.size();
-	const typename vector<T>::size_type capacity = vct.capacity();
-	const std::string isCapacityOk = (capacity >= size) ? "OK" : "KO";
-	// Cannot limit capacity's max value because it's implementation dependent
-
-	std::cout << "size: " << size << std::endl;
-	std::cout << "capacity: " << vct.capacity() << " " << isCapacityOk << std::endl;
-	std::cout << "max_size: " << vct.max_size() << std::endl;
-	if (print_content)
-	{
-		typename vector<T>::const_iterator it = vct.begin();
-		typename vector<T>::const_iterator ite = vct.end();
-		std::cout << std::endl << "Content is:" << std::endl;
-		for (; it != ite; ++it)
-			std::cout << "- " << *it << std::endl;
-	}
-	std::cout << "###############################################" << std::endl;
-}
-
-template <typename T>
-void	printSize(ft::vector<T> const &vct, bool print_content = true)
-{
-	const typename ft::vector<T>::size_type size = vct.size();
-	const typename ft::vector<T>::size_type capacity = vct.capacity();
-	const std::string isCapacityOk = (capacity >= size) ? "OK" : "KO";
-	// Cannot limit capacity's max value because it's implementation dependent
-
-	std::cout << "size: " << size << std::endl;
-	std::cout << "capacity: " << vct.capacity() << " " << isCapacityOk << std::endl;
-	std::cout << "max_size: " << vct.max_size() << std::endl;
-	if (print_content)
-	{
-		typename ft::vector<T>::const_iterator it = vct.begin();
-		typename ft::vector<T>::const_iterator ite = vct.end();
-		std::cout << std::endl << "Content is:" << std::endl;
-		for (; it != ite; ++it)
-			std::cout << "- " << *it << std::endl;
-	}
-	std::cout << "###############################################" << std::endl;
-}
-
-
-int		main(void)
+int main()
 {
 	{
-		std::cout << "\e[0;34m Real Vector -> >>>> \e[0m" << std::endl;
+		/* Exemple du vrai MAP */
+		// map<int, int> gquiz1;
+		
+		// 	// insert elements in random order
+		// 	gquiz1.insert(pair<int, int>(1, 40));
+		// 	gquiz1.insert(pair<int, int>(2, 30));
+		// 	gquiz1.insert(pair<int, int>(3, 60));
+		// 	gquiz1.insert(pair<int, int>(4, 20));
+		// 	gquiz1.insert(pair<int, int>(5, 50));
+		// 	gquiz1.insert(pair<int, int>(6, 50));
+			
+		// 	// gquiz1[7]=10;     // another way of inserting a value in a map
+			
+		
+		// 	// printing map gquiz1
+		// 	map<int, int>::iterator itr;
+		// 	cout << "\nThe map gquiz1 is : \n";
+		// 	cout << "\tKEY\tELEMENT\n";
+		// 	for (itr = gquiz1.begin(); itr != gquiz1.end(); ++itr) {
+		// 		cout << '\t' << itr->first << '\t' << itr->second
+		// 			<< '\n';
+		// 	}
+		// 	cout << "index 4 : " << gquiz1[4];
+		// 	cout << endl;
+		
+		// std::map<char,int> mymap;
+		// std::map<char,int>::key_compare mycomp = mymap.key_comp();
 
-		const int start_size = 7;
-		vector<TESTED_TYPE> vct(start_size, 20);
-		vector<TESTED_TYPE> vct2;
-		vector<TESTED_TYPE>::iterator it = vct.begin();
+		// mymap['a']=100;
+		// mymap['b']=200;
+		// mymap['c']=300;
 
-		for (int i = 2; i < start_size; ++i)
-			it[i] = (start_size - i) * 3;
-		// printSize(vct, true);
+		// // cout << "index 4 : " << mymap['c'];
+		// std::cout << "mymap contains:\n";
+		// char highest = mymap.rbegin()->first;     // key value of last element
+		// std::map<char,int>::iterator it = mymap.begin();
+		// do {
+		// 	std::cout << it->first << " => " << it->second << '\n';
+		// } while ( mycomp((*it++).first, highest) );
 
-		vct.resize(10, 42);
-		// printSize(vct, true);
+		// std::cout << '\n';
 
-		vct.resize(18, 43);
-		// printSize(vct, true);
-		vct.resize(10);
-		// printSize(vct, true);
-		// // // printSize(vct, true);
-		vct.resize(23, 44);
-		printSize(vct, true);
-		// vct.resize(5);
-		// printSize(vct, true);
-		// vct.reserve(5);
-		// vct.reserve(3);
-		// printSize(vct, true);
-		// vct.resize(87);
-		// vct.resize(5);
-		// printSize(vct, true);
+		int n = 1;
+		int a[5] = {1, 2, 3, 4, 5};
+	
+		// build a pair from two ints
+		auto p1 = std::make_pair(n, a[1]);
+		// std::map mymap;
+		std::cout << "The value of p1 is "
+				<< "(" << p1.first << ", " << p1.second << ")\n";
+		// std::cout << "The value of p1 is "
+		// 		<< "(" << mymap[1] << ")\n";
+		// build a pair from a reference to int and an array (decayed to pointer)
+		// auto p2 = std::make_pair(std::ref(n), a);
+		// n = 7;
+		// std::cout << "The value of p2 is "
+		// 	<< "(" << p2.first << ", " << *(p2.second + 2) << ")\n";
 
-		// is_empty(vct2);
-		// vct2 = vct;
-		// is_empty(vct2);
-		// vct.reserve(vct.capacity() + 1);
-		// printSize(vct, true);
-		// printSize(vct2, true);
-
-		// vct2.resize(0);
-		// is_empty(vct2);
-		// printSize(vct2, true);
-	}
-	{
-		std::cout << "\e[0;34m My Vector -> >>>> \e[0m" << std::endl;
-		const int start_size = 7;
-		ft::vector<TESTED_TYPE> vct(start_size, 20);
-		ft::vector<TESTED_TYPE> vct2;
-		ft::vector<TESTED_TYPE>::iterator it = vct.begin();
-
-		for (int i = 2; i < start_size; ++i)
-			it[i] = (start_size - i) * 3;
-		// printSize(vct, true);
-
-		vct.resize(10, 42);
-		// printSize(vct, true);
-
-		vct.resize(18, 43);
-		// printSize(vct, true);
-		vct.resize(10);
-		// printSize(vct, true);
-		// // // printSize(vct, true);
-		vct.resize(23, 44);
-		printSize(vct, true);
-		// vct.resize(5);
-		// printSize(vct, true);
-		// vct.reserve(5);
-		// vct.reserve(3);
-		// printSize(vct, true);
-		// vct.resize(87);
-		// vct.resize(5);
-		// printSize(vct, true);
-
-		// is_empty(vct2);
-		// vct2 = vct;
-		// is_empty(vct2);
-		// vct.reserve(vct.capacity() + 1);
-		// printSize(vct, true);
-		// printSize(vct2, true);
-
-		// vct2.resize(0);
-		// is_empty(vct2);
-		// printSize(vct2, true);
 
 	}
-	return (0);
+  
 }
