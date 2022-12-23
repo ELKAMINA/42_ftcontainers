@@ -4,6 +4,7 @@
 
   1. Vector
   2. Map
+  3. Stack
 
 **Tools to implement for each container**
 
@@ -142,6 +143,21 @@ Perks and cons regarding other dynamic sequence containers
 Perks : vectors are very efficient accessing its elements (just like arrays) and relatively efficient adding or removing elements from its end. 
   
 Cons : For operations that involve inserting or removing elements at positions other than the end, they perform worse than the others, and have less consistent iterators and references than lists and forward_lists.
+
+
+# Map container
+
+
+
+Glossary for MAP
+-----------
+| Title | Definition |
+|:--------------|:----------------|
+| Modifiers | functions that modifies the structure of a vector container |
+| Allocator | to give the programmer control over memory allocation within containers. It's stateless|
+
+
+
 
   # Global glossary
   
