@@ -35,10 +35,9 @@ namespace ft
 			template<class U, class V>
 				pair (const pair<U,V>& pr) : first(pr.first), second(second.pr) {};
 			// Copy Constructors
-			Pair(const Pair& other) : first(other.first), second(other.second) {}
-			Pair(Pair&& other) : first(std::move(other.first)), second(std::move(other.second)) {} // ???
-
-			pair (const first_type& a, const second_type& b) : first(a), second(b){};
+	
+			pair (const first_type& a, const second_type& b) : first(a), second(b) {
+			}
 
 			~pair(){}
 			// Assignment operators
@@ -82,10 +81,10 @@ namespace ft
 		}
 
 		template <class T1,class T2>
-		pair<const T1,T2> make_pair (T1 x, T2 y)
-		{
-			return (pair<T1,T2>(x,y));
-		}
+			pair<const T1,T2> make_pair (T1 x, T2 y)
+			{
+				return (pair<T1,T2>(x,y));
+			}
 
 
 }
