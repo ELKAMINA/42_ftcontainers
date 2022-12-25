@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <sstream>
+#include <cstddef>
 #include <iomanip>
 #include "./enable_if.hpp"
 #include "./equal.hpp"
@@ -29,7 +30,7 @@ namespace ft
 /* *********************************************************************/		
 
 			// Default Constructors
-				Pair() : first(), second() {}
+				pair() : first(), second() {}
 
 			// Parametric Constructors
 			template<class U, class V>
@@ -41,7 +42,7 @@ namespace ft
 
 			~pair(){}
 			// Assignment operators
-			Pair& operator=(const Pair& other) {
+			pair& operator=(const pair& other) {
 				first = other.first;
 				second = other.second;
 				return *this;
