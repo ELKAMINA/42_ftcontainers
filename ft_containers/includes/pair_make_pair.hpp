@@ -42,11 +42,11 @@ namespace ft
 
 			~pair(){}
 			// Assignment operators
-			pair& operator=(const pair& other) {
-				first = other.first;
-				second = other.second;
-				return *this;
-			}
+			// pair& operator=(const pair& other) {
+			// 	first = other.first;
+			// 	second = other.second;
+			// 	return *this;
+			// }
 
 		};
 			// Comparison operators

@@ -26,39 +26,41 @@ namespace ft
 				BLACK = 'b',
 			};
 		
-		protected: 
-			colors 			color;  
+			colors 			color; 
+			colors			parent_colors;
+			colors			left_color;
+			colors			right_color;
 			Node* 			left;
 			Node* 			right;
-			Node* 			bah; // parent
+			Node* 			parent; // parent
 			value_type		*data;
 			int				level;
 			comm*			commun;
 
-			Node() : color(RED), left(NULL), right(NULL), bah(NULL), data(NULL){};
-			Node(const T &data) : color(RED), left(NULL), right(NULL), bah(NULL), data(data){};
+			Node() : color(RED), left(NULL), right(NULL), parent(NULL), data(NULL){};
+			Node(const T &data) : color(RED), left(NULL), right(NULL), parent(NULL), data(data){};
 
 			/* ***Constructeur par copie*** */
-			Node(const Node &rhs)
-			{
-				*this == rhs;
-			}
+			// Node(const Node &rhs)
+			// {
+			// 	*this = rhs;
+			// }
 			
-			/* ***Constructeur par assignation*** */
-			Node &operator=(const Node &rhs)
-			{
-				if (this != &rhs)
-				{
-					*data = *(rhs.data);
-					left = rhs.left;
-					right = rhs.right;
-					bah = rhs.bah;
-					color = rhs.color;
-				}
-			}
+			// /* ***Constructeur par assignation*** */
+			// Node &operator=(const Node &rhs)
+			// {
+			// 	if (this != &rhs)
+			// 	{
+			// 		*data = *(rhs.data);
+			// 		left = rhs.left;
+			// 		right = rhs.right;
+			// 		parent = rhs.parent;
+			// 		color = rhs.color;
+			// 	}
+			// }
 	/*
 	** ********************************************************************
-	** To acces protected data from the tree and the iterator
+	** To access protected data from the tree and the iterator
 	** ********************************************************************
 	*/
 			//friend of mytree so that it can access its protected data.

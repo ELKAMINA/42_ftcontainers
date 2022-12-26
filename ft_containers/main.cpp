@@ -22,6 +22,10 @@ int main()
 
 		map<int, int> kikou;
 
+		// ft::pair<int, int> pr(50,30);
+		kikou.insert(pr);
+		kikou.printTree();
+
 		std::cout << " le vrai map " << std::endl;
 		std::map<int,  int> hiho;
 

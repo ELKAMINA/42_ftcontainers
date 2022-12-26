@@ -141,6 +141,16 @@ namespace ft {
 			return (value_compare(key_compare()));// on cree un object de la class value_compare (avec en param l'objet Compare alias key_compare)
 		};
 
+/* ************************************************************************** */
+/*                             		Tests: 		                              */
+/* ************************************************************************** */
+
+	public:
+
+		void insert(ft::Node<value_type> x)
+		{
+			ft::mytree<key_type, key_of_value , value_type, key_compare, Allocator>::insert(x);
+		}
 
 	};
 }
