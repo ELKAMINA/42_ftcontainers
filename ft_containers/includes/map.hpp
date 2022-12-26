@@ -10,14 +10,14 @@
 #include "./lexicographical_compare.hpp"
 #include "./RandomAccessIterator.hpp"
 #include "./ReverseIterator.hpp"
-#include "struct_node.hpp"
+#include "./struct_node.hpp"
 #include "./tree_of_nodes.hpp"
 
 /* Maps are associative containers that store elements formed by a combination of a key value and a mapped value, following a specific order.
 
 value_type => pair type combining key and mapped value*/
 
-class mytree;
+// class mytree;
 
 namespace ft {
 
@@ -40,10 +40,11 @@ namespace ft {
 			typedef T 																				mapped_type; // ok
 			typedef pair<const Key, T> 																value_type; // ok
 			typedef Compare																			key_compare; // ok
+
+
 			typedef				std::size_t															size_type; // ok
 			typedef				std::ptrdiff_t														difference_type;// ok
 			typedef				Allocator															allocator_type;// ok
-			// typedef	typename	Allocator::template rebind<node>::other								rebind_type;
 			typedef				value_type&															reference;
 			typedef				const value_type&													const_reference;
 			typedef	typename	Allocator::pointer													pointer;
@@ -54,50 +55,42 @@ namespace ft {
 			// typedef	typename	ft::reverse_iterator<const_iterator>								const_reverse_iterator;
 
 
+		/* to give to the class tree_of_nodes a function object that
+		** will extract the first_type parameter out of an std::pair<first_type,
+		** second_type> */	
+			template <class U>
+			struct KeyOfValue : public std::unary_function<value_type, typename value_type::first_type> {
+
+				typename value_type::first_type &
+				operator()(value_type & x)
+				const
+				{ return x.first; }
+
+				const typename value_type::first_type &
+				operator()(const value_type & x)
+				const
+				{ return x.first; }	
+
+			};	/* Getting the key from the a pair*/
+
+			typedef KeyOfValue<value_type>															key_of_value;
+
 			/* *** Nodes AND TREE ** */
-			typedef typename ft::mytree::value_comp					value_compare; //a function object that allows to compare 2 value_type
+			typedef ft::mytree<key_type, key_of_value , value_type, key_compare, Allocator>			rbt;
+			typedef typename ft::mytree<key_type, key_of_value , value_type, key_compare, Allocator>::value_compare												value_compare; //a function object that allows to compare 2 value_type
 
-			typedef ft::Node< ft::pair<const Key, T> >			node_type;
-			typedef node_type*									node_pointer;
-			typedef std::allocator<node_type> 					node_allocator_type;
-
-
-			typedef typename ft::Node::KeyOfValue<value_type>()					KeyOfValue;
-			typedef typename ft::mytree<key_type, value_type, KeyOfValue, key_compare, Allocator> rbt;
-
-			/* ****************************************************************************** */
-
-
-
-					/* Some structs */
-
-			/* to give to the class tree_of_nodes a function object that
-			** will extract the first_type parameter out of an std::pair<first_type,
-			** second_type> */	
-		struct KeyOfValue : public std::unary_function<value_type, typename value_type::first_type> {
-
-			typename value_type::first_type &
-			operator()(value_type & x)
-			const
-			{ return x.first; }
-
-			const typename value_type::first_type &
-			operator()(const value_type & x)
-			const
-			{ return x.first; }	
-
-		};	/* Getting the key from the a pair*/
-	
-
+		/* ****************************************************************************** */
 
 /*************************************************************************/
 /*                Constructors : 						                */
 /* *********************************************************************/
+				public:
 
-			explicit map (const key_compare& comp = key_compare(),             const allocator_type& alloc = allocator_type()) : _rbt(value_compare(comp), alloc)
-			{
-
-			};
+					explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) : _rbt(comp, alloc)
+					{
+						// std::cout << "kikou je rentre ici " << std::endl;
+						// _rbt = rbt(value_compare(comp), alloc);
+					};
 
 			// template <class InputIterator> 
 			// map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
@@ -114,19 +107,9 @@ namespace ft {
 /*************************************************************************/
 /*                Attributes : 						                	*/
 /* *********************************************************************/
-	// typedef struct_node<value_type>						RBT;
-	// typedef RBT*										RBTPtr;
-			
-	// typename allocator_type::template rebind<RBT>::other node_allocation;
 
-	// private:
-	// 	allocator_type 		_allocation;
-	// 	node*				_root;
-	// 	node*				_leaf;
-	// 	size_type			_current;
-	// 	size_type			_capacity;
-	// 	key_compare			_comp;
-	rbt	_rbt;
+	private:
+		rbt	_rbt;
 
 /*************************************************************************/
 /*                Capacity : 						                	*/

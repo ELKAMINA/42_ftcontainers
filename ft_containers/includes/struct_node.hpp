@@ -18,15 +18,15 @@ namespace ft
 			int	  			nb_nodes;
 		} comm;
 
-		protected: 
-			typedef T		value_type;
-
+		typedef T		value_type;
+		
 			enum colors
 			{
 				RED = 'r',
 				BLACK = 'b',
 			};
-
+		
+		protected: 
 			colors 			color;  
 			Node* 			left;
 			Node* 			right;
@@ -61,13 +61,13 @@ namespace ft
 	** To acces protected data from the tree and the iterator
 	** ********************************************************************
 	*/
-			//friend of rb_tree so that it can access its protected data.
+			//friend of mytree so that it can access its protected data.
 			template <class, class, class, class, class>
-			friend class rb_tree;
+			friend class mytree;
 
 			//friend of re_tree_iterator so that it can access its protected data.
-			template <class, class>
-			friend class rb_tree_iterator;
+			// template <class, class>
+			// friend class rb_tree_iterator;
 
 	};
 
