@@ -8,56 +8,31 @@
 
 /* We need to create a temlate structure of nodes so that it can adapt to any type of value_type. For map, it will adapt to pair<T,U>*/
 
+enum
+{
+	BLACK = 0,
+	RED,
+};
+
 namespace ft
 {
 	template<typename T>
 	struct Node 
 	{
-		typedef struct Common
-		{
-			int	  			nb_nodes;
-		} comm;
 
 		typedef T		value_type;
-		
-			enum colors
-			{
-				RED = 'r',
-				BLACK = 'b',
-			};
-		
-			colors 			color; 
-			colors			parent_colors;
-			colors			left_color;
-			colors			right_color;
-			Node* 			left;
-			Node* 			right;
-			Node* 			parent; // parent
-			value_type		*data;
-			int				level;
-			comm*			commun;
+	
+		value_type		pair_node;
+		Node* 			left;
+		Node* 			right;
+		Node* 			parent; // parent
+		Node**			node_base;			
+		Node**			node_sent;
+		int				color;
 
-			Node() : color(RED), left(NULL), right(NULL), parent(NULL), data(NULL){};
-			Node(const T &data) : color(RED), left(NULL), right(NULL), parent(NULL), data(data){};
+		// Node() : color(RED), left(NULL), right(NULL), parent(NULL), node_base(NULL), node_sentinel(NULL), {};
+		// Node(const T &data) : color(RED), left(NULL), right(NULL), parent(NULL), root(NULL), tNULL(NULL){};
 
-			/* ***Constructeur par copie*** */
-			// Node(const Node &rhs)
-			// {
-			// 	*this = rhs;
-			// }
-			
-			// /* ***Constructeur par assignation*** */
-			// Node &operator=(const Node &rhs)
-			// {
-			// 	if (this != &rhs)
-			// 	{
-			// 		*data = *(rhs.data);
-			// 		left = rhs.left;
-			// 		right = rhs.right;
-			// 		parent = rhs.parent;
-			// 		color = rhs.color;
-			// 	}
-			// }
 	/*
 	** ********************************************************************
 	** To access protected data from the tree and the iterator
@@ -67,7 +42,7 @@ namespace ft
 			template <class, class, class, class, class>
 			friend class mytree;
 
-			//friend of re_tree_iterator so that it can access its protected data.
+			//friend of tree_iterator so that it can access its protected data.
 			// template <class, class>
 			// friend class rb_tree_iterator;
 
