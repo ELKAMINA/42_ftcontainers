@@ -46,6 +46,7 @@ int main()
 		kikou.insert_node(pr9);
 		kikou.insert_node(pr10);
 		kikou.insert_node(pr11);
+		kikou.deleteNode(pr1);
 
 
 		// std::cout << kikou.size() << std::endl;

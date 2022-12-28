@@ -9,6 +9,7 @@
 #include "./equal.hpp"
 #include "./lexicographical_compare.hpp"
 #include "./RandomAccessIterator.hpp"
+#include "./BidirectionnalAccessIterator.hpp"
 #include "./ReverseIterator.hpp"
 #include "./struct_node.hpp"
 #include "./pair_make_pair.hpp"
@@ -49,8 +50,8 @@ namespace ft {
 			typedef	typename	Allocator::const_pointer														const_pointer;
 			typedef				ft::Node<value_type>															node;
 			typedef				ft::Node<value_type>*															ptr_n;
-			// typedef				binary_tree_iterator<value_type, Compare, node*>					iterator;
-			// typedef				binary_tree_iterator<const value_type, Compare, node*>				const_iterator;
+			typedef				ft::BidirectionnalAccessIterator<key_type, mapped_type>							iterator;
+			typedef				ft::BidirectionnalAccessIterator<key_type, mapped_type>						const_iterator;
 			// typedef	typename	ft::reverse_iterator<iterator>										reverse_iterator;
 			// typedef	typename	ft::reverse_iterator<const_iterator>								const_reverse_iterator;
 
@@ -387,9 +388,9 @@ namespace ft {
 	ptr_n x, y;
 	while (node != _sentinel)
 	{
-		if (node->pair.first == key)
+		if (node->pair_node.first == key)
 			z = node;
-		if (node->pair.first <= key)
+		if (node->pair_node.first <= key)
 			node = node->right;
 		else
 			node = node->left;
@@ -508,7 +509,7 @@ namespace ft {
 
 	void deleteNode(value_type data) {
 		
-		deleteNodeHelper(_base, data);
+		deleteNodeHelper(_base, data.first);
 		_size_tree --;
 	}
 
