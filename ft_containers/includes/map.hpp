@@ -105,7 +105,7 @@ namespace ft {
 
 						/* Initializing an empty tree with its empty nodes */
 						_sentinel = _node_allocation.allocate(1); // allocating memory for our sentinel
-						_sentinel->color = RED;
+						_sentinel->color = BLACK;
 						_sentinel->left = NULL;
 						_sentinel->right = NULL;
 						_sentinel->parent = _sentinel;
@@ -115,8 +115,8 @@ namespace ft {
 						/* Root node */
 						_base = _sentinel;
 
-						_allocation.construct(&_sentinel->pair_node, _sentinel->pair_node); // pourquoi on envoie le ptr de pair_node?
-						std::cout << "Kikou " << std::endl;
+						_allocation.construct(&_base->pair_node, _sentinel->pair_node); // pourquoi on envoie le ptr de pair_node?
+						// std::cout << "Kikou " << std::endl;
 					};
 
 			// template <class InputIterator> 
@@ -162,11 +162,26 @@ namespace ft {
 			return (value_compare(key_compare()));// on cree un object de la class value_compare (avec en param l'objet Compare alias key_compare)
 		};
 
+
 /* ************************************************************************** */
-/*                             		Modifiers : 		                      */
+/*                           		Allocator:                                */
+/* ************************************************************************** */
+
+	allocator_type get_allocator() const {
+
+		return allocator_type();
+	};
+
+/* ************************************************************************** */
+/*                             		Red Black Tree : 		                  */
 /* ************************************************************************** */
 
 	public:
+
+
+	/* ************************************************* */
+	/*  		Ordering		 : 		                */
+	/* *********************************************** */
 
 		void preOrderHelper(ptr_n node) {
 			if (node != _sentinel) {
@@ -205,6 +220,10 @@ namespace ft {
 			postOrderHelper(_base);
 		}
 
+
+	/* ************************************************* */
+	/*  		Rotations		 : 		                */
+	/* *********************************************** */
 		void leftRotate(ptr_n x) {
 			ptr_n y = x->right;
 			x->right = y->left;
@@ -242,6 +261,10 @@ namespace ft {
 			y->right = x;
 			x->parent = y;
 		}
+
+	/* ************************************************* */
+	/*  		Inserting		 : 		                */
+	/* *********************************************** */
 
 		void insertFix(ptr_n k) {
 			ptr_n u;
@@ -282,9 +305,9 @@ namespace ft {
 							k = k->parent;
 							leftRotate(k);
 					}
-						k->parent->color = BLACK;
-						k->parent->parent->color = RED;
-						rightRotate(k->parent->parent);
+					k->parent->color = BLACK;
+					k->parent->parent->color = RED;
+					rightRotate(k->parent->parent);
 					}
 				}
 				if (k == _base) {
@@ -311,6 +334,7 @@ namespace ft {
 			ptr_n x = this->_base;
 
 			while (x != _sentinel) {
+				// std::cout << "je rentre ici ? " << std::endl;
 				y = x;
 				if (_comp(node->pair_node.first, x->pair_node.first)) {
 					x = x->left;
@@ -334,6 +358,7 @@ namespace ft {
 			}
 			if (node->parent->parent == NULL) {
 				node->node_base = &_base;
+				insertFix(node);
 				return node;
 			}
 			insertFix(node);
@@ -341,9 +366,213 @@ namespace ft {
 			return node;
 		}
 
-/* ************************************************************************** */
-/*                             		Tree Visualisation :  	                  */
-/* ************************************************************************** */
+	/* ************************************************* */
+	/*  		Deleting and Replace		            */
+	/* *********************************************** */
+
+	void rbTransplant(ptr_n u, ptr_n v) {
+		
+		if (u->parent == NULL)
+			_base = v;
+		else if (u == u->parent->left)
+			u->parent->left = v;
+		else
+			u->parent->right = v;
+		v->parent = u->parent;
+	}
+
+	void deleteNodeHelper(ptr_n node, key_type key) {
+	
+	ptr_n z = _sentinel;
+	ptr_n x, y;
+	while (node != _sentinel)
+	{
+		if (node->pair.first == key)
+			z = node;
+		if (node->pair.first <= key)
+			node = node->right;
+		else
+			node = node->left;
+	}
+	if (z == _sentinel)
+		return;
+
+	y = z;
+	int y_original_color = y->color;
+	if (z->left == _sentinel)
+	{
+		x = z->right;
+		rbTransplant(z, z->right);
+	} 
+	else if (z->right == _sentinel)
+	{
+		x = z->left;
+		rbTransplant(z, z->left);
+	} 
+	else
+	{
+		y = minimum(z->right);
+		y_original_color = y->color;
+		x = y->right;
+		if (y->parent == z)
+			x->parent = y;
+		else 
+		{
+			rbTransplant(y, y->right);
+			y->right = z->right;
+			y->right->parent = y;
+		}
+		rbTransplant(z, y);
+		y->left = z->left;
+		y->left->parent = y;
+		y->color = z->color;
+	}
+	
+	deallocate_node(z);
+	_size_tree --;
+	
+	if (y_original_color == BLACK)
+		deleteFix(x);
+}
+
+	void deleteFix(ptr_n x) 
+	{	
+		ptr_n s;
+		while (x != _base && x->color == BLACK)
+		{
+			if (x == x->parent->left)
+			{
+				s = x->parent->right;
+				if (s->color == RED)
+				{
+					s->color = BLACK;
+					x->parent->color = RED;
+					leftRotate(x->parent);
+					s = x->parent->right;
+				}
+				if (s->left->color == BLACK && s->right->color == BLACK)
+				{
+					s->color = RED;
+					x = x->parent;
+				} 
+				else
+				{
+					if (s->right->color == BLACK)
+					{
+						s->left->color = BLACK;
+						s->color = RED;
+						rightRotate(s);
+						s = x->parent->right;
+					}
+					s->color = x->parent->color;
+					x->parent->color = BLACK;
+					s->right->color = BLACK;
+					leftRotate(x->parent);
+					x = _base;
+				}
+			} 
+			else 
+			{
+				s = x->parent->left;
+				if (s->color == RED)
+				{
+					s->color = BLACK;
+					x->parent->color = RED;
+					rightRotate(x->parent);
+					s = x->parent->left;
+				}
+				if (s->right->color == BLACK && s->right->color == BLACK)
+				{
+					s->color = RED;
+					x = x->parent;
+				}
+				else 
+				{
+					if (s->left->color == BLACK)
+					{
+						s->right->color = BLACK;
+						s->color = RED;
+						leftRotate(s);
+						s = x->parent->left;
+					}
+					s->color = x->parent->color;
+					x->parent->color = BLACK;
+					s->left->color = BLACK;
+					rightRotate(x->parent);
+					x = _base;
+				}
+			}
+		}
+		x->color = BLACK;
+	}
+
+	void deleteNode(value_type data) {
+		
+		deleteNodeHelper(_base, data);
+		_size_tree --;
+	}
+
+	void	deallocate_node(ptr_n node)
+	{
+		_allocation.destroy(&node->pair_node);
+		_node_allocation.deallocate(node, 1);
+	}
+
+	void	delete_tree(ptr_n p )
+	{
+		if (p != _sentinel)
+		{
+			delete_tree(p->left);
+			delete_tree(p->right);
+			deallocate_node(p);
+			_size_tree --;
+		}
+	}
+
+
+	/* ************************************************* */
+	/*  		Searching in Tree:  	                */
+	/* *********************************************** */
+
+	ptr_n searchTreeKey(ptr_n node, const key_type& key) const {
+		if (node == _sentinel || key == node->pair_node.first)
+			return node;
+		if (_comp(key, node->pair_node.first))
+			return searchTreeKey(node->left, key);
+		return searchTreeKey(node->right, key);
+	}
+
+
+	/* ************************************************* */
+	/*  		Getting max/min  :  	                */
+	/* *********************************************** */
+
+	ptr_n minimum(ptr_n node) const {
+		
+		if (node == _sentinel)
+			return node;
+		while (node->left != _sentinel)
+			node = node->left;
+		return node;
+	}
+
+	ptr_n maximum(ptr_n node) {
+		
+		if (node == _sentinel)
+			return node;
+		while (node->right != _sentinel)
+			node = node->right;
+		return node;
+	}
+
+	int get_max() {
+
+		return (maximum(_base)->pair_node.first);
+	}
+
+	/* ************************************************* */
+	/*  		Visualisation		 : 	                */
+	/* *********************************************** */
 
 	void printHelper(ptr_n root, std::string indent, bool last) {
 		if (root != _sentinel) {
