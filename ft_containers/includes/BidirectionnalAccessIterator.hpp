@@ -9,7 +9,7 @@
 
 namespace ft
 {
-    template<typename key, class value, bool _const = false>
+    template <typename key, class value, bool _const = false>
     class mapIterator
     {
         public:
@@ -26,14 +26,14 @@ namespace ft
             /* Constructors and Destructors */
             mapIterator() : _ptr(NULL) {}
             mapIterator(ptr_n ptr) : _ptr(ptr) {}
-            mapIterator(const mapIterator<typename remove_cv<value_type>::type> &other) : _ptr(other.getPtr()) {}
+            mapIterator(const mapIterator<typename remove_cv<value_type>::type, value, _const> &other) : _ptr(other.getPtr()) {}
             virtual ~mapIterator() {} // virtual destructor : why?
 
             /* Retrieve the current ptr_n */
-            ptr_n base() const { return this->_ptr;};
+            // ptr_n base() const { return this->_ptr;};
             
             /* Comparison Operators */
-            mapIterator &operator=(const mapIterator<typename remove_cv<value_type>::type> &other)
+            mapIterator &operator=(const mapIterator<typename remove_cv<value_type>::type, value, _const> &other)
             {
             //     if (this != &other)
                 _ptr = other.getPtr();

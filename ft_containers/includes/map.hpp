@@ -50,8 +50,8 @@ namespace ft {
 			typedef	typename	Allocator::const_pointer														const_pointer;
 			typedef				ft::Node<value_type>															node;
 			typedef				ft::Node<value_type>*															ptr_n;
-			typedef				ft::BidirectionnalAccessIterator<key_type, mapped_type>							iterator;
-			typedef				ft::BidirectionnalAccessIterator<key_type, mapped_type>						const_iterator;
+			typedef				ft::mapIterator<key_type, mapped_type>											iterator;
+			typedef				ft::mapIterator<key_type, mapped_type>											const_iterator;
 			// typedef	typename	ft::reverse_iterator<iterator>										reverse_iterator;
 			// typedef	typename	ft::reverse_iterator<const_iterator>								const_reverse_iterator;
 
@@ -89,7 +89,6 @@ namespace ft {
 			allocator_type											_allocation;
 			size_type												_size_tree;
 			key_compare												_comp;
-
 
 
 
@@ -172,6 +171,69 @@ namespace ft {
 
 		return allocator_type();
 	};
+
+
+/*************************************************************************/
+/*                Iterators : 						                	*/
+/* *********************************************************************/
+
+	iterator begin()
+	{
+		return (iterator(minimum(_base)));
+	}
+
+	const_iterator begin() const
+	{
+		return (const_iterator(minimum(_base)));
+	}
+
+	iterator end()
+	{
+		return (iterator(_sentinel));
+	}
+
+	const_iterator end() const
+	{
+		return (const_iterator(_sentinel));
+	}
+
+/* ************************************************************************** */
+/*                           		Modifiers:                                */
+/* ************************************************************************** */
+
+	pair<iterator, bool> insert(const value_type& val)
+	{
+		ptr_n already = searchTreeKey(_base, val.first);
+		if	(already == _sentinel)
+		{
+			ptr_n node_Inserted = insert_node(val);
+			iterator temp = iterator(node_Inserted);
+			return make_pair<iterator, bool>(temp, true);
+		}
+		return (make_pair<iterator, bool>(iterator(already), false));
+	}
+
+	iterator insert (iterator position, const value_type& val)
+	{
+		(void)position;
+		/* Position is a hint that helps us to insert the element at some position  */
+		return (iterator(insert_node(val)));
+	}
+
+	template <class InputIterator>
+		void insert (InputIterator first, InputIterator last)
+		{
+			while(first != last)
+			{
+				insert(*first);
+				first++;
+			}
+		}
+
+	void erase(iterator position)
+	{
+		
+	}
 
 /* ************************************************************************** */
 /*                             		Red Black Tree : 		                  */

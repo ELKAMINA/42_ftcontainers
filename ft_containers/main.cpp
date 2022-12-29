@@ -16,9 +16,9 @@
 int main()
 {
 	{
-		/*************************************************************************/
-		/*                Constructors : 						                */
-		/* *********************************************************************/
+/*************************************************************************/
+/*                Constructors : 						                */
+/* *********************************************************************/
 
 		ft::pair<int, int> pr(10,30);
 		ft::pair<int, int> pr1(18,20);
@@ -33,39 +33,76 @@ int main()
 		ft::pair<int, int> pr9(2,90);
 		ft::pair<int, int> pr10(1,90);
 		ft::pair<int, int> pr11(70,90);
+
+/*************************************************************************/
+/*                Insert : 						              			*/
+/* *********************************************************************/
+	{
 		ft::map<int, int> kikou;
-		kikou.insert_node(pr);
-		kikou.insert_node(pr1);
-		kikou.insert_node(pr2);
-		kikou.insert_node(pr3);
-		kikou.insert_node(pr4);
-		kikou.insert_node(pr5);
-		kikou.insert_node(pr6);
-		kikou.insert_node(pr7);
-		kikou.insert_node(pr8);
-		kikou.insert_node(pr9);
-		kikou.insert_node(pr10);
-		kikou.insert_node(pr11);
-		kikou.deleteNode(pr1);
+		ft::map<int, int> test2;
+		kikou.insert(ft::pair<int, int> (10, 30));
+		kikou.insert(ft::pair<int, int> (70, 30));
+		kikou.insert(ft::pair<int, int> (50, 90));
+		ft::map<int, int>::iterator it = kikou.begin();
+		it++;
+		kikou.insert(ft::pair<int, int> (90, 100));
+		test2.insert(kikou.begin(), kikou.end());
+		ft::map<int, int>::iterator it_test = test2.begin();
+		for	(; it_test != test2.end(); it_test++)
+		{
+			std::cout << "first : " << it_test->first << " second :" << it_test->second << std::endl;
+			// std::cout << it-> << std::endl;
+		}
+	}
+// kikou.printTree();
+
+
+/* ************************************************************************** */
+/*                      Testing private func insert_node :                    */
+/* ************************************************************************** */
+		// kikou.insert_node(pr);
+		// kikou.insert_node(pr1);
+		// kikou.insert_node(pr2);
+		// kikou.insert_node(pr3);
+		// kikou.insert_node(pr4);
+		// kikou.insert_node(pr5);
+		// kikou.insert_node(pr6);
+		// kikou.insert_node(pr7);
+		// kikou.insert_node(pr8);
+		// kikou.insert_node(pr9);
+		// kikou.insert_node(pr10);
+		// kikou.insert_node(pr11);
+		// kikou.deleteNode(pr1);
 
 
 		// std::cout << kikou.size() << std::endl;
-		kikou.printTree();
 		// kikou.insert(pr);
 		// kikou.printTrees();
-
-		std::cout << " le vrai map " << std::endl;
-		std::map<int, int> real;
-		real.insert(std::pair<int, int> (50, 30));
-		real.insert(std::pair<int, int> (10, 20));
-		real.insert(std::pair<int, int> (60, 90));
-		std::map<int, int>::iterator it = real.begin();
-		for	(; it != real.end(); it++)
 		{
-			std::cout << "first : " << it->first << " second :" << it->second << std::endl;
-			// std::cout << it-> << std::endl;
+			std::cout << std::endl;
+			std::cout << " The Real MAP " << std::endl;
+			std::map<int, int> real;
+			std::map<int, int> test2;
+			real.insert(std::pair<int, int> (10, 30));
+			real.insert(std::pair<int, int> (70, 30));
+			real.insert(std::pair<int, int> (50, 90));
+			std::map<int, int>::iterator it = real.begin();
+			it++;
+			real.insert(it, std::pair<int, int> (90, 100));
+			test2.insert(real.begin(), real.end());
+			std::map<int, int>::iterator it_test = test2.begin();
+			for	(; it_test != test2.end(); it_test++)
+			{
+				std::cout << "first : " << it_test->first << " second :" << it_test->second << std::endl;
+				// std::cout << it-> << std::endl;
+			}
+			// for	(; it != real.end(); it++)
+			// {
+			// 	std::cout << "first : " << it->first << " second :" << it->second << std::endl;
+			// 	// std::cout << it-> << std::endl;
+			// }
 		}
 		// real.printTree();
 	}
-  
+	return 0;
 }
