@@ -84,7 +84,7 @@ namespace ft {
 
 			typedef typename allocator_type::template rebind<node>::other	allocation_for_Node;
 			allocation_for_Node										_node_allocation;
-			ptr_n													_base;
+			ptr_n													_base; // the root of my tree
 			ptr_n													_sentinel; // our '\0'
 			allocator_type											_allocation;
 			size_type												_size_tree;
@@ -232,7 +232,101 @@ namespace ft {
 
 	void erase(iterator position)
 	{
-		
+		deleteNode(*position);
+	}
+
+	size_type erase(const key_type& k)
+	{
+		ptr_n already = searchTreeKey(_base, k);
+		if	(already != _sentinel)
+		{
+			deleteNode(already->pair_node);
+			return 1;
+		}
+		return 0;
+	}
+
+	void erase(iterator first, iterator last)
+	{
+		iterator temp;
+		while(first != last)
+		{
+			temp = first++;
+			erase(temp);
+		}
+	}
+
+	void clear()
+	{
+		delete_tree(_base);
+		_base = _sentinel;
+		_size_tree = 0;
+	}
+
+	void swap(map& x)
+	{
+		allocator_type tmp_alloc = _allocation;
+		allocation_for_Node tmp_node_alloc = _node_allocation;
+		ptr_n	tmp_base = _base;
+		ptr_n	tmp_sent = _sentinel;
+		size_type tmp_size = _size_tree;
+		key_compare tmp_comp = _comp;
+
+		// this->clear();
+		_base = x._base;
+		_allocation = x._allocation;
+		_node_allocation = x._node_allocation;
+		_sentinel = x._sentinel;
+		_size_tree = x._size_tree;
+		_comp = x._comp;
+
+		// x.clear();
+		x._base = tmp_base;
+		x._allocation = tmp_alloc;
+		x._node_allocation = tmp_node_alloc;
+		x._sentinel = tmp_sent;
+		x._size_tree = tmp_size;
+		x._comp = tmp_comp;
+
+		// x._base_sentinelle(x._base);
+		// _base_sentinelle(_base);
+	}
+
+/*************************************************************************/
+/*                Operations	 : 					                	*/
+/* *********************************************************************/
+
+	iterator find(const key_type& k)
+	{
+		ptr_n searched = searchTreeKey(_base, k);
+		if	(searched == _sentinel)
+			return end();
+		else
+			return (iterator(searched));
+	}
+
+	const_iterator find(const key_type& k) const
+	{
+		ptr_n searched = searchTreeKey(_base, k);
+		if	(searched == _sentinel)
+			return end();
+		else
+			return (const_iterator(searched));
+	}
+
+/*************************************************************************/
+/*                Element Access : 					                	*/
+/* *********************************************************************/
+
+	mapped_type& operator[](const key_type& k)
+	{
+		ptr_n searched = searchTreeKey(_base, k);
+		if	(searched == _sentinel)
+		{
+			insert(ft::make_pair(k, mapped_type()));
+			searched = searchTreeKey(_base, k);
+		}
+		return searched->pair_node.second;
 	}
 
 /* ************************************************************************** */
@@ -245,6 +339,17 @@ namespace ft {
 	/* ************************************************* */
 	/*  		Ordering		 : 		                */
 	/* *********************************************** */
+
+		// void _base_sentinelle(ptr_n node)
+		// {
+		// 	if	(node->left)
+		// 		_base_sentinelle(node->left);
+		// 	if	(node->right)
+		// 		_base_sentinelle(node->right);
+		// 	node->node_base = &_base;
+		// 	node->node_sent = &_sentinel;
+		// }
+
 
 		void preOrderHelper(ptr_n node) {
 			if (node != _sentinel) {

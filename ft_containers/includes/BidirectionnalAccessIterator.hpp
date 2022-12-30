@@ -56,11 +56,14 @@ namespace ft
             reference operator*() const {return _ptr->pair_node; } // OK
             pointer operator->() const { return &_ptr->pair_node; } // OK
             mapIterator &operator++()
-            { 
-				if (_ptr == maximum(*_ptr->node_base))
+            {
+				if (_ptr == max(*_ptr->node_base))
+                {
+                    //std::cout << "je rentre ici " << std::endl;
 					_ptr = *_ptr->node_sent;
+                }
 				else
-					_ptr = successor(_ptr);
+					_ptr = right_after(_ptr);
 				return *this; 
             } // OK
 
