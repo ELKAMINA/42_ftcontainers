@@ -119,17 +119,49 @@ namespace ft {
 						// std::cout << "Kikou " << std::endl;
 					};
 
-			// template <class InputIterator> 
-			// map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
-			// {
+					template <class InputIterator> 
+					map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+					{
+						_allocation = alloc;
+						_comp = comp;
+						_size_tree = 0;
 
-			// };
+						/* Initializing an empty tree with its empty nodes */
+						_sentinel = _node_allocation.allocate(1); // allocating memory for our sentinel
+						_sentinel->color = BLACK;
+						_sentinel->left = NULL;
+						_sentinel->right = NULL;
+						_sentinel->parent = _sentinel;
+						_sentinel->node_sent = &_sentinel;
+						_sentinel->node_base = &_base;
 
-			// map (const map& x)
-			// {
+						/* Root node */
+						_base = _sentinel;
 
-			// };
+						_allocation.construct(&_base->pair_node, _sentinel->pair_node); // pourquoi on envoie le ptr de pair_node?
+						insert(first, last);
+					};
 
+					map (const map& x)
+					{
+						clear();
+						insert(x.begin(), x.end());
+						return (*this);
+					};
+
+					~map()
+					{
+						if	(_base == _sentinel)
+						{
+							_size_tree = 0;
+							deallocate_node(_sentinel);
+							return ;
+						}
+						if	(_size_tree > 0)
+							clear();
+						_size_tree = 0;
+						deallocate_node(_sentinel);
+					}
 
 
 /*************************************************************************/
@@ -325,8 +357,6 @@ namespace ft {
 	iterator lower_bound(const key_type& k)
 	{
 		ptr_n searched = searchTreeKey(_base, k);
-		// ptr_n test = iterator(searched).right_before(searched);
-		// std::cout << test->pair_node.first << std::endl;
 		if	(searched == _sentinel)
 		{
 			iterator it = begin();
@@ -351,8 +381,6 @@ namespace ft {
 	const_iterator lower_bound(const key_type& k) const
 	{
 		ptr_n searched = searchTreeKey(_base, k);
-		// ptr_n test = const_iterator(searched).right_before(searched);
-		// std::cout << test->pair_node.first << std::endl;
 		if	(searched == _sentinel)
 		{
 			const_iterator it = begin();
@@ -377,8 +405,6 @@ namespace ft {
 	iterator upper_bound(const key_type& k)
 	{
 		ptr_n searched = searchTreeKey(_base, k);
-		// ptr_n test = iterator(searched).right_before(searched);
-		// std::cout << test->pair_node.first << std::endl;
 		if	(searched == _sentinel)
 		{
 			iterator it = begin();
@@ -408,8 +434,6 @@ namespace ft {
 	const_iterator upper_bound(const key_type& k) const
 	{
 		ptr_n searched = searchTreeKey(_base, k);
-		// ptr_n test = const_iterator(searched).right_before(searched);
-		// std::cout << test->pair_node.first << std::endl;
 		if	(searched == _sentinel)
 		{
 			const_iterator it = begin();
@@ -473,11 +497,11 @@ namespace ft {
 /*                             		Red Black Tree : 		                  */
 /* ************************************************************************** */
 
-	public:
+	private:
 
 
 	/* ************************************************* */
-	/*  		Ordering		 : 		                */
+	/*  		Ordering/utils		 : 		            */
 	/* *********************************************** */
 
 		void _base_sentinelle(ptr_n node)
@@ -488,44 +512,6 @@ namespace ft {
 				_base_sentinelle(node->right);
 			node->node_base = &_base;
 			node->node_sent = &_sentinel;
-		}
-
-
-		void preOrderHelper(ptr_n node) {
-			if (node != _sentinel) {
-			std::cout << node->data << " ";
-			preOrderHelper(node->left);
-			preOrderHelper(node->right);
-		}
-	}
-
-	// Inorder
-		void inOrderHelper(ptr_n node) {
-			if (node != _sentinel) {
-				inOrderHelper(node->left);
-				std::cout << node->data << " ";
-				inOrderHelper(node->right);
-			}
-		}
-
-		void postOrderHelper(ptr_n node) {
-			if (node != _sentinel) {
-			postOrderHelper(node->left);
-			postOrderHelper(node->right);
-			std::cout << node->data << " ";
-			}
-		}
-
-		void preorder() {
-			preOrderHelper(_base);
-		}
-
-		void inorder() {
-			inOrderHelper(_base);
-		}
-
-		void postorder() {
-			postOrderHelper(_base);
 		}
 
 
@@ -907,4 +893,40 @@ namespace ft {
 	
     };
 	};
+		/* ************************************************************************** */
+		/*                       Non-member function overloads                        */
+		/* ************************************************************************** */
+		
+		template< class Key, class T, class Compare, class Alloc >
+		bool operator == ( const ft::map<Key,T,Compare,Alloc>& lhs, const ft::map<Key,T,Compare,Alloc>& rhs ) {
+			
+			typename ft::map<Key,T,Compare,Alloc>::const_iterator first = rhs.begin();
+			typename ft::map<Key,T,Compare,Alloc>::const_iterator last = rhs.end();
+			typename ft::map<Key,T,Compare,Alloc>::const_iterator cursor = lhs.begin();
+
+			if (lhs.size() != rhs.size())
+				return (false);
+			return (ft::equal(lhs.begin(),lhs.end(),rhs.begin()));
+		}
+
+		template< class Key, class T, class Compare, class Alloc >
+		bool operator!=( const ft::map<Key,T,Compare,Alloc>& lhs, const ft::map<Key,T,Compare,Alloc>& rhs ) { return (!(lhs == rhs)); }
+
+		template< class Key, class T, class Compare, class Alloc >
+		bool operator<( const ft::map<Key,T,Compare,Alloc>& lhs, const ft::map<Key,T,Compare,Alloc>& rhs ) {
+			
+			return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+		}
+
+		template< class Key, class T, class Compare, class Alloc >
+		bool operator<=( const ft::map<Key,T,Compare,Alloc>& lhs, const ft::map<Key,T,Compare,Alloc>& rhs ) { return (!(rhs < lhs)); }
+
+		template< class Key, class T, class Compare, class Alloc >
+		bool operator>( const ft::map<Key,T,Compare,Alloc>& lhs, const ft::map<Key,T,Compare,Alloc>& rhs ) { return (rhs < lhs); }
+	
+		template< class Key, class T, class Compare, class Alloc >
+		bool operator>=( const ft::map<Key,T,Compare,Alloc>& lhs, const ft::map<Key,T,Compare,Alloc>& rhs ) { return (!(rhs > lhs)); }
+
+		template< class Key, class T, class Compare, class Alloc >
+		void swap( ft::map<Key,T,Compare,Alloc>& lhs, ft::map<Key,T,Compare,Alloc>& rhs ) { lhs.swap(rhs); }
 }
