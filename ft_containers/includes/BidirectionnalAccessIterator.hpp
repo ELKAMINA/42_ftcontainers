@@ -54,12 +54,13 @@ namespace ft
 
             /* Operators */
             reference operator*() const {return _ptr->pair_node; } // OK
-            pointer operator->() const { return &_ptr->pair_node; } // OK
+            pointer operator->() const { return &(operator*()); } // OK
             mapIterator &operator++()
             {
+
+                // std::cout << "je rentre ici " << std::endl;
 				if (_ptr == max(*_ptr->node_base))
                 {
-                    //std::cout << "je rentre ici " << std::endl;
 					_ptr = *_ptr->node_sent;
                 }
 				else
@@ -69,11 +70,17 @@ namespace ft
 
             mapIterator operator++(int) 
             { 
+                // std::cout << _ptr->pair_node.first << std::endl;
+                // std::cout << (*_ptr->node_base)->pair_node.first << std::endl;
                 mapIterator tmp(*this); 
 				if (_ptr == max(*_ptr->node_base))
+                {
 					_ptr = *_ptr->node_sent;
+                }
 				else
+                {
 					_ptr = right_after(_ptr);
+                }
 				return tmp;
             } // OK
             
@@ -108,10 +115,15 @@ namespace ft
             /*                Functions that help : 	    	                	*/
             /* *********************************************************************/
 
+            public: 
             ptr_n min(ptr_n node)
             {
+                // int i = 0;
 				while (node->left != *_ptr->node_sent)
+                {
 					node = node->left;
+                    // std::cout << "kikou & i = " << "node " << &node << "node left " << &node->left << " node_sent " << &_ptr->node_sent << std::endl;
+                }
 				return node;
             }
 
@@ -123,6 +135,8 @@ namespace ft
             }
 
             ptr_n right_after(ptr_n x) {
+                
+                // std::cout << "je rentre ici " << std::endl;
 				if (x->right != *_ptr->node_sent)
 					return min(x->right);
 				ptr_n y = x->parent;

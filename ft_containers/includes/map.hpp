@@ -288,8 +288,8 @@ namespace ft {
 		x._size_tree = tmp_size;
 		x._comp = tmp_comp;
 
-		// x._base_sentinelle(x._base);
-		// _base_sentinelle(_base);
+		x._base_sentinelle(x._base);
+		_base_sentinelle(_base);
 	}
 
 /*************************************************************************/
@@ -313,6 +313,146 @@ namespace ft {
 		else
 			return (const_iterator(searched));
 	}
+
+	size_type count(const key_type& k) const
+	{
+		ptr_n searching = searchTreeKey(_base, k);
+		if	(searching == _sentinel || searching == NULL)
+			return 0;
+		return 1;
+	}
+
+	iterator lower_bound(const key_type& k)
+	{
+		ptr_n searched = searchTreeKey(_base, k);
+		// ptr_n test = iterator(searched).right_before(searched);
+		// std::cout << test->pair_node.first << std::endl;
+		if	(searched == _sentinel)
+		{
+			iterator it = begin();
+			for (;it != end();)
+			{
+				if	(_comp(k, it->first))
+					return (it);
+				it++;
+			}
+		}
+		else if (searched)
+			return (iterator(searched));
+		else
+		{
+			ptr_n tmp = iterator(searched).right_after(searched);
+			return (iterator(tmp));
+		}
+		return end();
+	}
+
+
+	const_iterator lower_bound(const key_type& k) const
+	{
+		ptr_n searched = searchTreeKey(_base, k);
+		// ptr_n test = const_iterator(searched).right_before(searched);
+		// std::cout << test->pair_node.first << std::endl;
+		if	(searched == _sentinel)
+		{
+			const_iterator it = begin();
+			for (;it != end();)
+			{
+				if	(_comp(k, it->first))
+					return (it);
+				it++;
+			}
+			return end();
+		}
+		else if (searched)
+			return (const_iterator(searched));
+		else
+		{
+			ptr_n tmp = const_iterator(searched).right_after(searched);
+			return (const_iterator(tmp));
+		}
+	};
+
+
+	iterator upper_bound(const key_type& k)
+	{
+		ptr_n searched = searchTreeKey(_base, k);
+		// ptr_n test = iterator(searched).right_before(searched);
+		// std::cout << test->pair_node.first << std::endl;
+		if	(searched == _sentinel)
+		{
+			iterator it = begin();
+			for (;it != end();)
+			{
+				if	(_comp(k, it->first))
+					return (it);
+				it++;
+			}
+		}
+		else if (searched)
+		{
+			ptr_n next = iterator(searched).right_after(searched);
+			if	(next)
+				return (iterator(next));
+			return end();
+		}
+		else
+		{
+			ptr_n tmp = iterator(searched).right_after(searched);
+			return (iterator(tmp));
+		}
+		return end();
+	}
+
+
+	const_iterator upper_bound(const key_type& k) const
+	{
+		ptr_n searched = searchTreeKey(_base, k);
+		// ptr_n test = const_iterator(searched).right_before(searched);
+		// std::cout << test->pair_node.first << std::endl;
+		if	(searched == _sentinel)
+		{
+			const_iterator it = begin();
+			for (;it != end();)
+			{
+				if	(_comp(k, it->first))
+					return (it);
+				it++;
+			}
+		}
+		else if (searched)
+		{
+			ptr_n next = const_iterator(searched).right_after(searched);
+			if	(next)
+				return (const_iterator(next));
+			return end();
+		}
+		else
+		{
+			ptr_n tmp = iterator(searched).right_after(searched);
+			return (iterator(tmp));
+		}
+		return end();
+	}
+
+	pair<iterator, iterator>
+	equal_range(const key_type& k)
+	{
+
+		iterator lb = lower_bound(k);
+		iterator ub = upper_bound(k);
+		return (ft::make_pair<iterator, iterator>(lb, ub));
+	}
+
+	pair<const_iterator, const_iterator>
+	equal_range(const key_type& k) const
+	{
+
+		iterator lb = lower_bound(k);
+		iterator ub = upper_bound(k);
+		return (ft::make_pair<const_iterator, const_iterator>(lb, ub));
+	}
+
 
 /*************************************************************************/
 /*                Element Access : 					                	*/
@@ -340,15 +480,15 @@ namespace ft {
 	/*  		Ordering		 : 		                */
 	/* *********************************************** */
 
-		// void _base_sentinelle(ptr_n node)
-		// {
-		// 	if	(node->left)
-		// 		_base_sentinelle(node->left);
-		// 	if	(node->right)
-		// 		_base_sentinelle(node->right);
-		// 	node->node_base = &_base;
-		// 	node->node_sent = &_sentinel;
-		// }
+		void _base_sentinelle(ptr_n node)
+		{
+			if	(node->left)
+				_base_sentinelle(node->left);
+			if	(node->right)
+				_base_sentinelle(node->right);
+			node->node_base = &_base;
+			node->node_sent = &_sentinel;
+		}
 
 
 		void preOrderHelper(ptr_n node) {

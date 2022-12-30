@@ -30,8 +30,10 @@ namespace ft
 		Node**			node_sent;
 		int				color;
 
-		// Node() : color(RED), left(NULL), right(NULL), parent(NULL), node_base(NULL), node_sentinel(NULL), {};
-		// Node(const T &data) : color(RED), left(NULL), right(NULL), parent(NULL), root(NULL), tNULL(NULL){};
+		Node() : color(0), left(NULL), right(NULL), parent(NULL), node_base(NULL), node_sent(NULL)
+		{};
+		Node(const T &data) : color(0), left(NULL), right(NULL), parent(NULL), node_base(NULL), node_sent(NULL)
+		{};
 
 	/*
 	** ********************************************************************
