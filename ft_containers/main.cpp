@@ -151,21 +151,26 @@ int main()
 		// // itlow=mymap.lower_bound ('b');  // itlow points to b
 		// itup=mymap.upper_bound ('d');   // itup points to e (not d!)
 		// std::cout << itup->first << " => " << itup->second << '\n';
-		ft::map<char,int> mymap;
+		// ft::map<char,int> mymap;
 
-		mymap['a']=10;
-		mymap['b']=20;
-		mymap['c']=30;
-		mymap['d']=30;
+		// mymap['a']=10;
+		// mymap['b']=20;
+		// mymap['c']=30;
+		// mymap['d']=30;
 
-		ft::pair<ft::map<char,int>::iterator,ft::map<char,int>::iterator> ret;
-		ret = mymap.equal_range('p');
+		// ft::map<char,int> map2(mymap);
+		// ft::map<char,int>::iterator it = map2.begin();
+		// ft::map<char,int> map3;
+		// map3 = map2;
+		// ft::map<char,int>::iterator it2 = map3.begin();
+		// for(; it2 != map3.end(); it2++)
+		// 	std::cout << it2->first << " => " << it2->second << '\n';
 
-		std::cout << "lower bound points to: ";
-		std::cout << ret.first->first << " => " << ret.first->second << '\n';
+		// ret = mymap.equal_range('p');
+		// std::cout << "lower bound points to: ";
 
-		std::cout << "upper bound points to: ";
-		std::cout << ret.second->first << " => " << ret.second->second << '\n';
+		// std::cout << "upper bound points to: ";
+		// std::cout << ret.second->first << " => " << ret.second->second << '\n';
 		// mymap.erase(itlow,itup);        // erases [itlow,itup)
 
 		// print content:

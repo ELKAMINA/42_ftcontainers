@@ -52,8 +52,8 @@ namespace ft {
 			typedef				ft::Node<value_type>*															ptr_n;
 			typedef				ft::mapIterator<key_type, mapped_type>											iterator;
 			typedef				ft::mapIterator<key_type, mapped_type>											const_iterator;
-			// typedef	typename	ft::reverse_iterator<iterator>										reverse_iterator;
-			// typedef	typename	ft::reverse_iterator<const_iterator>								const_reverse_iterator;
+			typedef	typename	ft::reverse_iterator<iterator>													reverse_iterator;
+			typedef	typename	ft::reverse_iterator<const_iterator>										 		const_reverse_iterator;
 
 			class value_compare : public std::binary_function<value_type, value_type, bool>
 			{   
@@ -142,7 +142,27 @@ namespace ft {
 						insert(first, last);
 					};
 
-					map (const map& x)
+					map(const map& x)
+					{
+						_allocation = x._allocation;
+						_comp = x._comp;
+						_size_tree = 0;
+
+						_sentinel = _node_allocation.allocate(1); // allocating memory for our sentinel
+						_sentinel->color = BLACK;
+						_sentinel->left = NULL;
+						_sentinel->right = NULL;
+						_sentinel->parent = _sentinel;
+						_sentinel->node_sent = &_sentinel;
+						_sentinel->node_base = &_base;
+						/* Root node */
+						_base = _sentinel;
+						_allocation.construct(&_base->pair_node, value_type()); // pourquoi on envoie le ptr de pair_node?
+						insert(x.begin(), x.end());
+						*this = x;
+					}
+
+					map& operator =(const map& x)
 					{
 						clear();
 						insert(x.begin(), x.end());
