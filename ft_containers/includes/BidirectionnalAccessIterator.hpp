@@ -136,13 +136,13 @@ namespace ft
 
             ptr_n right_after(ptr_n x) {
                 
-                // std::cout << "je rentre ici " << std::endl;
 				if (x->right != *_ptr->node_sent)
 					return min(x->right);
 				ptr_n y = x->parent;
 				while (y != *_ptr->node_sent && x == y->right)
 				{
 					x = y;
+                    // std::cout << "FIRST :" << x->pair_node.first << std::endl;
 					y = y->parent;
 				}
 				return y;

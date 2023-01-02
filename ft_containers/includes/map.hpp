@@ -289,6 +289,9 @@ namespace ft {
 	iterator insert (iterator position, const value_type& val)
 	{
 		(void)position;
+		ptr_n found = searchTreeKey(_base, val.first);
+		if	(found != _sentinel)
+			return iterator(found);
 		/* Position is a hint that helps us to insert the element at some position  */
 		return (iterator(insert_node(val)));
 	}
@@ -446,22 +449,28 @@ namespace ft {
 	iterator upper_bound(const key_type& k)
 	{
 		ptr_n searched = searchTreeKey(_base, k);
+		// std::cout << "upper bound " << end().getPtr()->pair_node.first << std::endl;
+		// if	(searched == maximum(searched))
+		// 	return end();
 		if	(searched == _sentinel)
 		{
+			// std::cout << "je rentre hereee " << std::endl;
 			iterator it = begin();
 			for (;it != end();)
 			{
 				if	(_comp(k, it->first))
+				{
 					return (it);
+				}
 				it++;
 			}
 		}
-		else if (searched)
+		else if (searched->pair_node.first == k)
 		{
-			ptr_n next = iterator(searched).right_after(searched);
-			if	(next)
-				return (iterator(next));
-			return end();
+			// std::cout << "kikouu " << std::endl;
+			if	(searched == maximum(searched))
+				return end();
+			return maximum(searched);
 		}
 		else
 		{
