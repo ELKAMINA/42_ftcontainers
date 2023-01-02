@@ -102,10 +102,10 @@ namespace ft {
 						_allocation = alloc;
 						_comp = comp;
 						_size_tree = 0;
-
 						/* Initializing an empty tree with its empty nodes */
 						_sentinel = _node_allocation.allocate(1); // allocating memory for our sentinel
 						_sentinel->color = BLACK;
+						// _sentinel->pair_node = NULL;
 						_sentinel->left = NULL;
 						_sentinel->right = NULL;
 						_sentinel->parent = _sentinel;
@@ -115,7 +115,7 @@ namespace ft {
 						/* Root node */
 						_base = _sentinel;
 
-						_allocation.construct(&_base->pair_node, _sentinel->pair_node); // pourquoi on envoie le ptr de pair_node?
+						_allocation.construct(&_base->pair_node, value_type()); // pourquoi on envoie le ptr de pair_node?
 						// std::cout << "Kikou " << std::endl;
 					};
 
@@ -260,9 +260,9 @@ namespace ft {
 		{
 			ptr_n node_Inserted = insert_node(val);
 			iterator temp = iterator(node_Inserted);
-			return make_pair<iterator, bool>(temp, true);
+			return ft::make_pair<iterator, bool>(temp, true);
 		}
-		return (make_pair<iterator, bool>(iterator(already), false));
+		return (ft::make_pair<iterator, bool>(iterator(already), false));
 	}
 
 	iterator insert (iterator position, const value_type& val)

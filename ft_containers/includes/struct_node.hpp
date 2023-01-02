@@ -2,9 +2,8 @@
 #include <cstddef>
 #include <iostream>
 #include <memory> // for std::allocator
-#include "./map.hpp"
+// #include "./map.hpp"
 //#include "./binary_function.hpp"
-#include "./map.hpp"
 
 /* We need to create a temlate structure of nodes so that it can adapt to any type of value_type. For map, it will adapt to pair<T,U>*/
 
@@ -30,9 +29,9 @@ namespace ft
 		Node**			node_sent;
 		int				color;
 
-		Node() : color(0), left(NULL), right(NULL), parent(NULL), node_base(NULL), node_sent(NULL)
+		Node() : pair_node(NULL), color(0), left(NULL), right(NULL), parent(NULL), node_base(NULL), node_sent(NULL)
 		{};
-		Node(const T &data) : color(0), left(NULL), right(NULL), parent(NULL), node_base(NULL), node_sent(NULL)
+		Node(const T &data) : pair_node(data), color(0), left(NULL), right(NULL), parent(NULL), node_base(NULL), node_sent(NULL)
 		{};
 
 	/*
@@ -41,12 +40,10 @@ namespace ft
 	** ********************************************************************
 	*/
 			//friend of mytree so that it can access its protected data.
-			template <class, class, class, class, class>
-			friend class mytree;
+			template <class, class, class, class>
+			friend class map;
 
 			//friend of tree_iterator so that it can access its protected data.
-			// template <class, class>
-			// friend class rb_tree_iterator;
 
 	};
 
