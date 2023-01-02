@@ -129,8 +129,8 @@ namespace ft
 				return (*this);
 			}
 
-            iterator_type operator->() const { iterator_type tmp = bs;
-				return &*--tmp;; } // OK
+            pointer operator->() const {
+				return &(operator*()); } // OK
 			
 			reference operator[] (size_t n) const { 
 				

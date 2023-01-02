@@ -1,3 +1,5 @@
+  
+
 #include <iostream>
 #include <iomanip>
 #include <map>
@@ -8,57 +10,52 @@
 #include <iostream>
 #include <utility>
 #include <functional>
-#include <string>
-
-/* For colours in terminal/outputs : https://stackoverflow.com/questions/2616906/how-do-i-output-coloured-text-to-a-linux-terminal*/
-
-// using namespace ft;
 
 int main()
 {
-	{
+    {
+        using namespace std;
 
-        using namespace ft;   
-        pair<int, std::string>			my_pair(8, "salut");
-        map<int, std::string>			test;
-        map<int, std::string>::iterator	it;
+        map<char,int> mymap;
 
-        test.insert(my_pair);
-        test.insert(pair<int, std::string>(-4, "bar"));
-        test.insert(pair<int, std::string>(2, "machin"));
-        test.insert(pair<int, std::string>(3, "foo"));
-        test.insert(pair<int, std::string>(746, "Marcel"));
-        test.insert(pair<int, std::string>(1, "truc"));
-        it = test.begin();
-        std::cout << '\n';
+        map<char,int>::key_compare mycomp = mymap.key_comp();
 
-        while (it != test.end())
-        {
-            // cout << "start of while\n";
-            std::cout << it->first << ", " << it->second << '\n';
-            it++;
-        }
+        mymap['a']=100;
+        mymap['b']=200;
+        mymap['c']=300;
+
+
+        char highest = mymap.rbegin()->first;     // key value of last element
+
+
+        cout << "mymap contains:\n";
+        map<char,int>::iterator it = mymap.begin();
+        do {
+            cout << it->first << " => " << it->second << '\n';
+        } while ( mycomp((*it++).first, highest) );
+
+        cout << '\n';
     }
     {
-        using namespace std;   
-        pair<int, std::string>			my_pair(8, "salut");
-        map<int, std::string>			test;
-        map<int, std::string>::iterator	it;
+        using namespace ft;
 
-        test.insert(my_pair);
-        test.insert(pair<int, std::string>(-4, "bar"));
-        test.insert(pair<int, std::string>(2, "machin"));
-        test.insert(pair<int, std::string>(3, "foo"));
-        test.insert(pair<int, std::string>(746, "Marcel"));
-        test.insert(pair<int, std::string>(1, "truc"));
-        it = test.begin();
-        std::cout << '\n';
+        ft::map<char,int> mymap;
 
-        while (it != test.end())
-        {
-            // cout << "start of while\n";
-            std::cout << it->first << ", " << it->second << '\n';
-            it++;
-        }
+        ft::map<char,int>::key_compare mycomp = mymap.key_comp();
+
+        mymap['a']=100;
+        mymap['b']=200;
+        mymap['c']=300;
+
+
+        char highest = mymap.rbegin()->first;     // key value of last element
+        std::cout << "highest :\n" << highest << std::endl;
+            std::cout << "mymap contains:\n";
+            ft::map<char,int>::iterator it = mymap.begin();
+            do {
+                std::cout << it->first << " => " << it->second << '\n';
+            } while ( mycomp((*it++).first, highest) );
+
+            std::cout << '\n'; 
     }
 }

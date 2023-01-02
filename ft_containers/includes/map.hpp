@@ -249,6 +249,27 @@ namespace ft {
 		return (const_iterator(_sentinel));
 	}
 
+
+	reverse_iterator rbegin()
+	{
+		return (reverse_iterator(end()));
+	}
+
+	const_reverse_iterator rbegin() const
+	{
+		return (const_reverse_iterator(end()));
+	}
+
+	reverse_iterator rend()
+	{
+		return (reverse_iterator(begin()));
+	}
+
+	const_reverse_iterator rend() const
+	{
+		return (const_reverse_iterator(begin()));
+	}
+
 /* ************************************************************************** */
 /*                           		Modifiers:                                */
 /* ************************************************************************** */
@@ -823,7 +844,7 @@ namespace ft {
 	void deleteNode(value_type data) {
 		
 		deleteNodeHelper(_base, data.first);
-		_size_tree --;
+		// _size_tree --;
 	}
 
 	void	deallocate_node(ptr_n node)

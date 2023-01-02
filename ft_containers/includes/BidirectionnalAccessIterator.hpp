@@ -89,7 +89,7 @@ namespace ft
                 if (_ptr == min(*_ptr->node_base))
                     _ptr = *_ptr->node_sent;
                 else if (_ptr == *_ptr->node_sent)
-                    _ptr == max(*_ptr->node_base);
+                    _ptr = max(*_ptr->node_base);
 				else
 					_ptr = right_before(_ptr);
 				return *this;
@@ -102,7 +102,7 @@ namespace ft
                if (_ptr == min(*_ptr->node_base))
                     _ptr = *_ptr->node_sent;
                 else if (_ptr == *_ptr->node_sent)
-                    _ptr == max(*_ptr->node_base);
+                    _ptr = max(*_ptr->node_base);
 				else
 					_ptr = right_before(_ptr);
 				return tmp;
@@ -160,7 +160,7 @@ namespace ft
 				return y;
 			}
 
-            ptr_n getPtr() {
+            ptr_n getPtr() const {
 				return (_ptr);
 			}
         };
