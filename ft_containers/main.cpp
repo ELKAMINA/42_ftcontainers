@@ -12,10 +12,11 @@
 #include <string>
 #include <list>
 #include "./common.hpp"
+#include "./includes/stack.hpp"
 
-#define T1 char
-#define T2 foo<float>
-typedef TESTED_NAMESPACE::map<T1, T2> _map;
+// #define T1 char
+// #define T2 foo<float>
+// typedef TESTED_NAMESPACE::map<T1, T2> _map;
 // typedef _map::const_iterator const_it;
 
 // static unsigned int i = 0;
@@ -33,19 +34,37 @@ typedef TESTED_NAMESPACE::map<T1, T2> _map;
 
 int		main(void)
 {
-	_map	mp;
+	ft::stack<float>								other_stack;
+	ft::vector<std::string>							lst;
 
-	mp['a'] = 2.3;
-	mp['b'] = 1.4;
-	mp['c'] = 0.3;
-	mp['d'] = 4.2;
-	printSize(mp);
+	lst.push_back("salut");
+	lst.push_back("tu vas bien?");
+	lst.push_back("super");
+	lst.push_back("et toi?");
 
-	// for (const_it it1 = mp.begin(); it1 != mp.end(); ++it1)
-	// 	for (const_it it2 = mp.begin(); it2 != mp.end(); ++it2)
-	// 		ft_comp(mp, it1, it2);
+	ft::stack<std::string, ft::vector<std::string> >	my_stack(lst);
 
-	// printSize(mp);
+	std::cout << std::boolalpha << other_stack.empty() << std::endl;
+	other_stack.push(8.5); // 8.5;
+	other_stack.push(42.4242); // 8.5; 42.4242;
+	std::cout << other_stack.size() << '\n'; // 2
+	other_stack.pop(); // 8.5;
+	std::cout << other_stack.size() << '\n'; // 1
+	other_stack.push(78541.987); // 8.5; 78541.987;
+	std::cout << other_stack.size() << '\n'; // 2
+	std::cout << other_stack.top() << '\n'; //78541.987
+	std::cout << std::boolalpha << other_stack.empty() << std::endl;
+
+	const std::string const_top = my_stack.top();
+
+	std::cout << "const top: " << const_top << '\n';
+
+	while (!my_stack.empty())
+	{
+		std::cout << my_stack.top() << '\n';
+		my_stack.pop();
+	}
+
 	return (0);
 }
 

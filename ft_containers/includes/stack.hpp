@@ -1,19 +1,17 @@
 #pragma once
 
-#include "./vector.hpp"
 #include <iostream>
 #include <memory> // for allocator
 #include <stdexcept>
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include "./vector.hpp"
 #include "./enable_if.hpp"
 #include "./equal.hpp"
 #include "./lexicographical_compare.hpp"
 #include "./RandomAccessIterator.hpp"
 #include "./ReverseIterator.hpp"
-
-class vector;
 
 namespace ft
 {
@@ -28,7 +26,7 @@ namespace ft
 				typedef typename Container::reference		reference;
 				typedef typename Container::const_reference	const_reference;
 
-				explicit stack(const Container& cont = Container())
+				explicit stack(const container_type& cont = container_type())
 					: c(cont) {}
 
 				~stack() {}
@@ -76,26 +74,32 @@ namespace ft
 				}
 
 				/* Relational operators friends */
-				template <class _T, class _Container>
-					friend inline bool	operator==(const stack<T, Container>& lhs, const stack<T, Container>& rhs);
+				template <class T1, class C1>
+				friend bool operator== (const stack<T1, C1>& lhs, const stack<T1, C1>& rhs);
+		
+				template <class T1, class C1>
+				friend bool operator< (const stack<T1, C1>& lhs, const stack<T1, C1>& rhs);
+	
+				// template <class _T, class _container_type>
+				// 	friend inline bool	operator==(const stack<T, container_type>& lhs, const stack<T, container_type>& rhs);
 
-				template <class _T, class _Container>
-					friend inline bool	operator<(const stack<T, _Container>& lhs, const stack<T, _Container>& rhs);
+				// template <class _T, class _container_type>
+				// 	friend inline bool	operator<(const stack<T, _container_type>& lhs, const stack<T, _container_type>& rhs);
 				
-				template <class _T, class _Container>
-					friend inline bool	operator!=(const stack<T, _Container>& lhs, const stack<T, _Container>& rhs);
+				// template <class _T, class _container_type>
+				// 	friend inline bool	operator!=(const stack<T, _container_type>& lhs, const stack<T, _container_type>& rhs);
 
-				template <class _T, class _Container>
-					friend inline bool	operator<=(const stack<T, _Container>& lhs, const stack<T, _Container>& rhs);
+				// template <class _T, class _container_type>
+				// 	friend inline bool	operator<=(const stack<T, _container_type>& lhs, const stack<T, _container_type>& rhs);
 
-				template <class _T, class _Container>
-					friend inline bool	operator>(const stack<T, _Container>& lhs, const stack<T, _Container>& rhs);
+				// template <class _T, class _container_type>
+				// 	friend inline bool	operator>(const stack<T, _container_type>& lhs, const stack<T, _container_type>& rhs);
 				
-				template <class _T, class _Container>
-					friend inline bool	operator>=(const stack<T, _Container>& lhs, const stack<T, _Container>& rhs);
+				// template <class _T, class _container_type>
+				// 	friend inline bool	operator>=(const stack<T, _container_type>& lhs, const stack<T, _container_type>& rhs);
 
 			protected:
-				Container	c;
+				container_type	c;
 		};
 
 	template <class T, class Container>
