@@ -8,8 +8,6 @@
 #include "./pair_make_pair.hpp"
 
 
-
-
 namespace ft
 {
     template <typename key_value>
@@ -24,10 +22,7 @@ namespace ft
             typedef typename standard::iterator_category    						            iterator_category;
             typedef typename standard::pointer              						            pointer;
             typedef typename standard::reference            						            reference;
-            typedef			ft::Node<value_type>*												ptr_n;
-            // typedef typename check_const_map<_const, const value_type&, value_type&>::type								reference;
-			// typedef typename check_const_map<_const, const value_type*, value_type*>::type								pointer;
-			// typedef typename check_const_map<_const, const ft::Node<value_type>*,  ft::Node<value_type>* >::type		ptr_n;
+            typedef			ft::Node<typename remove_cv<value_type>::type>*					    ptr_n;
             
             /* Constructors and Destructors */
             mapIterator() : _ptr(NULL) {}

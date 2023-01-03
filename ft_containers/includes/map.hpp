@@ -39,7 +39,7 @@ namespace ft {
 		/* *********************************************************************/
 			typedef 			Key 																			key_type; // ok
 			typedef 			T 																				mapped_type;
-			typedef				ft::pair<const key_type, mapped_type>	 									value_type;
+			typedef				ft::pair<const key_type, mapped_type>	 												value_type;
 			typedef				Compare																			key_compare;
 			typedef				std::size_t																		size_type; // ok
 			typedef				std::ptrdiff_t																	difference_type;
@@ -50,8 +50,8 @@ namespace ft {
 			typedef	typename	Allocator::const_pointer														const_pointer;
 			typedef				ft::Node<value_type>															node;
 			typedef				ft::Node<value_type>*															ptr_n;
-			typedef				ft::mapIterator<value_type>											iterator;
-			typedef				ft::mapIterator<value_type>								const_iterator;
+			typedef				ft::mapIterator<value_type>														iterator;
+			typedef				ft::mapIterator<const value_type>												const_iterator;
 			typedef	typename	ft::reverse_iterator<iterator>													reverse_iterator;
 			typedef	typename	ft::reverse_iterator<const_iterator>										 	const_reverse_iterator;
 
