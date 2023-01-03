@@ -7,33 +7,41 @@
 #include "./struct_node.hpp"
 #include "./pair_make_pair.hpp"
 
+
+
+
 namespace ft
 {
-    template <typename key, class value, bool _const = false>
+    template <typename key_value>
     class mapIterator
     {
         public:
             /* Shorthands and definitions */
-            typedef          mapIterator<key, value, _const>                                    auto_class;
-            typedef          ft::pair<const key, value>                                         value_type;
+            typedef          mapIterator<key_value>                                            auto_class;
+            typedef          key_value                                                          value_type;
 			typedef 		 ft::iterator<std::bidirectional_iterator_tag, value_type>  		standard;
             typedef typename standard::difference_type      						            difference_type;
             typedef typename standard::iterator_category    						            iterator_category;
             typedef typename standard::pointer              						            pointer;
             typedef typename standard::reference            						            reference;
             typedef			ft::Node<value_type>*												ptr_n;
+            // typedef typename check_const_map<_const, const value_type&, value_type&>::type								reference;
+			// typedef typename check_const_map<_const, const value_type*, value_type*>::type								pointer;
+			// typedef typename check_const_map<_const, const ft::Node<value_type>*,  ft::Node<value_type>* >::type		ptr_n;
             
             /* Constructors and Destructors */
             mapIterator() : _ptr(NULL) {}
             mapIterator(ptr_n ptr) : _ptr(ptr) {}
-            mapIterator(const mapIterator<typename remove_cv<value_type>::type, value, _const> &other) : _ptr(other.getPtr()) {}
+            mapIterator(mapIterator<typename remove_cv<value_type>::type> const &other) : _ptr(other.getPtr()) {
+                // std::cout << "je rentre ici ??? " << std::endl;
+            }
             virtual ~mapIterator() {} // virtual destructor : why?
 
             /* Retrieve the current ptr_n */
             // ptr_n base() const { return this->_ptr;};
             
             /* Comparison Operators */
-            mapIterator &operator=(const mapIterator<typename remove_cv<value_type>::type, value, _const> &other)
+            mapIterator &operator=(const mapIterator<typename remove_cv<value_type>::type> &other)
             {
             //     if (this != &other)
                 _ptr = other.getPtr();
@@ -49,7 +57,7 @@ namespace ft
 			template <typename T1>
 			bool operator!=(const T1& s) const {
 				
-				return _ptr != s._ptr;
+				return _ptr != s.getPtr();
 			}
 
             /* Operators */
@@ -84,7 +92,7 @@ namespace ft
 				return tmp;
             } // OK
             
-            mapIterator &operator--() 
+           mapIterator &operator--() 
             {
                 if (_ptr == min(*_ptr->node_base))
                     _ptr = *_ptr->node_sent;
@@ -161,6 +169,10 @@ namespace ft
 			}
 
             ptr_n getPtr() const {
+				return (_ptr);
+			}
+
+            ptr_n getPtr() {
 				return (_ptr);
 			}
         };

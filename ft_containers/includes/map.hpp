@@ -39,7 +39,7 @@ namespace ft {
 		/* *********************************************************************/
 			typedef 			Key 																			key_type; // ok
 			typedef 			T 																				mapped_type;
-			typedef				ft::pair<const key_type, mapped_type> 											value_type;
+			typedef				ft::pair<const key_type, mapped_type>	 									value_type;
 			typedef				Compare																			key_compare;
 			typedef				std::size_t																		size_type; // ok
 			typedef				std::ptrdiff_t																	difference_type;
@@ -50,10 +50,10 @@ namespace ft {
 			typedef	typename	Allocator::const_pointer														const_pointer;
 			typedef				ft::Node<value_type>															node;
 			typedef				ft::Node<value_type>*															ptr_n;
-			typedef				ft::mapIterator<key_type, mapped_type>											iterator;
-			typedef				ft::mapIterator<key_type, mapped_type>											const_iterator;
+			typedef				ft::mapIterator<value_type>											iterator;
+			typedef				ft::mapIterator<value_type>								const_iterator;
 			typedef	typename	ft::reverse_iterator<iterator>													reverse_iterator;
-			typedef	typename	ft::reverse_iterator<const_iterator>										 		const_reverse_iterator;
+			typedef	typename	ft::reverse_iterator<const_iterator>										 	const_reverse_iterator;
 
 			class value_compare : public std::binary_function<value_type, value_type, bool>
 			{   
@@ -197,7 +197,11 @@ namespace ft {
 		};
 
 		size_type max_size() const { 
-			return _allocation.max_size(); 
+			// std::allocator <char> tmp;
+			// size_type maxsize = tmp.max_size();
+			// return (maxsize / (sizeof(value_type) + sizeof(node)));
+			// return (); 
+			return (_allocation.max_size());
 		};
 
 /* ************************************************************************** */
@@ -400,113 +404,59 @@ namespace ft {
 
 	iterator lower_bound(const key_type& k)
 	{
-		ptr_n searched = searchTreeKey(_base, k);
-		if	(searched == _sentinel)
+		iterator start = begin();
+		iterator end = this->end();
+
+		for (; start != end; start++)
 		{
-			iterator it = begin();
-			for (;it != end();)
-			{
-				if	(_comp(k, it->first))
-					return (it);
-				it++;
-			}
+			// std::cout << " first " << start->first << " VS Key " << k << std::endl;
+			if	(_comp((*start).first, k) == false)
+				break ;
 		}
-		else if (searched)
-			return (iterator(searched));
-		else
-		{
-			ptr_n tmp = iterator(searched).right_after(searched);
-			return (iterator(tmp));
-		}
-		return end();
+		return (start);	
 	}
 
 
 	const_iterator lower_bound(const key_type& k) const
 	{
-		ptr_n searched = searchTreeKey(_base, k);
-		if	(searched == _sentinel)
+		const_iterator start = begin();
+		const_iterator end = this->end();
+
+		for (; start != end; start++)
 		{
-			const_iterator it = begin();
-			for (;it != end();)
+			if	(_comp((*start).first, k) == false) // means that start is either equal or superior to k
 			{
-				if	(_comp(k, it->first))
-					return (it);
-				it++;
+				break ;
 			}
-			return end();
 		}
-		else if (searched)
-			return (const_iterator(searched));
-		else
-		{
-			ptr_n tmp = const_iterator(searched).right_after(searched);
-			return (const_iterator(tmp));
-		}
+		return (start);
 	};
 
 
 	iterator upper_bound(const key_type& k)
 	{
-		ptr_n searched = searchTreeKey(_base, k);
-		// std::cout << "upper bound " << end().getPtr()->pair_node.first << std::endl;
-		// if	(searched == maximum(searched))
-		// 	return end();
-		if	(searched == _sentinel)
+		iterator start = begin();
+		iterator end = this->end();
+		for (; start != end; start++)
 		{
-			// std::cout << "je rentre hereee " << std::endl;
-			iterator it = begin();
-			for (;it != end();)
-			{
-				if	(_comp(k, it->first))
-				{
-					return (it);
-				}
-				it++;
-			}
+			if	(_comp(k, (*start).first))
+				break ;
 		}
-		else if (searched->pair_node.first == k)
-		{
-			// std::cout << "kikouu " << std::endl;
-			if	(searched == maximum(searched))
-				return end();
-			return maximum(searched);
-		}
-		else
-		{
-			ptr_n tmp = iterator(searched).right_after(searched);
-			return (iterator(tmp));
-		}
-		return end();
+		return (start);	
 	}
 
 
 	const_iterator upper_bound(const key_type& k) const
 	{
-		ptr_n searched = searchTreeKey(_base, k);
-		if	(searched == _sentinel)
+		const_iterator start = begin();
+		const_iterator end = this->end();
+
+		for (; start != end; start++)
 		{
-			const_iterator it = begin();
-			for (;it != end();)
-			{
-				if	(_comp(k, it->first))
-					return (it);
-				it++;
-			}
+			if	(_comp(k, (*start).first)) // true is k < start.first strictement => less than est true
+				break ;
 		}
-		else if (searched)
-		{
-			ptr_n next = const_iterator(searched).right_after(searched);
-			if	(next)
-				return (const_iterator(next));
-			return end();
-		}
-		else
-		{
-			ptr_n tmp = iterator(searched).right_after(searched);
-			return (iterator(tmp));
-		}
-		return end();
+		return (start);	
 	}
 
 	pair<iterator, iterator>
@@ -522,8 +472,8 @@ namespace ft {
 	equal_range(const key_type& k) const
 	{
 
-		iterator lb = lower_bound(k);
-		iterator ub = upper_bound(k);
+		const_iterator lb = lower_bound(k);
+		const_iterator ub = upper_bound(k);
 		return (ft::make_pair<const_iterator, const_iterator>(lb, ub));
 	}
 
