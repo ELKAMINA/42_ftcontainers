@@ -243,7 +243,7 @@ Running time : error detected at running/execution time
   7. Generic programing / SFINAE
 
 Generic programing is a a way to define identical algorithms on differents types of data. It's a kind of polymorphism (type polymorphism or type setting).
-  `Simple case`: two template functions ( **insert (size_t x, value_type val) and insert(inputIterator x, inputIterator y)**). So which one choosing by the compiler. To make it use the one with Iterator, the condition is that, after verifying, the type of the arguments, the compiler has to conclude that it is not an integral (size_type and value_type) to make it cancel the first possibility.
+  `Simple case`: two template functions ( **insert (size_t x, value_type val) and insert(inputIterator x, inputIterator y)**). So which one the compiler will choose when reading this code ìnsert(5, 20). To make it use the one with Iterator, the condition is that, after verifying, the underlying type of the arguments, the compiler has to conclude that it is not an integral type (size_type and value_type) to make it cancel the first possibility and the use the second.
   
 It is based on SFINAE : Substitution Failure is not an Error.
 SFINAE is based on the idea that when a compiler encounters an invalid type or expression during template instantiation, it will simply ignore that invalid code and continue the compilation process, instead of generating a compilation error. This allows you to write code that uses template metaprogramming to perform type-based dispatching and conditional logic, without causing compilation errors.
