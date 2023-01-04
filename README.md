@@ -85,13 +85,21 @@ Different categories of iterators :
  
  What is their goal ?
  
- The goal of defining the 5th type of traits is to make the iterator compatible with STL algorithms.
+ The goal of defining the 5th type of traits is **to make the iterator compatible with STL algorithms.**
  
  6. What is ptrdiff_t ?
  
  IT'S A TYPE.
  ptrdiff_t is the signed integer type of the result of subtracting two pointers.
  ptrdiff_t is used for pointer arithmetic and array indexing, if negative values are possible
+ 
+ 5. More explanations about tools to implement :
+ 
+ > **lexiographical_compare** : is a tool that makes us compare strings. The idea behind is to know which two strings are equal (Comparison and reflexivity) or which one is greater or smaller lexicographically.
+ 
+ > **equal** : Same as lexicographical_compare. Equal allow us to compare two ranges to see if they're equal or not.
+ 
+ > enable_if : See point 7 on Global Glossary
   
 # Vector container
 
