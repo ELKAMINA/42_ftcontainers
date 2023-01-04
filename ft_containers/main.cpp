@@ -1,70 +1,315 @@
-
 #include <iostream>
 #include <iomanip>
 #include <map>
 #include "./includes/stack.hpp"
 #include "./includes/vector.hpp"
+#include "./includes/map.hpp"
 #include "./includes/ReverseIterator.hpp"
 #include "./includes/map.hpp"
+#include "./includes/prints.hpp"
 #include <iostream>
 #include <utility>
 #include <functional>
 #include <string>
-#include <list>
-#include "./common.hpp"
-#include "./includes/stack.hpp"
 
-// #define T1 char
-// #define T2 foo<float>
-// typedef TESTED_NAMESPACE::map<T1, T2> _map;
-// typedef _map::const_iterator const_it;
 
-// static unsigned int i = 0;
-
-// void	ft_comp(const _map &mp, const const_it &it1, const const_it &it2)
-// {
-// 	bool res[2];
-
-// 	std::cout << "\t-- [" << ++i << "] --" << std::endl;
-// 	res[0] = mp.key_comp()(it1->first, it2->first);
-// 	res[1] = mp.value_comp()(*it1, *it2);
-// 	std::cout << "with [" << it1->first << " and " << it2->first << "]: ";
-// 	std::cout << "key_comp: " << res[0] << " | " << "value_comp: " << res[1] << std::endl;
-// }
-
-int		main(void)
+int main() 
 {
-	ft::stack<float>								other_stack;
-	ft::vector<std::string>							lst;
+	/* ************************************************* */
+	/*          		Member functions : 	          	*/
+	/* *************************************************/
 
-	lst.push_back("salut");
-	lst.push_back("tu vas bien?");
-	lst.push_back("super");
-	lst.push_back("et toi?");
+    std::cout << _IYELLOW << "MAP -  MEMBER FUNCTIONS " << _END << std::endl;
+    {
+        {
+            {
+                std::cout << _PURPLE << "Default constructors with ft " << _END << std::endl;
+                // ft::map<int,float> map_ft;
+                // ft::map<int,int> map_ft;
+                // ft::map<int, std::string> map_ft;
+                // ft::map<std::string, char> map_ft;
+                ft::map<float, double> map_ft;
+                std::cout << "size_ft : " << map_ft.size() << std::endl;
+            }
+            {
+                std::cout <<  _PURPLE << "Default constructors with std " << _END << std::endl;
+                // std::map<int,float> map_std;
+                // std::map<int,int> map_std;
+                // std::map<int, std::string> map_std;
+                // std::map<std::string, char> map_std;
+                std::map<float, double> map_std;
+                std::cout << "size_std : " << map_std.size() << std::endl;
+            }
+        }
+        {
+            {
+                std::cout << _PURPLE << "Range constructors with ft " << _END << std::endl;
+            
+                ft::map<char,float> map_ft_for_construction;
+                map_ft_for_construction['a'] = 8.98;
+                map_ft_for_construction['b'] = 30.8;
+                map_ft_for_construction['c'] = 29.98;
+                map_ft_for_construction['d'] = 10.01;
+                map_ft_for_construction['e'] = 12.99;
+                map_ft_for_construction['f'] = 16.0;
 
-	ft::stack<std::string, ft::vector<std::string> >	my_stack(lst);
+                ft::map<char,float> map_ft(map_ft_for_construction.begin(), map_ft_for_construction.end());
 
-	std::cout << std::boolalpha << other_stack.empty() << std::endl;
-	other_stack.push(8.5); // 8.5;
-	other_stack.push(42.4242); // 8.5; 42.4242;
-	std::cout << other_stack.size() << '\n'; // 2
-	other_stack.pop(); // 8.5;
-	std::cout << other_stack.size() << '\n'; // 1
-	other_stack.push(78541.987); // 8.5; 78541.987;
-	std::cout << other_stack.size() << '\n'; // 2
-	std::cout << other_stack.top() << '\n'; //78541.987
-	std::cout << std::boolalpha << other_stack.empty() << std::endl;
+                std::cout << "size_ft : " << map_ft.size() << std::endl;
+                ft::map<char, float>::iterator it = map_ft.begin();
+                for(; it != map_ft.end(); it++)
+                    std::cout << "Composition Map_ft : first = " << it->first << " second = " << it->second << std::endl; 
+            }
+            {
+                std::cout << _PURPLE << "Range constructors with std " << _END << std::endl;
+            
+                std::map<char,float> map_ft_for_construction;
+                map_ft_for_construction['a'] = 8.98;
+                map_ft_for_construction['b'] = 30.8;
+                map_ft_for_construction['c'] = 29.98;
+                map_ft_for_construction['d'] = 10.01;
+                map_ft_for_construction['e'] = 12.99;
+                map_ft_for_construction['f'] = 16.0;
 
-	const std::string const_top = my_stack.top();
+                std::map<char,float> map_ft(map_ft_for_construction.begin(), map_ft_for_construction.end());
 
-	std::cout << "const top: " << const_top << '\n';
+                std::cout << "size_ft : " << map_ft.size() << std::endl;
+                std::map<char, float>::iterator it = map_ft.begin();
+                for(; it != map_ft.end(); it++)
+                    std::cout << "Composition Map_ft : first = " << it->first << " second = " << it->second << std::endl; 
+            }
+        }
+        {
+            {
+                std::cout << _PURPLE << "Copy constructors with ft " << _END << std::endl;
+            
+                ft::map<char,float> map_ft_for_construction;
+                map_ft_for_construction['a'] = 8.98;
+                map_ft_for_construction['b'] = 30.8;
+                map_ft_for_construction['c'] = 29.98;
+                map_ft_for_construction['d'] = 10.01;
+                map_ft_for_construction['e'] = 12.99;
+                map_ft_for_construction['f'] = 16.0;
 
-	while (!my_stack.empty())
-	{
-		std::cout << my_stack.top() << '\n';
-		my_stack.pop();
-	}
+                ft::map<char,float> map_ft(map_ft_for_construction);
 
-	return (0);
+                std::cout << "size_ft : " << map_ft.size() << std::endl;
+                ft::map<char, float>::iterator it = map_ft.begin();
+                for(; it != map_ft.end(); it++)
+                    std::cout << "Composition Map_ft : first = " << it->first << " second = " << it->second << std::endl; 
+            }
+            {
+                std::cout << _PURPLE << "Copy constructors with std " << _END << std::endl;
+            
+                std::map<char,float> map_std_for_construction;
+                map_std_for_construction['a'] = 8.98;
+                map_std_for_construction['b'] = 30.8;
+                map_std_for_construction['c'] = 29.98;
+                map_std_for_construction['d'] = 10.01;
+                map_std_for_construction['e'] = 12.99;
+                map_std_for_construction['f'] = 16.0;
+
+                std::map<char,float> map_std(map_std_for_construction);
+
+                std::cout << "size_ft : " << map_std.size() << std::endl;
+                std::map<char, float>::iterator it = map_std.begin();
+                for(; it != map_std.end(); it++)
+                    std::cout << "Composition Map_std : first = " << it->first << " second = " << it->second << std::endl; 
+            }
+        }
+        {
+            {
+                std::cout << _PURPLE << "Operator = with ft " << _END << std::endl;
+                ft::map<char,int> first;
+                ft::map<char,int> second;
+
+                first['x']=8;
+                first['y']=16;
+                first['z']=32;
+
+                second=first;                // second now contains 3 ints
+                first=ft::map<char,int>();  // and first is now empty
+
+                std::cout << "Size of first: " << first.size() << '\n';
+                std::cout << "Size of second: " << second.size() << '\n';
+            }
+            {
+                std::cout << _PURPLE << "Operator = with std " << _END << std::endl;
+                std::map<char,int> first;
+                std::map<char,int> second;
+
+                first['x']=8;
+                first['y']=16;
+                first['z']=32;
+
+                second=first;                // second now contains 3 ints
+                first=std::map<char,int>();  // and first is now empty
+
+                std::cout << "Size of first: " << first.size() << '\n';
+                std::cout << "Size of second: " << second.size() << '\n';
+            }
+        }
+    }
+    /* ************** FIN DE MEMBER FUNCTIONS ************** */
+
+    /* ************************************************* */
+	/*          		Iterators functions : 	      	*/
+	/* *************************************************/
+    {
+        std::cout << _IYELLOW << "MAP -  Iterators " << _END << std::endl;
+        {
+            {
+                {
+                    std::cout << _PURPLE << "Begin/end ft " << _END << std::endl;
+                    ft::map<char,int> mymap;
+
+                    mymap['b'] = 100;
+                    mymap['a'] = 200;
+                    mymap['c'] = 300;
+
+                    // show content:
+                    for (ft::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+                        std::cout << it->first << " => " << it->second << '\n';
+                }
+                {
+                    std::cout << _PURPLE << "Begin/end std " << _END << std::endl;
+                    std::map<char,int> mymap;
+
+                    mymap['b'] = 100;
+                    mymap['a'] = 200;
+                    mymap['c'] = 300;
+
+                    // show content:
+                    for (std::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
+                        std::cout << it->first << " => " << it->second << '\n';
+                }
+            }
+
+            {
+                {
+                    std::cout << _PURPLE << "rBegin/rend ft " << _END << std::endl;
+                    ft::map<char,int> mymap;
+
+                    mymap['x'] = 100;
+                    mymap['y'] = 200;
+                    mymap['z'] = 300;
+
+                    // show content:
+                    ft::map<char,int>::reverse_iterator rit;
+                    for (rit=mymap.rbegin(); rit!=mymap.rend(); ++rit)
+                        std::cout << rit->first << " => " << rit->second << '\n';
+                }
+                {
+                    std::cout << _PURPLE << "rBegin/rend std " << _END << std::endl;
+                    std::map<char,int> mymap;
+
+                    mymap['x'] = 100;
+                    mymap['y'] = 200;
+                    mymap['z'] = 300;
+
+                    // show content:
+                    std::map<char,int>::reverse_iterator rit;
+                    for (rit=mymap.rbegin(); rit!=mymap.rend(); ++rit)
+                        std::cout << rit->first << " => " << rit->second << '\n';
+                }
+            }
+        }
+    /* ************** FIN ITERATORS ************** */
+    }
+    /* ************************************************* */
+	/*          		Capacity : 	                	*/
+	/* *************************************************/
+    {
+        {
+            std::cout << _PURPLE << "empty/size/max_size with ft " << _END << std::endl;
+            ft::map<char,int> mymap;
+
+
+            std::cout << mymap.empty() << '\n';
+            std::cout << "size () _ft " << mymap.size() << '\n';
+            std::cout << "max_size _ft " << mymap.max_size() << '\n'; // max_size entre STL et le mien est normale (differente car dépend de ce qui a dedans)
+
+            mymap['a']=10; 
+            mymap['b']=20;
+            mymap['c']=30;
+
+            std::cout << "size () _ft " << mymap.size() << '\n';
+            std::cout << "max_size _ft " << mymap.max_size() << '\n';
+
+            while (!mymap.empty())
+            {
+                std::cout << mymap.begin()->first << " => " << mymap.begin()->second << '\n';
+                mymap.erase(mymap.begin());
+            }
+        }
+        {
+            std::cout << _PURPLE << "empty/size/max_size with std " << _END << std::endl;
+            std::map<char,int> mymap;
+
+
+            std::cout << mymap.empty() << '\n'; // 1 is true and 0 is false
+             std::cout << "size () _std " << mymap.size() << '\n';
+            std::cout << "max_size _std " << mymap.max_size() << '\n';
+            mymap['a']=10;
+            mymap['b']=20;
+            mymap['c']=30;
+
+            std::cout << "size () _std " << mymap.size() << '\n';
+            std::cout << "max_size _std " << mymap.max_size() << '\n';
+            while (!mymap.empty())
+            {
+                std::cout << mymap.begin()->first << " => " << mymap.begin()->second << '\n';
+                mymap.erase(mymap.begin());
+            }
+
+        }
+    }
+    /* ****************** FIN CAPACITY *********************************** */
+
+    /* ************************************************* */
+	/*          		Element accees : 	          	*/
+	/* *************************************************/
+    {
+        std::cout << _PURPLE << "Operator [] with ft" << _END << std::endl;
+
+        {
+            ft::map<char,std::string> mymap;
+
+            mymap['a']="an element";
+            mymap['b']="another element";
+            mymap['c']=mymap['b'];
+
+            std::cout << "mymap['a'] is " << mymap['a'] << '\n';
+            std::cout << "mymap['b'] is " << mymap['b'] << '\n';
+            std::cout << "mymap['c'] is " << mymap['c'] << '\n';
+            std::cout << "mymap['d'] is " << mymap['d'] << '\n';
+
+            std::cout << "mymap now contains " << mymap.size() << " elements.\n";
+        }
+        {
+            std::cout << _PURPLE << "Operator [] with std" << _END << std::endl;
+
+            std::map<char,std::string> mymap;
+
+            mymap['a']="an element";
+            mymap['b']="another element";
+            mymap['c']=mymap['b'];
+
+            std::cout << "mymap['a'] is " << mymap['a'] << '\n';
+            std::cout << "mymap['b'] is " << mymap['b'] << '\n';
+            std::cout << "mymap['c'] is " << mymap['c'] << '\n';
+            std::cout << "mymap['d'] is " << mymap['d'] << '\n'; //insert a new element
+
+            std::cout << "mymap now contains " << mymap.size() << " elements.\n";
+        }
+    }
+
+
+
+   // std::cout << "insert " << std::endl;
+        // ft::pair<char, float> pr1('a', 7.6);
+        // ft::pair<char, float> pr2('b', 0.6);
+        // ft::pair<char, float> pr3('c', 7.996);
+        // ft::pair<char, float> pr5('d', 7.6);
+
 }
-

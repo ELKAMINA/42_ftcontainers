@@ -66,9 +66,8 @@ void	print(ft::map<Key, T>& lst)
 int main()
 {
     {
-        using namespace std;
 
-        std::cout << _WHITE << "# test_map" << _END << std::endl;
+        std::cout << _WHITE << _ICYAN << "# test_map" << _END << std::endl;
         std::cout << _YELLOW <<  "/* ********************************************************************** */" << std::endl;
         std::cout << "/*                          "<< _WHITE << "BASIC TESTS" << _YELLOW << "                                   */" << std::endl;
         std::cout << "/* ********************************************************************** */" << _END << std::endl;

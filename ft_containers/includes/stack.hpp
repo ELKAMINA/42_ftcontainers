@@ -79,24 +79,6 @@ namespace ft
 		
 				template <class T1, class C1>
 				friend bool operator< (const stack<T1, C1>& lhs, const stack<T1, C1>& rhs);
-	
-				// template <class _T, class _container_type>
-				// 	friend inline bool	operator==(const stack<T, container_type>& lhs, const stack<T, container_type>& rhs);
-
-				// template <class _T, class _container_type>
-				// 	friend inline bool	operator<(const stack<T, _container_type>& lhs, const stack<T, _container_type>& rhs);
-				
-				// template <class _T, class _container_type>
-				// 	friend inline bool	operator!=(const stack<T, _container_type>& lhs, const stack<T, _container_type>& rhs);
-
-				// template <class _T, class _container_type>
-				// 	friend inline bool	operator<=(const stack<T, _container_type>& lhs, const stack<T, _container_type>& rhs);
-
-				// template <class _T, class _container_type>
-				// 	friend inline bool	operator>(const stack<T, _container_type>& lhs, const stack<T, _container_type>& rhs);
-				
-				// template <class _T, class _container_type>
-				// 	friend inline bool	operator>=(const stack<T, _container_type>& lhs, const stack<T, _container_type>& rhs);
 
 			protected:
 				container_type	c;
