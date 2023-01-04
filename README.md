@@ -85,13 +85,21 @@ Different categories of iterators :
  
  What is their goal ?
  
- The goal of defining the 5th type of traits is to make the iterator compatible with STL algorithms.
+ The goal of defining the 5th type of traits is **to make the iterator compatible with STL algorithms.**
  
  6. What is ptrdiff_t ?
  
  IT'S A TYPE.
  ptrdiff_t is the signed integer type of the result of subtracting two pointers.
  ptrdiff_t is used for pointer arithmetic and array indexing, if negative values are possible
+ 
+ 5. More explanations about tools to implement :
+ 
+ > **lexiographical_compare** : is a tool that makes us compare strings. The idea behind is to know which two strings are equal (Comparison and reflexivity) or which one is greater or smaller lexicographically.
+ 
+ > **equal** : Same as lexicographical_compare. Equal allow us to compare two ranges to see if they're equal or not.
+ 
+ > enable_if : See point 7 on Global Glossary
   
 # Vector container
 
@@ -234,7 +242,9 @@ Running time : error detected at running/execution time
 
   7. Generic programing / SFINAE
 
-Generic programing is a a way to define identical algorithms on differents types of data. It's a kind of polymorphism (type polymorphism or type setting)
+Generic programing is a a way to define identical algorithms on differents types of data. It's a kind of polymorphism (type polymorphism or type setting).
+  `Simple case`: two template functions ( **insert (size_t x, value_type val) and insert(inputIterator x, inputIterator y)**). So which one the compiler will choose when reading this code ìnsert(5, 20). To make it use the one with Iterator, the condition is that, after verifying, the underlying type of the arguments, the compiler has to conclude that it is not an integral type (size_type and value_type) to make it cancel the first possibility and the use the second.
+  
 It is based on SFINAE : Substitution Failure is not an Error.
 SFINAE is based on the idea that when a compiler encounters an invalid type or expression during template instantiation, it will simply ignore that invalid code and continue the compilation process, instead of generating a compilation error. This allows you to write code that uses template metaprogramming to perform type-based dispatching and conditional logic, without causing compilation errors.
   
