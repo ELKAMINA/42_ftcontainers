@@ -99,7 +99,7 @@ Different categories of iterators :
  
  > **equal** : Same as lexicographical_compare. Equal allow us to compare two ranges to see if they're equal or not.
  
- > enable_if : See point 7 on Global Glossary
+ > enable_if : See points 5/7 on Global Glossary
   
 # Vector container
 
@@ -244,6 +244,8 @@ Running time : error detected at running/execution time
 
   7. Generic programing / SFINAE
 
+enable_if a class trait. A class trait is a class that associates to data type, other types and static member functions.
+it adds another level to generic programming.
 Generic programing is a a way to define identical algorithms on differents types of data. It's a kind of polymorphism (type polymorphism or type setting).
   `Simple case`: two template functions ( **insert (size_t x, value_type val) and insert(inputIterator x, inputIterator y)**). So which one the compiler will choose when reading this code ìnsert(5, 20). To make it use the one with Iterator, the condition is that, after verifying, the underlying type of the arguments, the compiler has to conclude that it is not an integral type (size_type and value_type) to make it cancel the first possibility and the use the second.
   
@@ -253,8 +255,8 @@ SFINAE is based on the idea that when a compiler encounters an invalid type or e
 8. Metadata et Metaprograming
 
  ** A TRADUIRE **
-Où une donnée peut simplement être une information, une liste de mesures ou des observations, une histoire ou une description d’une certaine chose. Les métadonnées spécifient les informations pertinentes sur les données, ce qui aide à identifier la nature et la caractéristique des données.
-*Une information disponible au programme sur les types qui y sont utilisés*
+ MetaDatas give relevant informations on data which helps getting the nature and data characteristics.
+ It's available information for the program on types that are used.
 
 9. Template specialization/ Template instantiation :
   
@@ -271,8 +273,6 @@ The primary template is the template that is being specialized.
 # To deepen
 
   > Overhead
-  
-  > RUNTIME vs COMPILE TIME (how it really works)
   
   > Embedded system
   
