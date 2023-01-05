@@ -12,7 +12,6 @@
 #include <functional>
 #include <string>
 #include <list>
-#include "./common.hpp"
 #include "./includes/stack.hpp"
 
 // #define T1 char

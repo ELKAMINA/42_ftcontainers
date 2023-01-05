@@ -55,6 +55,21 @@ namespace ft {
 			typedef	typename	ft::reverse_iterator<iterator>													reverse_iterator;
 			typedef	typename	ft::reverse_iterator<const_iterator>										 	const_reverse_iterator;
 
+
+	/*************************************************************************/
+	/*                Attributes : 						                	*/
+	/* *********************************************************************/
+	/* We need to define a new type of allocator to adapt it to a new type of variable : Node*/
+		private:
+
+			typedef typename allocator_type::template rebind<node>::other	allocation_for_Node;
+			allocation_for_Node										_node_allocation;
+			ptr_n													_base; // the root of my tree
+			ptr_n													_sentinel; // our '\0'
+			allocator_type											_allocation;
+			size_type												_size_tree;
+			key_compare												_comp;
+
 			class value_compare : public std::binary_function<value_type, value_type, bool>
 			{   
 				friend class map<key_type, mapped_type, key_compare, allocator_type>;
@@ -75,21 +90,6 @@ namespace ft {
 					{ return comp(x.first, y); }
 			
 			};
-
-	/*************************************************************************/
-	/*                Attributes : 						                	*/
-	/* *********************************************************************/
-	/* We need to define a new type of allocator to adapt it to a new type of variable : Node*/
-		private:
-
-			typedef typename allocator_type::template rebind<node>::other	allocation_for_Node;
-			allocation_for_Node										_node_allocation;
-			ptr_n													_base; // the root of my tree
-			ptr_n													_sentinel; // our '\0'
-			allocator_type											_allocation;
-			size_type												_size_tree;
-			key_compare												_comp;
-
 
 
 /*************************************************************************/
@@ -280,7 +280,7 @@ namespace ft {
 
 	pair<iterator, bool> insert(const value_type& val)
 	{
-		ptr_n already = searchTreeKey(_base, val.first);
+		ptr_n already = finding_key(_base, val.first);
 		if	(already == _sentinel)
 		{
 			ptr_n node_Inserted = insert_node(val);
@@ -293,7 +293,7 @@ namespace ft {
 	iterator insert (iterator position, const value_type& val)
 	{
 		(void)position;
-		ptr_n found = searchTreeKey(_base, val.first);
+		ptr_n found = finding_key(_base, val.first);
 		if	(found != _sentinel)
 			return iterator(found);
 		/* Position is a hint that helps us to insert the element at some position  */
@@ -317,7 +317,7 @@ namespace ft {
 
 	size_type erase(const key_type& k)
 	{
-		ptr_n already = searchTreeKey(_base, k);
+		ptr_n already = finding_key(_base, k);
 		if	(already != _sentinel)
 		{
 			deleteNode(already->pair_node);
@@ -338,7 +338,7 @@ namespace ft {
 
 	void clear()
 	{
-		delete_tree(_base);
+		rbt_deletion(_base);
 		_base = _sentinel;
 		_size_tree = 0;
 	}
@@ -378,7 +378,7 @@ namespace ft {
 
 	iterator find(const key_type& k)
 	{
-		ptr_n searched = searchTreeKey(_base, k);
+		ptr_n searched = finding_key(_base, k);
 		if	(searched == _sentinel)
 			return end();
 		else
@@ -387,7 +387,7 @@ namespace ft {
 
 	const_iterator find(const key_type& k) const
 	{
-		ptr_n searched = searchTreeKey(_base, k);
+		ptr_n searched = finding_key(_base, k);
 		if	(searched == _sentinel)
 			return end();
 		else
@@ -396,7 +396,7 @@ namespace ft {
 
 	size_type count(const key_type& k) const
 	{
-		ptr_n searching = searchTreeKey(_base, k);
+		ptr_n searching = finding_key(_base, k);
 		if	(searching == _sentinel || searching == NULL)
 			return 0;
 		return 1;
@@ -484,11 +484,11 @@ namespace ft {
 
 	mapped_type& operator[](const key_type& k)
 	{
-		ptr_n searched = searchTreeKey(_base, k);
+		ptr_n searched = finding_key(_base, k);
 		if	(searched == _sentinel)
 		{
 			insert(ft::make_pair(k, mapped_type()));
-			searched = searchTreeKey(_base, k);
+			searched = finding_key(_base, k);
 		}
 		return searched->pair_node.second;
 	}
@@ -560,7 +560,7 @@ namespace ft {
 	/*  		Inserting		 : 		                */
 	/* *********************************************** */
 
-		void insertFix(ptr_n k) {
+		void repare_afterInsertion(ptr_n k) {
 			ptr_n u;
 			while (k->parent->color == RED) {
 				if (k->parent == k->parent->parent->right) {
@@ -652,10 +652,10 @@ namespace ft {
 			}
 			if (node->parent->parent == NULL) {
 				node->node_base = &_base;
-				insertFix(node);
+				repare_afterInsertion(node);
 				return node;
 			}
-			insertFix(node);
+			repare_afterInsertion(node);
 			node->node_base = &_base;
 			return node;
 		}
@@ -664,7 +664,7 @@ namespace ft {
 	/*  		Deleting and Replace		            */
 	/* *********************************************** */
 
-	void rbTransplant(ptr_n u, ptr_n v) {
+	void rbtT(ptr_n u, ptr_n v) {
 		
 		if (u->parent == NULL)
 			_base = v;
@@ -675,7 +675,7 @@ namespace ft {
 		v->parent = u->parent;
 	}
 
-	void deleteNodeHelper(ptr_n node, key_type key) {
+	void manage_deletion(ptr_n node, key_type key) {
 	
 	ptr_n z = _sentinel;
 	ptr_n x, y;
@@ -696,12 +696,12 @@ namespace ft {
 	if (z->left == _sentinel)
 	{
 		x = z->right;
-		rbTransplant(z, z->right);
+		rbtT(z, z->right);
 	} 
 	else if (z->right == _sentinel)
 	{
 		x = z->left;
-		rbTransplant(z, z->left);
+		rbtT(z, z->left);
 	} 
 	else
 	{
@@ -712,11 +712,11 @@ namespace ft {
 			x->parent = y;
 		else 
 		{
-			rbTransplant(y, y->right);
+			rbtT(y, y->right);
 			y->right = z->right;
 			y->right->parent = y;
 		}
-		rbTransplant(z, y);
+		rbtT(z, y);
 		y->left = z->left;
 		y->left->parent = y;
 		y->color = z->color;
@@ -726,10 +726,10 @@ namespace ft {
 	_size_tree --;
 	
 	if (y_original_color == BLACK)
-		deleteFix(x);
+		Rebalancing_afterDeletion(x);
 }
 
-	void deleteFix(ptr_n x) 
+	void Rebalancing_afterDeletion(ptr_n x) 
 	{	
 		ptr_n s;
 		while (x != _base && x->color == BLACK)
@@ -802,7 +802,7 @@ namespace ft {
 
 	void deleteNode(value_type data) {
 		
-		deleteNodeHelper(_base, data.first);
+		manage_deletion(_base, data.first);
 		// _size_tree --;
 	}
 
@@ -812,12 +812,12 @@ namespace ft {
 		_node_allocation.deallocate(node, 1);
 	}
 
-	void	delete_tree(ptr_n p )
+	void	rbt_deletion(ptr_n p )
 	{
 		if (p != _sentinel)
 		{
-			delete_tree(p->left);
-			delete_tree(p->right);
+			rbt_deletion(p->left);
+			rbt_deletion(p->right);
 			deallocate_node(p);
 			_size_tree --;
 		}
@@ -828,12 +828,12 @@ namespace ft {
 	/*  		Searching in Tree:  	                */
 	/* *********************************************** */
 
-	ptr_n searchTreeKey(ptr_n node, const key_type& key) const {
+	ptr_n finding_key(ptr_n node, const key_type& key) const {
 		if (node == _sentinel || key == node->pair_node.first)
 			return node;
 		if (_comp(key, node->pair_node.first))
-			return searchTreeKey(node->left, key);
-		return searchTreeKey(node->right, key);
+			return finding_key(node->left, key);
+		return finding_key(node->right, key);
 	}
 
 
@@ -868,7 +868,7 @@ namespace ft {
 	/*  		Visualisation		 : 	                */
 	/* *********************************************** */
 
-	void printHelper(ptr_n root, std::string indent, bool last) {
+	void visu_rbt(ptr_n root, std::string indent, bool last) {
 		if (root != _sentinel) {
 			std::cout << indent;
 		if (last) {
@@ -881,14 +881,14 @@ namespace ft {
 
 		std::string sColor = root->color ? "RED" : "BLACK";
 		std::cout << root->pair_node.first << "(" << sColor << ")" << std::endl;
-		printHelper(root->left, indent, false);
-		printHelper(root->right, indent, true);
+		visu_rbt(root->left, indent, false);
+		visu_rbt(root->right, indent, true);
 		}
 	};
 
 	void printTree() {
 		if (_base) {
-			printHelper(_base, "", true);
+			visu_rbt(_base, "", true);
 		}
 	
     };
