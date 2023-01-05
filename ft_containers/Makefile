@@ -2,6 +2,8 @@ NAME = container
 	
 SRC = main.cpp
 
+MAVAR =  -DMAVAR=0
+
 OBJ = $(SRC:.cpp=.o)
 
 DEPS = $(OBJ:.o=.d)
@@ -16,6 +18,9 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	$(CXX) $(CXXFLAGS) -o  $(NAME) $(OBJ)
 
+diff:
+	make re NAME='std_container' MAVAR='-DMAVAR=1'
+
 clean :
 	rm -rf $(OBJ) $(DEPS)
 
@@ -26,4 +31,4 @@ re: fclean
 	make all
 
 -include $(DEPS)
-.PHONY : all clean fclean ree
+.PHONY : all clean fclean re diff
