@@ -154,8 +154,10 @@ Cons : For operations that involve inserting or removing elements at positions o
 
 
 # Map container
-
-   *Why using Red Black Tree as Data Structure ?*
+ 
+A Map container is a sorted associative container (in opposition to Vector container which is sequential container) that contains key-value pairs with unique keys. Keys are sorted by using the comparison function Compare. Search, removal, and insertion operations have logarithmic complexity. Maps are usually implemented as red-black trees
+  
+ *Why using Red Black Tree as Data Structure ?*
   
 **A binary search tree (BST)**, also called an ordered or sorted binary tree, is a rooted binary tree data structure with the key of each internal node being greater than all the keys in the respective node's left subtree and less than the ones in its right subtree. The time complexity of operations on the binary search tree is directly proportional to the height of the tree. Many types of BST : 
 > Red Black Trees  assures that the complexity is O(log2n) although it is roughly balanced compared to the AVL Tree.
