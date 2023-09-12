@@ -19,11 +19,11 @@
 
 **Requirements**
   
-  > Iterators system.
-  
-  > std::allocator.
-  
-  > keyword friend if needed.
+- Iterators system.
+
+- std::allocator.
+
+- keyword friend if needed.
 
 # To start :
 
@@ -32,16 +32,13 @@ a container is an object that contains other objects that can be manipulated (su
 
 2. What makes a container more intersting than another in some situations ?
 We call **Complexity** : the idea of how efficient it is to access an element from the container. W can distinguish :
- - Linear Complexity O(n) : if calculation is proportional to n.
- - Instantaneous Complexity O(1) : if calculation is instantaneous.
- - Logarithmic COmplexity O(log(n))
+- Linear Complexity O(n) : if calculation is proportional to n.
+- Instantaneous Complexity O(1) : if calculation is instantaneous.
+- Logarithmic COmplexity O(log(n))
   
  3. What are iterators ?
- 
- => Pointer-like objects
- 
+ They are **pointer-like objects**
  In C++ STL (Standard Template Library), 3 things are meaningful and important:
-
 **Containers**: These are used to manage collection of objects of a certain kind. Containers can be of two types: Sequence Containers (vector, deque, list) and Associative Containers (Set, Multiset, Map, Multimap).
 
 **Algorithms**: These are used to process the elements of a collection. That is algorithms feed from containers and process those elements in a predefined way and may also push the results into the same/different container.
@@ -55,11 +52,11 @@ The designer of STL chose a wonderful yet simple common approach - "The separati
 **Iterators are those Bridge/Tunnel/Glue** between containers classes and algorithms.
 
 Different categories of iterators :
-  - Bidirectionnal
-  - Random access
-  - Input iterators
-  - Output iterators
-  - Forward iterators
+- Bidirectionnal
+- Random access
+- Input iterators
+- Output iterators
+- Forward iterators
  
  Iterator algorithms are not dependent on the container type.
  Adding iterators to your containers will make them compatible with the range-based for loops(c++11) and the C++ Algorithms library: a collection of functions for searching, sorting, counting and manipulating containers, based on iterators.
@@ -67,14 +64,13 @@ Different categories of iterators :
  4. Creating our own container ?
  
  3 requirements :
+- **Container interface requirements**
+
+- **Allocator interface requirements :**
   
-  - **Container interface requirements**
+The basic interface of an allocator class consists of a set of typedefs, a pair of allocation functions, allocate() and deallocate(), and a pair of       construction/destruction members, construct() and destroy(). The typedefs are used by a container to determine the look of pointers, references,           sizes, and differences, where a difference means a distance between two pointers  
   
-  - **Allocator interface requirements :**
-  
-    The basic interface of an allocator class consists of a set of typedefs, a pair of allocation functions, allocate() and deallocate(), and a pair of       construction/destruction members, construct() and destroy(). The typedefs are used by a container to determine the look of pointers, references,           sizes, and differences, where a difference means a distance between two pointers  
-  
-  - **Iterator requirements**
+- **Iterator requirements**
 
 5. What are *.traits ?
 
@@ -95,11 +91,11 @@ Different categories of iterators :
  
  5. More explanations about tools to implement :
  
- > **lexiographical_compare** : is a tool that makes us compare strings. The idea behind is to know which two strings are equal (Comparison and reflexivity) or which one is greater or smaller lexicographically.
+ - **lexiographical_compare** : is a tool that makes us compare strings. The idea behind is to know which two strings are equal (Comparison and reflexivity) or which one is greater or smaller lexicographically.
  
- > **equal** : Same as lexicographical_compare. Equal allow us to compare two ranges to see if they're equal or not.
+ - **equal** : Same as lexicographical_compare. Equal allow us to compare two ranges to see if they're equal or not.
  
- > enable_if : See points 5/7 on Global Glossary
+ - enable_if : See points 5/7 on Global Glossary
   
 # Vector container
 
@@ -213,32 +209,32 @@ Running time : error detected at running/execution time
 **Compile-time tasks **
     In C++, the compile time refers to the phase of the program's execution when the source code is transformed into an executable program by the compiler. During this phase, the compiler performs a number of tasks, including:
 
-  > Syntax checking: The compiler checks the source code for syntactic correctness, ensuring that the code follows the rules of the C++ language.
+  - Syntax checking: The compiler checks the source code for syntactic correctness, ensuring that the code follows the rules of the C++ language.
 
-  > Preprocessing: The compiler processes any preprocessor directives in the source code, such as #include or #define statements.
+  - Preprocessing: The compiler processes any preprocessor directives in the source code, such as #include or #define statements.
 
-  > Type checking: The compiler checks the types of variables, functions, and expressions to ensure that they are used correctly.
+  - Type checking: The compiler checks the types of variables, functions, and expressions to ensure that they are used correctly.
 
-  > Optimization: The compiler may perform various optimizations on the code to improve its performance, such as inlining functions or eliminating unnecessary instructions.
+  - Optimization: The compiler may perform various optimizations on the code to improve its performance, such as inlining functions or eliminating unnecessary instructions.
 
-  > Code generation: The compiler generates machine code (also known as object code) from the source code, which can be executed by the computer's processor.
+  - Code generation: The compiler generates machine code (also known as object code) from the source code, which can be executed by the computer's processor.
 
-  > Linking: The compiler may link the object code with libraries or other object files to create the final executable program.
+  - Linking: The compiler may link the object code with libraries or other object files to create the final executable program.
  
 **run-time tasks ** 
     During the run time of a C++ program, the executable code is loaded into memory and executed by the processor. At run time, the following tasks are performed:
 
-  > Memory allocation: The program allocates memory for variables, data structures, and other objects as needed.
+  - Memory allocation: The program allocates memory for variables, data structures, and other objects as needed.
 
-  > Function calls: The program calls functions and executes their code.
+  - Function calls: The program calls functions and executes their code.
 
-  > Control flow: The program executes statements in a specific order based on the control flow of the program, such as looping or branching.
+  - Control flow: The program executes statements in a specific order based on the control flow of the program, such as looping or branching.
 
-  > Input/output: The program may read input from the user or external sources, or output results to the user or external destinations.
+  - Input/output: The program may read input from the user or external sources, or output results to the user or external destinations.
 
-  > Exception handling: The program may handle exceptions or errors that occur during execution.
+  - Exception handling: The program may handle exceptions or errors that occur during execution.
 
-  > Cleanup: The program may perform cleanup tasks when it finishes executing, such as releasing resources or closing files.
+  - Cleanup: The program may perform cleanup tasks when it finishes executing, such as releasing resources or closing files.
 
     At run time, the program executes the machine code that was generated by the compiler at compile time. This code may include calls to functions, manipulation of data structures, and other operations that are performed by the processor.  
 
@@ -247,7 +243,7 @@ Running time : error detected at running/execution time
 enable_if a class trait. A class trait is a class that associates to data type, other types and static member functions.
 it adds another level to generic programming.
 Generic programing is a a way to define identical algorithms on differents types of data. It's a kind of polymorphism (type polymorphism or type setting).
-  `Simple case`: two template functions ( **insert (size_t x, value_type val) and insert(inputIterator x, inputIterator y)**). So which one the compiler will choose when reading this code ìnsert(5, 20). To make it use the one with Iterator, the condition is that, after verifying, the underlying type of the arguments, the compiler has to conclude that it is not an integral type (size_type and value_type) to make it cancel the first possibility and the use the second.
+`Simple case`: two template functions ( **insert (size_t x, value_type val) and insert(inputIterator x, inputIterator y)**). So which one the compiler will choose when reading this code ìnsert(5, 20). To make it use the one with Iterator, the condition is that, after verifying, the underlying type of the arguments, the compiler has to conclude that it is not an integral type (size_type and value_type) to make it cancel the first possibility and the use the second.
   
 It is based on SFINAE : Substitution Failure is not an Error.
 SFINAE is based on the idea that when a compiler encounters an invalid type or expression during template instantiation, it will simply ignore that invalid code and continue the compilation process, instead of generating a compilation error. This allows you to write code that uses template metaprogramming to perform type-based dispatching and conditional logic, without causing compilation errors.
